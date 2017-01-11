@@ -62,6 +62,5 @@ public class Constants implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-
     }
 }

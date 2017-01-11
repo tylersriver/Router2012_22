@@ -7,7 +7,6 @@ import sriver.w.tyler.router2017_22.networks.Constants;
 /**
  * Created by tyler.w.sriver on 1/11/2017.
  */
-
 public class BootLoader extends Observable {
 
     public BootLoader(Activity activity){
