@@ -10,6 +10,9 @@ import java.util.Observer;
 
 /**
  * Created by tyler.w.sriver on 1/11/2017.
+ *
+ * This class stores the many global constants
+ * needed by the entire applications
  */
 public class Constants implements Observer {
 

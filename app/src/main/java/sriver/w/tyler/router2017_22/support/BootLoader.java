@@ -6,6 +6,9 @@ import sriver.w.tyler.router2017_22.networks.Constants;
 
 /**
  * Created by tyler.w.sriver on 1/11/2017.
+ *
+ * This class boots the router and notify's
+ * all the observers
  */
 public class BootLoader extends Observable {
 
