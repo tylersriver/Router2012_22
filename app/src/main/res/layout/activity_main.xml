@@ -11,7 +11,208 @@
     tools:context="sriver.w.tyler.router2017_22.MainActivity">
 
     <TextView
+        android:text="Tyler's Router"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:id="@+id/TitleBarMain"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:textSize="25sp"
+        android:textStyle="normal|bold"
+        android:textAlignment="center"/>
+
+    <RelativeLayout
+        android:layout_width="550dp"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/TitleBarMain"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="11dp"
+        android:id="@+id/snifferLayout"
+        android:background="@color/lightBlue">
+
+        <TextView
+            android:text="Summary Frame List"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:id="@+id/summaryFrameListTitleBar"
+            android:layout_alignParentEnd="true"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="normal|bold"
+            android:background="@color/cyan"/>
+
+        <ListView
+            android:id="@+id/packetsCaptured"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/summaryFrameListTitleBar"
+            android:layout_centerHorizontal="true"
+            android:background="@color/cyan"/>
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="140dp"
+            android:id="@+id/protocolExplanation"
+            android:layout_below="@+id/packetsCaptured"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:background="@color/cyan"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="140dp"
+            android:layout_below="@+id/protocolExplanation"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="5dp"
+            android:id="@+id/hexDump"
+            android:layout_alignParentEnd="true"
+            android:background="@color/cyan"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/snifferLayout"
+        android:layout_alignRight="@+id/snifferLayout"
+        android:layout_alignParentEnd="true"
+        android:background="@color/lightBlue"
+        android:id="@+id/internalTablesLayout"
+        android:layout_width="340dp">
+
+        <TextView
+            android:text="Internal Tables"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/internalTablesTitleBar"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:textAlignment="center"
+            android:textStyle="normal|bold"
+            android:textSize="20sp"
+            android:background="@color/cyan"/>
+
+        <RelativeLayout
+            android:id="@+id/adjacencyLayout"
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            android:layout_below="@+id/internalTablesTitleBar"
+            android:layout_alignParentStart="true"
+            android:background="@color/cyan"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:text="Adjacency Table"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/adjacencyTitleBar"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:textStyle="normal|bold"
+                android:textAlignment="center"
+                android:textSize="12sp" />
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/adjacencyTitleBar"
+                android:layout_alignParentStart="true"
+                android:id="@+id/adjacencyListView" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/arpLayout"
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            android:layout_below="@+id/adjacencyLayout"
+            android:layout_alignParentStart="true"
+            android:background="@color/cyan"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:text="ARP Table"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/arpTitleBar"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:textSize="12sp"
+                android:textStyle="normal|bold"
+                android:textAlignment="center" />
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/arpTitleBar"
+                android:layout_alignParentStart="true"
+                android:id="@+id/arpListView" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/forwardingLayout"
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            android:layout_below="@+id/arpLayout"
+            android:layout_alignParentStart="true"
+            android:background="@color/cyan"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:text="Forwarding Table"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/forwardingTitleBar"
+                android:layout_alignParentEnd="true"
+                android:textAlignment="center"
+                android:textStyle="normal|bold"
+                android:textSize="12sp" />
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/forwardingListView"
+                android:layout_below="@+id/forwardingTitleBar" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/routingLayout"
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            android:layout_below="@+id/forwardingLayout"
+            android:layout_alignParentStart="true"
+            android:background="@color/cyan"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:text="Routing Table"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/routingTitleBar"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:textAlignment="center"
+                android:textStyle="normal|bold"
+                android:textSize="12sp" />
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/routingListView"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/routingTitleBar" />
+        </RelativeLayout>
+
+
+    </RelativeLayout>
 </RelativeLayout>

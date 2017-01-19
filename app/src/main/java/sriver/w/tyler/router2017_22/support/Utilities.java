@@ -7,12 +7,16 @@ package sriver.w.tyler.router2017_22.support;
  * for use within the application 
  */
 public class Utilities {
-    private static Utilities ourInstance = new Utilities();
 
+    // Fields
+    // --------------------------------------------------------------
+    private static Utilities ourInstance = new Utilities();
     public static Utilities getInstance() {
         return ourInstance;
     }
 
+    // Methods
+    // --------------------------------------------------------------
     private Utilities() {
     }
 }

@@ -2,6 +2,8 @@ package sriver.w.tyler.router2017_22.support;
 
 import android.app.Activity;
 import java.util.Observable;
+
+import sriver.w.tyler.router2017_22.UI.UIManager;
 import sriver.w.tyler.router2017_22.networks.Constants;
 
 /**
@@ -12,6 +14,8 @@ import sriver.w.tyler.router2017_22.networks.Constants;
  */
 public class BootLoader extends Observable {
 
+    // Methods
+    // --------------------------------------------------------------
     public BootLoader(Activity activity){
         bootRouter(activity);
     }
@@ -22,5 +26,7 @@ public class BootLoader extends Observable {
 
         setChanged();
         notifyObservers();
+
+        UIManager.getInstance().raiseToast("Router is booted");
     }
 }
