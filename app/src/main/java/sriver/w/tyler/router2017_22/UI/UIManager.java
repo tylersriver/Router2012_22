@@ -5,7 +5,9 @@ import android.content.Context;
 import android.widget.Toast;
 
 import java.util.Observable;
+import java.util.Observer;
 
+import sriver.w.tyler.router2017_22.support.BootLoader;
 import sriver.w.tyler.router2017_22.support.ParentActivity;
 
 /**
@@ -14,7 +16,7 @@ import sriver.w.tyler.router2017_22.support.ParentActivity;
  * This class is our top level manager for the UI
  * control
  */
-public class UIManager {
+public class UIManager implements Observer{
 
     // Fields
     // --------------------------------------------------------------
@@ -25,7 +27,6 @@ public class UIManager {
     // Methods
     // --------------------------------------------------------------
     private UIManager() {
-        setupWidgets();
     }
 
     public static UIManager getInstance() {
@@ -46,5 +47,12 @@ public class UIManager {
 
     public void update(Observable object){
 
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if (o.getClass().equals(BootLoader.class)){
+            setupWidgets();
+        }
     }
 }

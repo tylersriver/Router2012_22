@@ -23,6 +23,7 @@ public class BootLoader extends Observable {
     private void bootRouter(Activity activity){
         ParentActivity.setActivity(activity);
         addObserver(Constants.getInstance());
+        addObserver(UIManager.getInstance());
 
         setChanged();
         notifyObservers();
