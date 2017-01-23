@@ -9,12 +9,17 @@ package sriver.w.tyler.router2017_22.support;
 
 public class LabException extends Exception {
 
-    // Fields
+    // -- Fields
     // --------------------------------------------------------------
     private static final long serialVersionUID = 1L;
 
-    // Methods
+    // -- Methods
     // --------------------------------------------------------------
+
+    /**
+     * Generic error log function
+     * @param errorMessage
+     */
     public LabException(String errorMessage){
         super(errorMessage);
     }

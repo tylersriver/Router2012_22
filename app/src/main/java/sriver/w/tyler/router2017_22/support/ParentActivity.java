@@ -10,12 +10,12 @@ import android.app.Activity;
  */
 public class ParentActivity {
 
-    // Fields
+    // -- Fields
     // --------------------------------------------------------------
     static Activity parentActivity;
     private static ParentActivity ourInstance = new ParentActivity();
 
-    // Methods
+    // -- Methods
     // --------------------------------------------------------------
     public static ParentActivity getInstance() {
         return ourInstance;

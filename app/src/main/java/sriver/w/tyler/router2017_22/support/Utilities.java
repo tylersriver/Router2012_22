@@ -8,15 +8,19 @@ package sriver.w.tyler.router2017_22.support;
  */
 public class Utilities {
 
-    // Fields
+    // -- Fields
     // --------------------------------------------------------------
     private static Utilities ourInstance = new Utilities();
     public static Utilities getInstance() {
         return ourInstance;
     }
 
-    // Methods
+    // -- Methods
     // --------------------------------------------------------------
+
+    /**
+     * Constructor
+     */
     private Utilities() {
     }
 }

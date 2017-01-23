@@ -14,12 +14,22 @@ import sriver.w.tyler.router2017_22.networks.Constants;
  */
 public class BootLoader extends Observable {
 
-    // Methods
+    // -- Methods
     // --------------------------------------------------------------
+
+    /**
+     * Constructor
+     * @param activity
+     */
     public BootLoader(Activity activity){
         bootRouter(activity);
     }
 
+    /**
+     * This class instantiates the router and needed
+     * components
+     * @param activity
+     */
     private void bootRouter(Activity activity){
         ParentActivity.setActivity(activity);
         addObserver(Constants.getInstance());

@@ -16,7 +16,7 @@ import java.util.Observer;
  */
 public class Constants implements Observer {
 
-    // Fields
+    // -- Fields
     // --------------------------------------------------------------
     public static String routerName = new String("RouteMaster");
     public static String logTag = new String("ROUTEMASTER: ");
@@ -28,10 +28,10 @@ public class Constants implements Observer {
     //will be stored here in dotted decimal notation
     public static String IP_ADDRESS_PREFIX; // the prefix will be stored here
 
-    // Methods
+    // -- Methods
     // --------------------------------------------------------------
 
-    /*
+    /**
      * Constructor for Constants -- will eventually find out my IP address and do other nice
      * things that need to be set up in the constants file.
      */
