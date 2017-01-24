@@ -23,4 +23,26 @@ public class Utilities {
      */
     private Utilities() {
     }
+
+    /**
+     * Function to prepend 0's to hex string
+     * @param hexString String
+     * @param finalLength int
+     * @return String
+     */
+    public String padHexString(String hexString, int finalLength){
+        if(hexString.length() < finalLength) { // Make sure padding is needed
+            int zerosNeeded = finalLength - hexString.length();
+            String padding = "";
+
+            // Build string of needed zeros
+            for (int i = 0; i < zerosNeeded; i++) {
+                padding.concat("00");
+            }
+
+            // build final string
+            hexString = padding.concat(hexString);
+        }
+        return hexString;
+    }
 }

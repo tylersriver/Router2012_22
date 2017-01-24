@@ -43,31 +43,30 @@ public class UIManager implements Observer{
 
     /**
      * Display message on screen
-     * @param message
-     * @param displayTime
+     * @param message String
+     * @param displayTime int
      */
     public void raiseToast(String message, int displayTime) {
         Toast.makeText(context, message, displayTime).show();
     }
 
     /**
-     * Override display without gien time
-     * @param message
+     * Override display without given time
+     * @param message String
      */
     public void raiseToast(String message){
         raiseToast(message, Toast.LENGTH_LONG);
     }
 
     /**
-     * TODO: Add definition
+     * TODO: Add definition when needed
      */
     private void setupWidgets() {
-
     }
 
     /**
      * Update information
-     * @param object
+     * @param object Observable
      */
     public void update(Observable object){
 
@@ -75,8 +74,8 @@ public class UIManager implements Observer{
 
     /**
      * TODO: Add definition
-     * @param o
-     * @param arg
+     * @param o Observable
+     * @param arg Object
      */
     @Override
     public void update(Observable o, Object arg) {

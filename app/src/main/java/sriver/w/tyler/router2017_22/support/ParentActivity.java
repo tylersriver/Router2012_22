@@ -17,17 +17,33 @@ public class ParentActivity {
 
     // -- Methods
     // --------------------------------------------------------------
+
+    /**
+     * Return singleton instance
+     * @return ParentActivity
+     */
     public static ParentActivity getInstance() {
         return ourInstance;
     }
 
+    /**
+     * Constructor
+     */
     private ParentActivity() {
     }
 
+    /**
+     * Retrieve the parentActivity
+     * @return Activity
+     */
     public static Activity getActivity() {
         return parentActivity;
     }
 
+    /**
+     * Set the Activity
+     * @param Activity Activity
+     */
     public static void setActivity(Activity Activity) {
         parentActivity = Activity;
     }

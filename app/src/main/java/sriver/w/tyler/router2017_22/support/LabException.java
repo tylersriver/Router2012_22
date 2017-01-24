@@ -18,7 +18,7 @@ public class LabException extends Exception {
 
     /**
      * Generic error log function
-     * @param errorMessage
+     * @param errorMessage String
      */
     public LabException(String errorMessage){
         super(errorMessage);

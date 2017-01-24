@@ -67,6 +67,11 @@ public class Constants implements Observer {
         return null;
     }
 
+    /**
+     * TODO: Add desc when needed
+     * @param o Observable
+     * @param arg Object
+     */
     @Override
     public void update(Observable o, Object arg) {
     }

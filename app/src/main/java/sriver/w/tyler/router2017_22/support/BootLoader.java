@@ -19,7 +19,7 @@ public class BootLoader extends Observable {
 
     /**
      * Constructor
-     * @param activity
+     * @param activity Activity
      */
     public BootLoader(Activity activity){
         bootRouter(activity);
@@ -28,7 +28,7 @@ public class BootLoader extends Observable {
     /**
      * This class instantiates the router and needed
      * components
-     * @param activity
+     * @param activity Activity
      */
     private void bootRouter(Activity activity){
         ParentActivity.setActivity(activity);
@@ -37,7 +37,6 @@ public class BootLoader extends Observable {
 
         setChanged();
         notifyObservers();
-
         UIManager.getInstance().raiseToast("Router is booted");
     }
 }
