@@ -30,14 +30,14 @@ public class Utilities {
      * @param finalLength int
      * @return String
      */
-    public String padHexString(String hexString, int finalLength){
-        if(hexString.length() < finalLength) { // Make sure padding is needed
-            int zerosNeeded = finalLength - hexString.length();
+     static public String padHexString(String hexString, int finalLength){
+        if(hexString.length() < finalLength*2) { // Make sure padding is needed
+            int zerosNeeded = finalLength*2 - hexString.length();
             String padding = "";
 
             // Build string of needed zeros
             for (int i = 0; i < zerosNeeded; i++) {
-                padding.concat("00");
+                padding = padding.concat("0");
             }
 
             // build final string
