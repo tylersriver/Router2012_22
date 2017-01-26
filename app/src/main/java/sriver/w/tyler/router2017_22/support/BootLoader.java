@@ -34,6 +34,7 @@ public class BootLoader extends Observable {
         ParentActivity.setActivity(activity);
         addObserver(Constants.getInstance());
         addObserver(UIManager.getInstance());
+        addObserver(FrameLogger.getInstance());
 
         setChanged();
         notifyObservers();

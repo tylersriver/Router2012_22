@@ -35,5 +35,4 @@ public interface DatagramHeaderField {
      * @return String
      */
     String toAsciiString();
-
 }

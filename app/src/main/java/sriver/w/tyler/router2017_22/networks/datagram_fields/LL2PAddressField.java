@@ -14,9 +14,6 @@ public class LL2PAddressField implements DatagramHeaderField {
     private boolean isSourceAddress;
     private String explanation;
 
-    // -- Methods
-    // --------------------------------------------------------------
-
     // -- Interface Methods
     @Override
     public String toString() {
@@ -29,12 +26,14 @@ public class LL2PAddressField implements DatagramHeaderField {
     }
 
     @Override
-    public String toAsciiString() { // TODO: 1/25/17 Fix this method
-        String strAddress = Integer.toHexString(address);
-        String output = "";
-        for(int i = 0; i < strAddress.length(); i++){
+    public String toAsciiString() {
+        int temp = address;
+        StringBuilder builder = new StringBuilder();
+        while(temp > 0){
+            builder.append(Integer.toString(temp % 256));
+            temp = temp / 256;
         }
-        return output;
+        return builder.toString();
     }
 
     @Override

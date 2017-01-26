@@ -1,0 +1,115 @@
+package sriver.w.tyler.router2017_22.networks.datagram;
+
+import sriver.w.tyler.router2017_22.networks.datagram_fields.CRC;
+import sriver.w.tyler.router2017_22.networks.datagram_fields.DatagramHeaderField;
+import sriver.w.tyler.router2017_22.networks.datagram_fields.DatagramPayloadField;
+import sriver.w.tyler.router2017_22.networks.datagram_fields.LL2PAddressField;
+import sriver.w.tyler.router2017_22.networks.datagram_fields.LL2PTypeField;
+
+/**
+ * Created by tyler.w.sriver on 1/26/17.
+ */
+
+public class LL2PFrame implements DatagramHeaderField {
+
+    // -- Fields
+    // --------------------------------------------------------------
+    private LL2PAddressField destinationAddress;
+    private LL2PAddressField sourceAddress;
+    private LL2PTypeField type;
+    private DatagramPayloadField payload;
+    private CRC crc;
+
+    // -- Methods
+    // --------------------------------------------------------------
+
+    /**
+     * Constructor with all fields
+     * @param destinationAddress LL2PAddressField
+     * @param sourceAddress LL2PAddressField
+     * @param type LL2PTypeField
+     * @param payload DatagramPayloadField
+     * @param crc CRC
+     */
+    public LL2PFrame(LL2PAddressField destinationAddress, LL2PAddressField sourceAddress,
+                     LL2PTypeField type, DatagramPayloadField payload, CRC crc ){
+        this.destinationAddress = destinationAddress;
+        this.sourceAddress = sourceAddress;
+        this.type = type;
+        this.payload = payload;
+        this.crc = crc;
+    }
+
+    /**
+     * Constructor with byte array for frame
+     * @param byteArray byte[]
+     */
+    public LL2PFrame(byte[] byteArray){
+        
+    }
+
+    // -- Getters
+    // --------------------------------------------------------------
+
+    /**
+     * Get the destAddress
+     * @return LL2PAddressField
+     */
+    public LL2PAddressField getDestinationAddress() {
+        return destinationAddress;
+    }
+
+    /**
+     * get the source address
+     * @return LL2PAddressField
+     */
+    public LL2PAddressField getSourceAddress() {
+        return sourceAddress;
+    }
+
+    /**
+     * get the type
+     * @return LL2PTypeField
+     */
+    public LL2PTypeField getType() {
+        return type;
+    }
+
+    /**
+     * get the payload
+     * @return DatagramPayloadField
+     */
+    public DatagramPayloadField getPayload() {
+        return payload;
+    }
+
+    /**
+     * get the crc
+     * @return CRC
+     */
+    public CRC getCrc() {
+        return crc;
+    }
+
+    // -- Interface Methods
+    // --------------------------------------------------------------
+    @Override
+    public String toString() {
+        // TODO: 1/26/17 Implement 
+    }
+
+    @Override
+    public String toHexString() {
+        // TODO: 1/26/17 Implement 
+    }
+
+    @Override
+    public String toAsciiString() {
+        // TODO: 1/26/17 Implement 
+    }
+
+    @Override
+    public String explainSelf() {
+        // TODO: 1/26/17 Implement
+    }
+}

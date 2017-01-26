@@ -21,12 +21,18 @@ public class Constants implements Observer {
     public static String routerName = new String("RouteMaster");
     public static String logTag = new String("ROUTEMASTER: ");
     private static Constants ourInstance = new Constants();
-    public static Constants getInstance() {
-        return ourInstance;
-    }
+
     public static String IP_ADDRESS;	// the IP address of this system
     //will be stored here in dotted decimal notation
     public static String IP_ADDRESS_PREFIX; // the prefix will be stored here
+
+
+    // LL2P Frame Constants
+    final public static int LL2P_SOURCE_ADDRESS = 21;
+    final public static int LL2P_DEST_ADDRESS_OFFSET = 0;
+    final public static int LL2P_ADDRESS_FIELD_LENGTH  = 3;
+    final public static int LL2P_TYPE_FIELD_LENGTH = 2;
+    final public static int LL2P_CRC_FIELD_LENGTH = 2;
 
     // -- Methods
     // --------------------------------------------------------------
@@ -74,5 +80,14 @@ public class Constants implements Observer {
      */
     @Override
     public void update(Observable o, Object arg) {
+    }
+
+
+    /**
+     * Return our singleton instance
+     * @return Constants
+     */
+    public static Constants getInstance() {
+        return ourInstance;
     }
 }

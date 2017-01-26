@@ -12,9 +12,6 @@ public class LL2PTypeField implements DatagramHeaderField {
     private Integer type;
     private String explanation;
 
-    // -- Methods
-    // --------------------------------------------------------------
-
     // -- Interface Methods
     // --------------------------------------------------------------
 
@@ -30,8 +27,13 @@ public class LL2PTypeField implements DatagramHeaderField {
 
     @Override
     public String toAsciiString() {
-        // TODO: 1/25/17 add implementation
-        return null;
+        int temp = type;
+        StringBuilder builder = new StringBuilder();
+        while(temp > 0){
+            builder.append(Integer.toString((char)(temp % 256)));
+            temp = temp / 256;
+        }
+        return builder.toString();
     }
 
     @Override
