@@ -59,7 +59,7 @@ public class UIManager implements Observer{
     }
 
     /**
-     * TODO: Add definition when needed
+     * Build the widgets
      */
     private void setupWidgets() {
     }
@@ -73,7 +73,7 @@ public class UIManager implements Observer{
     }
 
     /**
-     * TODO: Add definition
+     * Setup widgets on notified
      * @param o Observable
      * @param arg Object
      */

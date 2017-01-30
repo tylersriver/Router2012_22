@@ -70,7 +70,7 @@ public class LL2PFrame implements Datagram {
         destinationAddress = new LL2PAddressField(bytes.substring(destAddressFrom, desAddressTo), false);
         sourceAddress = new LL2PAddressField(bytes.substring(sourceAddressFrom,sourceAddressTo), true);
         type = new LL2PTypeField(bytes.substring(typeFieldFrom,typeFieldTo));
-        payload = ;// TODO: 1/29/2017 what?
+        payload = new DatagramPayloadField();// TODO: 1/29/2017 what to pass?
         crc = new CRC(bytes.substring(crcFrom, crcTo));
     }
 
@@ -121,12 +121,22 @@ public class LL2PFrame implements Datagram {
     // --------------------------------------------------------------
     @Override
     public String toString() {
-        // TODO: 1/26/17 Implement 
+        // TODO: 1/26/17 Implement
+        return  destinationAddress.toString() + "\n" +
+                sourceAddress.toString() + "\n" +
+                type.toString() + "\n" +
+                payload.toString() + "\n" +
+                crc.toString();
     }
 
     @Override
     public String toHexString() {
-        // TODO: 1/26/17 Implement 
+        // TODO: 1/26/17 Implement
+        return  destinationAddress.toHexString() + "\n" +
+                sourceAddress.toHexString() + "\n" +
+                type.toHexString() + "\n" +
+                payload.toHexString() + "\n" +
+                crc.toHexString();
     }
 
     @Override
