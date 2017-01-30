@@ -40,8 +40,7 @@ public class Factory {
             // TODO: 1/29/2017
         } else if (FieldValue == Constants.LL2P_CRC_FIELD){
             return new CRC(contents);
-        } else{
-            return null;
         }
+        return null;
     }
 }

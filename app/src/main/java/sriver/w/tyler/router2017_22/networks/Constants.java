@@ -29,10 +29,10 @@ public class Constants implements Observer {
 
     // -- LL2P Frame Constants
     final public static int LL2P_SOURCE_ADDRESS = 21;
-    final public static int LL2P_DEST_ADDRESS = ; // TODO: 1/29/2017 What is?
-    final public static int LL2P_TYPE_FIELD = ; // TODO: 1/29/2017 What is? 
-    final public static int LL2P_PAYLOAD_FIELD = ; // TODO: 1/29/2017 What is?
-    final public static int LL2P_CRC_FIELD = ; // TODO: 1/29/2017 What is?
+    final public static int LL2P_DEST_ADDRESS = 22;
+    final public static int LL2P_TYPE_FIELD = 23;
+    final public static int LL2P_PAYLOAD_FIELD = 24;
+    final public static int LL2P_CRC_FIELD = 25; 
     
     final public static int LL2P_DEST_ADDRESS_OFFSET = 0;
     final public static int LL2P_SOURCE_ADDRESS_OFFSET = 3;
