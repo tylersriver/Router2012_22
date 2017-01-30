@@ -41,7 +41,7 @@ public class CRC implements DatagramHeaderField {
      * Constructor
      * @param typeValueString string
      */
-    public CRC(String typeValueString) throws UnsupportedEncodingException {
+    public CRC(String typeValueString) {
         this.crcValue = truncateWhenUTF8(typeValueString, 2);
     }
 

@@ -44,7 +44,7 @@ public class FrameLogger extends Observable implements Observer {
      */
     @Override
     public void update(Observable o, Object arg) {
-        if(o.getClass().equals(LL1Daemon.class)) { // TODO: 1/26/17 Need class
+        if(o.getClass().equals(LL1Daemon.class)) {
             frameList.add( (LL2PFrame) arg );
         }
 

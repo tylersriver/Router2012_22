@@ -27,12 +27,18 @@ public class Constants implements Observer {
     public static String IP_ADDRESS_PREFIX; // the prefix will be stored here
 
 
-    // LL2P Frame Constants
+    // -- LL2P Frame Constants
     final public static int LL2P_SOURCE_ADDRESS = 21;
+    final public static int LL2P_DEST_ADDRESS = ; // TODO: 1/29/2017 What is?
+    final public static int LL2P_TYPE_FIELD = ; // TODO: 1/29/2017 What is? 
+    final public static int LL2P_PAYLOAD_FIELD = ; // TODO: 1/29/2017 What is?
+    final public static int LL2P_CRC_FIELD = ; // TODO: 1/29/2017 What is?
+    
     final public static int LL2P_DEST_ADDRESS_OFFSET = 0;
-    final public static int LL2P_ADDRESS_FIELD_LENGTH  = 3;
-    final public static int LL2P_TYPE_FIELD_LENGTH = 2;
-    final public static int LL2P_CRC_FIELD_LENGTH = 2;
+    final public static int LL2P_SOURCE_ADDRESS_OFFSET = 3;
+    final public static int LL2P_TYPE_FIELD_OFFSET = 6;
+    final public static int LL2P_PAYLOAD_OFFSET = 8;
+    final public static int LL2P_CRC_FIELD_OFFSET = 40;
 
     // -- Methods
     // --------------------------------------------------------------

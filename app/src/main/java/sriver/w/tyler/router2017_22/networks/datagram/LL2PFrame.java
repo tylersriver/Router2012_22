@@ -1,5 +1,9 @@
 package sriver.w.tyler.router2017_22.networks.datagram;
 
+import java.util.Arrays;
+import java.util.concurrent.ConcurrentNavigableMap;
+
+import sriver.w.tyler.router2017_22.networks.Constants;
 import sriver.w.tyler.router2017_22.networks.datagram_fields.CRC;
 import sriver.w.tyler.router2017_22.networks.datagram_fields.DatagramHeaderField;
 import sriver.w.tyler.router2017_22.networks.datagram_fields.DatagramPayloadField;
@@ -8,9 +12,11 @@ import sriver.w.tyler.router2017_22.networks.datagram_fields.LL2PTypeField;
 
 /**
  * Created by tyler.w.sriver on 1/26/17.
+ *
+ * This class is the full structure for
+ * an LL2P frame
  */
-
-public class LL2PFrame implements DatagramHeaderField {
+public class LL2PFrame implements Datagram {
 
     // -- Fields
     // --------------------------------------------------------------
@@ -45,7 +51,27 @@ public class LL2PFrame implements DatagramHeaderField {
      * @param byteArray byte[]
      */
     public LL2PFrame(byte[] byteArray){
-        
+        // -- Put array into string
+        String bytes = Arrays.toString(byteArray);
+
+        // -- Set indexes for fields
+        int destAddressFrom = Constants.LL2P_DEST_ADDRESS_OFFSET;
+        int desAddressTo = destAddressFrom + 2;
+        int sourceAddressFrom = Constants.LL2P_SOURCE_ADDRESS_OFFSET;
+        int sourceAddressTo = sourceAddressFrom + 2;
+        int typeFieldFrom = Constants.LL2P_TYPE_FIELD_OFFSET;
+        int typeFieldTo = typeFieldFrom + 1;
+        int payloadFrom = Constants.LL2P_PAYLOAD_OFFSET;
+        int payloadTo = payloadFrom + 31;
+        int crcFrom = Constants.LL2P_CRC_FIELD_OFFSET;
+        int crcTo = crcFrom + 1;
+
+        // -- Instantiate fields
+        destinationAddress = new LL2PAddressField(bytes.substring(destAddressFrom, desAddressTo), false);
+        sourceAddress = new LL2PAddressField(bytes.substring(sourceAddressFrom,sourceAddressTo), true);
+        type = new LL2PTypeField(bytes.substring(typeFieldFrom,typeFieldTo));
+        payload = ;// TODO: 1/29/2017 what?
+        crc = new CRC(bytes.substring(crcFrom, crcTo));
     }
 
     // -- Getters
@@ -104,12 +130,12 @@ public class LL2PFrame implements DatagramHeaderField {
     }
 
     @Override
-    public String toAsciiString() {
+    public String toProtocolExplanationString() {
         // TODO: 1/26/17 Implement 
     }
 
     @Override
-    public String explainSelf() {
+    public String toSummaryString() {
         // TODO: 1/26/17 Implement
     }
 }
