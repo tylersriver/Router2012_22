@@ -22,8 +22,7 @@ public class Constants implements Observer {
     public static String logTag = new String("ROUTEMASTER: ");
     private static Constants ourInstance = new Constants();
 
-    public static String IP_ADDRESS;	// the IP address of this system
-    //will be stored here in dotted decimal notation
+    public static String IP_ADDRESS;	// the IP address of this system Note: will be stored here in dotted decimal notation
     public static String IP_ADDRESS_PREFIX; // the prefix will be stored here
 
 
