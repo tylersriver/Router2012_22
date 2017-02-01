@@ -27,9 +27,13 @@ public class Factory {
     private Factory() {
     }
 
+    /**
+     * This function returns the
+     * @param FieldValue int
+     * @param contents String
+     * @return requested field
+     */
     public DatagramHeaderField getDatagramHeaderField(int FieldValue, String contents){
-        // TODO: 1/26/17 Implement
-
         if(FieldValue == Constants.LL2P_SOURCE_ADDRESS){
             return new LL2PAddressField(contents, true);
         } else if(FieldValue == Constants.LL2P_DEST_ADDRESS){

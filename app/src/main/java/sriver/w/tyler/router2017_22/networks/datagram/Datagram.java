@@ -21,7 +21,7 @@ public interface Datagram {
 
     /**
      * Return a string that is a full explanation
-     * of the datagram and all it's field
+     * of the datagram and all it's fields
      * @return string
      */
     String toProtocolExplanationString();

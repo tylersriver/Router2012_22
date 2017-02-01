@@ -52,7 +52,7 @@ public class LL2PFrame implements Datagram {
      */
     public LL2PFrame(byte[] byteArray){
         // -- Put array into string
-        String bytes = Arrays.toString(byteArray);
+        String bytes = new String(byteArray);
 
         // -- Set indexes for fields
         int destAddressFrom = Constants.LL2P_DEST_ADDRESS_OFFSET;
@@ -139,13 +139,16 @@ public class LL2PFrame implements Datagram {
 
     @Override
     public String toProtocolExplanationString() {
-        // TODO: 1/26/17 Implement
-        return
+        return "LL2P Frame: " + "\n" +
+                "Destination Address: " + destinationAddress.toString() + "\n" +
+                "Source Address: " + sourceAddress.toString() + "\n" +
+                "Type: " + type.toString() + "\n" +
+                "Payload: " + payload.toString() + "\n" +
+                "CRC: " + crc.toString();
     }
 
     @Override
     public String toSummaryString() {
-        // TODO: 1/26/17 Implement
-        return "This is a LL2P frame";
+        return "LL2P frame";
     }
 }
