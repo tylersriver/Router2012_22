@@ -28,7 +28,7 @@ public class Factory {
     }
 
     /**
-     * This function returns the
+     * This function returns the requested header field
      * @param FieldValue int
      * @param contents String
      * @return requested field
