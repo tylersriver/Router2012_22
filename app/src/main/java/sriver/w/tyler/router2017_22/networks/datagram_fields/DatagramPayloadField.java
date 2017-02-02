@@ -41,7 +41,7 @@ public class DatagramPayloadField implements DatagramHeaderField {
 
     @Override
     public String explainSelf() {
-        return "This is datagram payload: ".concat(packet.toString());
+        return "This is the datagram payload: ".concat(packet.toString());
     }
 
     // -- Other Methods
@@ -59,6 +59,6 @@ public class DatagramPayloadField implements DatagramHeaderField {
      * @return Datagram
      */
     public Datagram getPayload(){
-        return this.packet;
+        return packet;
     }
 }

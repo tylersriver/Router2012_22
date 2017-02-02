@@ -130,10 +130,10 @@ public class LL2PFrame implements Datagram {
 
     @Override
     public String toHexString() {
-        return  destinationAddress.toHexString() + "\n" +
-                sourceAddress.toHexString() + "\n" +
-                type.toHexString() + "\n" +
-                payload.toHexString() + "\n" +
+        return  destinationAddress.toHexString() +
+                sourceAddress.toHexString() +
+                type.toHexString() +
+                payload.toHexString() +
                 crc.toHexString();
     }
 
@@ -149,6 +149,8 @@ public class LL2PFrame implements Datagram {
 
     @Override
     public String toSummaryString() {
-        return "LL2P frame";
+        return "LL2P frame: DestAddr: " + destinationAddress.toString() +
+                "SrcAddr: " + sourceAddress.toString() +
+                "Payload: " + payload.explainSelf();
     }
 }
