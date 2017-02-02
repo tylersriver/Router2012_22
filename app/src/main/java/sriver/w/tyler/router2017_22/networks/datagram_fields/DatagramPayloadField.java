@@ -1,8 +1,13 @@
 package sriver.w.tyler.router2017_22.networks.datagram_fields;
 
+import android.provider.ContactsContract;
+
 import java.net.DatagramPacket;
 
+import sriver.w.tyler.router2017_22.networks.Constants;
 import sriver.w.tyler.router2017_22.networks.datagram.Datagram;
+import sriver.w.tyler.router2017_22.networks.datagram.TextDatagram;
+import sriver.w.tyler.router2017_22.support.Factory;
 
 /**
  * Created by tyler.w.sriver on 1/26/17.
@@ -41,7 +46,7 @@ public class DatagramPayloadField implements DatagramHeaderField {
 
     @Override
     public String explainSelf() {
-        return "This is the datagram payload: ".concat(packet.toString());
+        return packet.toProtocolExplanationString();
     }
 
     // -- Other Methods
@@ -52,6 +57,15 @@ public class DatagramPayloadField implements DatagramHeaderField {
      */
     public DatagramPayloadField(Datagram pkt){
         this.packet = pkt;
+    }
+
+    /**
+     * constructor overload
+     * @param FieldValue int
+     * @param contents string
+     */
+    public DatagramPayloadField(int FieldValue, String contents) {
+        packet = Factory.getInstance().createPayload(FieldValue, contents);
     }
 
     /**

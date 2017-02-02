@@ -1,6 +1,10 @@
 package sriver.w.tyler.router2017_22.support;
 
+import java.lang.reflect.Field;
+
 import sriver.w.tyler.router2017_22.networks.Constants;
+import sriver.w.tyler.router2017_22.networks.datagram.Datagram;
+import sriver.w.tyler.router2017_22.networks.datagram.TextDatagram;
 import sriver.w.tyler.router2017_22.networks.datagram_fields.CRC;
 import sriver.w.tyler.router2017_22.networks.datagram_fields.DatagramHeaderField;
 import sriver.w.tyler.router2017_22.networks.datagram_fields.DatagramPayloadField;
@@ -40,11 +44,56 @@ public class Factory {
             return new LL2PAddressField(contents, false);
         } else if (FieldValue == Constants.LL2P_TYPE_FIELD){
             return new LL2PTypeField(contents);
-        } else if (FieldValue == Constants.LL2P_PAYLOAD_FIELD){
-            // TODO: 1/29/2017
+        } else if (checkIfPayload(FieldValue)){
+            return new DatagramPayloadField(FieldValue, contents);
         } else if (FieldValue == Constants.LL2P_CRC_FIELD){
             return new CRC(contents);
         }
         return null;
+    }
+
+    /**
+     * Check if the type is one of the payloads
+     * @param FieldValue int
+     * @return boolean
+     */
+    private boolean checkIfPayload(int FieldValue){
+        return FieldValue == Constants.LL2P_TYPE_IS_LL3P ||
+                FieldValue == Constants.LL2P_TYPE_IS_RESERVED ||
+                FieldValue == Constants.LL2P_TYPE_IS_LRP ||
+                FieldValue == Constants.LL2P_TYPE_IS_ECHO_REQUEST ||
+                FieldValue == Constants.LL2P_TYPE_IS_ECHO_REPLY ||
+                FieldValue == Constants.LL2P_TYPE_IS_ARP_REQUEST ||
+                FieldValue == Constants.LL2P_TYPE_IS_ARP_REPLY ||
+                FieldValue == Constants.LL2P_TYPE_IS_TEXT;
+    }
+
+    /**
+     * Create a payload object based on given FieldValue
+     * @param FieldValue int
+     * @param Contents String
+     * @return datagram
+     */
+    public Datagram createPayload(int FieldValue, String Contents){
+        switch (FieldValue){
+            case Constants.LL2P_TYPE_IS_TEXT:
+                return new TextDatagram(Contents);
+            case Constants.LL2P_TYPE_IS_RESERVED:
+                return null;
+            case Constants.LL2P_TYPE_IS_LRP:
+                return null;
+            case Constants.LL2P_TYPE_IS_LL3P:
+                return null;
+            case Constants.LL2P_TYPE_IS_ECHO_REQUEST:
+                return null;
+            case Constants.LL2P_TYPE_IS_ECHO_REPLY:
+                return null;
+            case Constants.LL2P_TYPE_IS_ARP_REQUEST:
+                return null;
+            case Constants.LL2P_TYPE_IS_ARP_REPLY:
+                return null;
+            default:
+                return null;
+        }
     }
 }

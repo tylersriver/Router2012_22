@@ -9,6 +9,7 @@ import sriver.w.tyler.router2017_22.networks.datagram_fields.DatagramHeaderField
 import sriver.w.tyler.router2017_22.networks.datagram_fields.DatagramPayloadField;
 import sriver.w.tyler.router2017_22.networks.datagram_fields.LL2PAddressField;
 import sriver.w.tyler.router2017_22.networks.datagram_fields.LL2PTypeField;
+import sriver.w.tyler.router2017_22.support.Factory;
 
 /**
  * Created by tyler.w.sriver on 1/26/17.
@@ -54,24 +55,20 @@ public class LL2PFrame implements Datagram {
         // -- Put array into string
         String bytes = new String(byteArray);
 
-        // -- Set indexes for fields
-        int destAddressFrom = Constants.LL2P_DEST_ADDRESS_OFFSET;
-        int desAddressTo = destAddressFrom + 5;
-        int sourceAddressFrom = Constants.LL2P_SOURCE_ADDRESS_OFFSET;
-        int sourceAddressTo = sourceAddressFrom + 5;
-        int typeFieldFrom = Constants.LL2P_TYPE_FIELD_OFFSET;
-        int typeFieldTo = typeFieldFrom + 3;
-        int payloadFrom = Constants.LL2P_PAYLOAD_OFFSET;
-        int payloadTo = payloadFrom + 62;
-        int crcFrom = Constants.LL2P_CRC_FIELD_OFFSET;
-        int crcTo = crcFrom + 3;
+        // -- Get Substrings for fields
+        String destAddr =  bytes.substring(Constants.LL2P_DEST_ADDRESS_OFFSET, Constants.LL2P_ADDRESS_LENGTH*2);
+        String srcAddr = bytes.substring(Constants.LL2P_SOURCE_ADDRESS_OFFSET, Constants.LL2P_SOURCE_ADDRESS_OFFSET + Constants.LL2P_ADDRESS_LENGTH*2);
+        String type = bytes.substring(Constants.LL2P_TYPE_FIELD_OFFSET, Constants.LL2P_TYPE_FIELD_OFFSET + Constants.LL2P_TYPE_FIELD_LENGTH*2);
+        String payload = bytes.substring(Constants.LL2P_PAYLOAD_OFFSET, bytes.length() - Constants.LL2P_CRC_FIELD_LENGTH*2-1);
+        String crc = bytes.substring(bytes.length() - Constants.LL2P_CRC_FIELD_LENGTH*2, bytes.length());
 
-        // -- Instantiate fields
-        destinationAddress = new LL2PAddressField(bytes.substring(destAddressFrom, desAddressTo), false);
-        sourceAddress = new LL2PAddressField(bytes.substring(sourceAddressFrom,sourceAddressTo), true);
-        type = new LL2PTypeField(bytes.substring(typeFieldFrom,typeFieldTo));
-        payload = new DatagramPayloadField();// TODO: 1/29/2017 what to pass?
-        crc = new CRC(bytes.substring(crcFrom, crcTo));
+        // -- Instantiate Fields
+        Factory factory = Factory.getInstance();
+        this.destinationAddress = (LL2PAddressField) factory.getDatagramHeaderField(Constants.LL2P_DEST_ADDRESS, destAddr);
+        this.sourceAddress = (LL2PAddressField) factory.getDatagramHeaderField(Constants.LL2P_DEST_ADDRESS, srcAddr);
+        this.type = (LL2PTypeField) factory.getDatagramHeaderField(Constants.LL2P_TYPE_FIELD, type);
+        this.payload = (DatagramPayloadField) factory.getDatagramHeaderField(Integer.valueOf(this.type.toString(), 16), payload);
+        this.crc = (CRC) factory.getDatagramHeaderField(Constants.LL2P_CRC_FIELD, crc);
     }
 
     // -- Getters

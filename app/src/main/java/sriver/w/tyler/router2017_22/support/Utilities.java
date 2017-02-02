@@ -45,4 +45,18 @@ public class Utilities {
         }
         return hexString;
     }
+
+    /**
+     * Convert an integer into an ASCII string
+     * @param value int
+     * @return string
+     */
+    static public String intToAscii(int value) {
+        int temp = value;
+        StringBuilder builder = new StringBuilder();
+        while (temp > 0) {
+            builder.append(Integer.toString(temp % 256));
+        }
+        return builder.toString();
+    }
 }

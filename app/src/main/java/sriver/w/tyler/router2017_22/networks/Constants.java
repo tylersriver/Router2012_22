@@ -31,14 +31,17 @@ public class Constants implements Observer {
     final public static int LL2P_SOURCE_ADDRESS = 21;
     final public static int LL2P_DEST_ADDRESS   = 22;
     final public static int LL2P_TYPE_FIELD     = 23;
-    final public static int LL2P_PAYLOAD_FIELD  = 24;
     final public static int LL2P_CRC_FIELD      = 25;
-    
-    final public static int LL2P_DEST_ADDRESS_OFFSET    = 0;
-    final public static int LL2P_SOURCE_ADDRESS_OFFSET  = 3;
-    final public static int LL2P_TYPE_FIELD_OFFSET      = 6;
-    final public static int LL2P_PAYLOAD_OFFSET         = 8;
-    final public static int LL2P_CRC_FIELD_OFFSET       = 40;
+
+    // -- Field Offsets
+    final public static int LL2P_DEST_ADDRESS_OFFSET        = 0;
+    final public static int LL2P_SOURCE_ADDRESS_OFFSET      = 6;
+    final public static int LL2P_TYPE_FIELD_OFFSET          = 12;
+    final public static int LL2P_PAYLOAD_OFFSET             = 16;
+
+    final public static int LL2P_CRC_FIELD_LENGTH = 2;
+    final public static int LL2P_ADDRESS_LENGTH = 3;
+    final public static int LL2P_TYPE_FIELD_LENGTH = 2;
 
     // -- LL2P Types
     final public static int LL2P_TYPE_IS_LL3P          = 0x8001;
@@ -49,6 +52,7 @@ public class Constants implements Observer {
     final public static int LL2P_TYPE_IS_ARP_REQUEST   = 0x8006;
     final public static int LL2P_TYPE_IS_ARP_REPLY     = 0x8007;
     final public static int LL2P_TYPE_IS_TEXT          = 0x8008;
+
 
     // -- Methods
     // --------------------------------------------------------------

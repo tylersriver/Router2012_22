@@ -1,5 +1,7 @@
 package sriver.w.tyler.router2017_22.networks.datagram_fields;
 
+import sriver.w.tyler.router2017_22.support.Utilities;
+
 /**
  * Created by tyler.w.sriver on 1/24/17.
  *
@@ -27,13 +29,7 @@ public class LL2PAddressField implements DatagramHeaderField {
 
     @Override
     public String toAsciiString() {
-        int temp = address;
-        StringBuilder builder = new StringBuilder();
-        while(temp > 0){
-            builder.append(Integer.toString(temp % 256));
-            temp = temp / 256;
-        }
-        return builder.toString();
+        return Utilities.intToAscii(address);
     }
 
     @Override
