@@ -56,15 +56,15 @@ public class LL2PFrame implements Datagram {
 
         // -- Set indexes for fields
         int destAddressFrom = Constants.LL2P_DEST_ADDRESS_OFFSET;
-        int desAddressTo = destAddressFrom + 2;
+        int desAddressTo = destAddressFrom + 5;
         int sourceAddressFrom = Constants.LL2P_SOURCE_ADDRESS_OFFSET;
-        int sourceAddressTo = sourceAddressFrom + 2;
+        int sourceAddressTo = sourceAddressFrom + 5;
         int typeFieldFrom = Constants.LL2P_TYPE_FIELD_OFFSET;
-        int typeFieldTo = typeFieldFrom + 1;
+        int typeFieldTo = typeFieldFrom + 3;
         int payloadFrom = Constants.LL2P_PAYLOAD_OFFSET;
-        int payloadTo = payloadFrom + 31;
+        int payloadTo = payloadFrom + 62;
         int crcFrom = Constants.LL2P_CRC_FIELD_OFFSET;
-        int crcTo = crcFrom + 1;
+        int crcTo = crcFrom + 3;
 
         // -- Instantiate fields
         destinationAddress = new LL2PAddressField(bytes.substring(destAddressFrom, desAddressTo), false);
@@ -121,10 +121,10 @@ public class LL2PFrame implements Datagram {
     // --------------------------------------------------------------
     @Override
     public String toString() {
-        return  destinationAddress.toString() + "\n" +
-                sourceAddress.toString() + "\n" +
-                type.toString() + "\n" +
-                payload.toString() + "\n" +
+        return  destinationAddress.toString() +
+                sourceAddress.toString() +
+                type.toString() +
+                payload.toString() +
                 crc.toString();
     }
 
