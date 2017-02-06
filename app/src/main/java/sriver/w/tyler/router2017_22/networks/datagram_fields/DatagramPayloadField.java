@@ -33,8 +33,6 @@ public class DatagramPayloadField implements DatagramHeaderField {
 
     @Override
     public String toAsciiString() {
-        // TODO: 1/26/17 Fix this method
-
         String hexString = toHexString();
         StringBuilder output = new StringBuilder();
         for(int i=0; i < hexString.length(); i+=2) {

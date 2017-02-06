@@ -42,6 +42,6 @@ public class CRC implements DatagramHeaderField {
      * @param typeValueString string
      */
     public CRC(String typeValueString) {
-        this.crcValue = typeValueString.substring(0, 3);
+        this.crcValue = typeValueString.substring(0, 4);
     }
 }

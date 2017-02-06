@@ -18,7 +18,12 @@ public class TextDatagram implements Datagram {
 
     @Override
     public String toHexString() {
-        return Integer.toHexString(Integer.valueOf(this.text, 16));
+        StringBuilder hex = new StringBuilder();
+        for(int i = 0; i < text.length(); i++){
+            int ascii = (int)text.charAt(i);
+            hex.append(Integer.toHexString(ascii));
+        }
+        return hex.toString();
     }
 
     @Override

@@ -19,12 +19,12 @@ public class LL2PAddressField implements DatagramHeaderField {
     // -- Interface Methods
     @Override
     public String toString() {
-        return Integer.toHexString(address);
+        return Utilities.padHexString(Integer.toHexString(address), 3);
     }
 
     @Override
     public String toHexString() {
-        return Integer.toHexString(address);
+        return Utilities.padHexString(Integer.toHexString(address), 3);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class LL2PAddressField implements DatagramHeaderField {
      * @param isSource boolean
      */
     public LL2PAddressField(String address, boolean isSource){
-        this.address = Integer.parseInt(address);
+        this.address = Integer.parseInt(address, 16);
         isSourceAddress = isSource;
         setExplanation();
     }

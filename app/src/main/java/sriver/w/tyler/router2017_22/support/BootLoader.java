@@ -46,12 +46,12 @@ public class BootLoader extends Observable {
     }
 
     private void testRouterComponents(){
-        String frameString = "0011223141598008Hi0000";
+        String frameString = "0011223141598008Hi1234";
         LL2PFrame frame = new LL2PFrame(frameString.getBytes());
 
         UIManager.getInstance().raiseToast("Frame is: " + frame.toString());
         UIManager.getInstance().raiseToast("Protocol Explanation: " + frame.toProtocolExplanationString());
-        UIManager.getInstance().raiseToast("The payload is: " + frame.getPayload().toAsciiString());
+        UIManager.getInstance().raiseToast("The payload is: " + frame.getPayload().toString());
         UIManager.getInstance().raiseToast("Hex Characters are: " + frame.toHexString());
         UIManager.getInstance().raiseToast("Summary String is: " + frame.toSummaryString());
     }

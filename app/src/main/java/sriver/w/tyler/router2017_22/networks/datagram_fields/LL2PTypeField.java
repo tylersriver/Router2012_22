@@ -54,7 +54,7 @@ public class LL2PTypeField implements DatagramHeaderField {
      * @param typeValueString string
      */
     public LL2PTypeField(String typeValueString){
-        this.type = Integer.parseInt(typeValueString);
+        this.type = Integer.parseInt(typeValueString, 16);
         setExplanation();
     }
 

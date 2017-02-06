@@ -1,7 +1,10 @@
 package sriver.w.tyler.router2017_22.support;
 
+import android.provider.Contacts;
+
 import java.lang.reflect.Field;
 
+import sriver.w.tyler.router2017_22.UI.UIManager;
 import sriver.w.tyler.router2017_22.networks.Constants;
 import sriver.w.tyler.router2017_22.networks.datagram.Datagram;
 import sriver.w.tyler.router2017_22.networks.datagram.TextDatagram;
@@ -95,5 +98,9 @@ public class Factory {
             default:
                 return null;
         }
+    }
+
+    public void displayMsg() {
+        UIManager.getInstance().raiseToast("This is the factory");
     }
 }
