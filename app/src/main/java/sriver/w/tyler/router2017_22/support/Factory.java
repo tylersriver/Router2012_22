@@ -13,6 +13,7 @@ import sriver.w.tyler.router2017_22.networks.datagram_fields.DatagramHeaderField
 import sriver.w.tyler.router2017_22.networks.datagram_fields.DatagramPayloadField;
 import sriver.w.tyler.router2017_22.networks.datagram_fields.LL2PAddressField;
 import sriver.w.tyler.router2017_22.networks.datagram_fields.LL2PTypeField;
+import sriver.w.tyler.router2017_22.networks.tablerecord.TableRecord;
 
 /**
  * Created by tyler.w.sriver on 1/26/17.
@@ -102,5 +103,10 @@ public class Factory {
 
     public void displayMsg() {
         UIManager.getInstance().raiseToast("This is the factory");
+    }
+
+    public TableRecord createRecord(){
+        // TODO: 2/5/17 Fill this in
+        return null;
     }
 }

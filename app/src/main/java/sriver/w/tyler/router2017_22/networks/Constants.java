@@ -39,9 +39,9 @@ public class Constants implements Observer {
     final public static int LL2P_TYPE_FIELD_OFFSET          = 12;
     final public static int LL2P_PAYLOAD_OFFSET             = 16;
 
-    final public static int LL2P_CRC_FIELD_LENGTH = 2;
-    final public static int LL2P_ADDRESS_LENGTH = 3;
-    final public static int LL2P_TYPE_FIELD_LENGTH = 2;
+    final public static int LL2P_CRC_FIELD_LENGTH   = 2;
+    final public static int LL2P_ADDRESS_LENGTH     = 3;
+    final public static int LL2P_TYPE_FIELD_LENGTH  = 2;
 
     // -- LL2P Types
     final public static int LL2P_TYPE_IS_LL3P          = 0x8001;
@@ -52,6 +52,14 @@ public class Constants implements Observer {
     final public static int LL2P_TYPE_IS_ARP_REQUEST   = 0x8006;
     final public static int LL2P_TYPE_IS_ARP_REPLY     = 0x8007;
     final public static int LL2P_TYPE_IS_TEXT          = 0x8008;
+
+    // -- Record Constants
+    // --------------------------------------------------------------
+
+    // -- Record Types
+    final public static int ADJACENCY_TABLE_RECORD  = 26;
+    final public static int ARP_TABLE_RECORD        = 27;
+    final public static int ROUTING_TABLE_RECORD    = 28;
 
 
     // -- Methods

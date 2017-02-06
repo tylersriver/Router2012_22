@@ -1,5 +1,7 @@
 package sriver.w.tyler.router2017_22.support;
 
+import java.util.Calendar;
+
 /**
  * Created by tyler.w.sriver on 1/11/2017.
  *
@@ -11,9 +13,7 @@ public class Utilities {
     // -- Fields
     // --------------------------------------------------------------
     private static Utilities ourInstance = new Utilities();
-    public static Utilities getInstance() {
-        return ourInstance;
-    }
+    public static long baseDateInSec = Calendar.getInstance().getTimeInMillis()/1000;
 
     // -- Methods
     // --------------------------------------------------------------
@@ -22,6 +22,14 @@ public class Utilities {
      * Constructor
      */
     private Utilities() {
+    }
+
+    /**
+     * Get the singleton instance
+     * @return Utilities
+     */
+    public static Utilities getInstance() {
+        return ourInstance;
     }
 
     /**
@@ -58,5 +66,13 @@ public class Utilities {
             builder.append(Integer.toString(temp % 256));
         }
         return builder.toString();
+    }
+
+    /**
+     * Get the current router up time
+     * @return int
+     */
+    static public int getTimeinSec(){
+        return (int) (Calendar.getInstance().getTimeInMillis()/1000 - baseDateInSec);
     }
 }
