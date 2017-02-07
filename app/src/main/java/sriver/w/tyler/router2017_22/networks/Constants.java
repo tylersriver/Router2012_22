@@ -24,6 +24,7 @@ public class Constants implements Observer {
 
     public static String IP_ADDRESS;	// the IP address of this system Note: will be stored here in dotted decimal notation
     public static String IP_ADDRESS_PREFIX; // the prefix will be stored here
+    final public static int UDP_PORT = 49999;
 
 
     // -- LL2P Frame Constants

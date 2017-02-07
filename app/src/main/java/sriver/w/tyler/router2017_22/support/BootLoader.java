@@ -7,6 +7,7 @@ import java.util.Observable;
 
 import sriver.w.tyler.router2017_22.UI.UIManager;
 import sriver.w.tyler.router2017_22.networks.Constants;
+import sriver.w.tyler.router2017_22.networks.daemon.LL1Daemon;
 import sriver.w.tyler.router2017_22.networks.datagram.LL2PFrame;
 
 /**
@@ -38,6 +39,7 @@ public class BootLoader extends Observable {
         addObserver(Constants.getInstance());
         addObserver(UIManager.getInstance());
         addObserver(FrameLogger.getInstance());
+        addObserver(LL1Daemon.getInstance());
 
         setChanged();
         notifyObservers();

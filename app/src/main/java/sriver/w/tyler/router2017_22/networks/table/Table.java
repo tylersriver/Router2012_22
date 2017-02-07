@@ -41,14 +41,13 @@ public class Table extends Observable implements TableInterface {
         return table.get(table.indexOf(record));
     }
 
-
     @Override
     public TableRecord getItem(Integer key) throws LabException {
         for (TableRecord record : table) {
             if(Objects.equals(record.getKey(), key)) {
                 return record;
             }
-        }
+        } return null; // TODO: 2/6/2017 Not sure correct implementation?
     }
 
     @Override
@@ -59,8 +58,7 @@ public class Table extends Observable implements TableInterface {
                 table.remove(table.indexOf(record));
                 return record;
             }
-        }
-        return null;
+        } return null;
     }
 
     @Override

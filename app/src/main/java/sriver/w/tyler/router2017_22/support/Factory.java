@@ -105,7 +105,7 @@ public class Factory {
         UIManager.getInstance().raiseToast("This is the factory");
     }
 
-    public TableRecord createRecord(){
+    public TableRecord getTableRecord(){
         // TODO: 2/5/17 Fill this in
         return null;
     }
