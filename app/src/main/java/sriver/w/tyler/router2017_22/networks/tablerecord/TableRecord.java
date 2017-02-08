@@ -18,7 +18,7 @@ public interface TableRecord {
      * Get the time passed in seconds since the record was
      * last referenced.
      * Note: if no age return 0
-     * @return
+     * @return Integer
      */
     Integer getAgeInSec();
 }

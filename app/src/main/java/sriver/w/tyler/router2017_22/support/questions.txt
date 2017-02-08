@@ -1,0 +1,22 @@
+/////////////////////////////
+//// QUESTIONS and NOTES ////
+/////////////////////////////
+
+-- Questions
+-----------------------------
+* Missing in LL1Daemon
+    - AdjacencyTable Support
+        + where do the methods go?
+        + when is table created? I think i'm missing the point...
+    - Thread Stuff
+        + Uh general understanding needed?
+        + receiving/sending udp packets? using sendFrame? do I need receive method?
+        + calling methods? LL1 constructor?
+        + spinning off threads?
+        + filling in supporting class methods
+* Factory
+    - method for creating records?
+
+
+-- Notes
+-----------------------------

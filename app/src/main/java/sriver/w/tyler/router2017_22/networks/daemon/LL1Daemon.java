@@ -1,8 +1,10 @@
 package sriver.w.tyler.router2017_22.networks.daemon;
 
 import android.database.CursorIndexOutOfBoundsException;
+import android.os.AsyncTask;
 import android.util.Log;
 
+import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.SocketException;
 import java.util.Observable;
@@ -17,6 +19,7 @@ import sriver.w.tyler.router2017_22.support.BootLoader;
 import sriver.w.tyler.router2017_22.support.Factory;
 import sriver.w.tyler.router2017_22.support.FrameLogger;
 import sriver.w.tyler.router2017_22.support.GetIPAddress;
+import sriver.w.tyler.router2017_22.support.PacketInformation;
 
 /**
  * Created by tyler.w.sriver on 1/26/17.
@@ -109,5 +112,61 @@ public class LL1Daemon extends Observable implements Observer {
     public void sendFrame(LL2PFrame ll2p){
         // TODO: 2/7/2017 Spin off thread to Tx frame
         notifyObservers(ll2p);
+    }
+
+    // -- Classes
+    // --------------------------------------------------------------
+
+    /**
+     * Async thread class for sending packets
+     */
+    private class SendUnicastFrame extends AsyncTask<PacketInformation, Void, Void>{
+        @Override
+        protected Void doInBackground(PacketInformation... params) {
+            return null;
+        }
+    }
+
+    /**
+     * Async thread class for receiving packets
+     */
+    private class ReceiveUnicastFrame extends AsyncTask<DatagramSocket, Void, byte[]> {
+
+        @Override
+        protected byte[] doInBackground(DatagramSocket... params) {
+            return new byte[0];
+        }
+
+        /**
+         * Receive
+         * @param frameBytes byte[]
+         */
+        protected void onPostExecute(byte[] frameBytes) {
+            // get an LL2P Frame object and notify the Frame Logger, passing frame.
+            LL2PFrame ll2PFrame = new LL2PFrame(frameBytes);
+            setChanged();
+            notifyObservers(ll2PFrame);
+
+            // pass this LL2P Frame to the LL2PDaemon when you create one...
+            ll2PDaemon.processLL2PFrame(ll2PFrame);
+            // spin off a new thread to listen for packets.
+            new ReceiveUnicastFrame().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, receiveSocket);
+        }
+    }
+
+    /** send UDP Packet
+     * A private Async class to send packets out of the UI thread.
+     */
+    private class sendUDPPacket extends AsyncTask<PacketInformation, Void, Void> {
+        @Override
+        protected Void doInBackground(PacketInformation... arg0) {
+            PacketInformation pktInfo = arg0[0];
+            try {
+                pktInfo.getSocket().send(pktInfo.getPacket());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
 }

@@ -41,4 +41,37 @@ public class AdjacencyRecord extends TableRecordClass {
     public String toString() {
         return "LL2P Address: " + Integer.toHexString(ll2pAddress) + "; " + "IP Address: " + ipaddress.toString();
     }
+
+    // -- Getter/Setters
+    /**
+     * Return the LL2P address
+     * @return Integer
+     */
+    public Integer getLl2pAddress() {
+        return ll2pAddress;
+    }
+
+    /**
+     * Set the LL2PAddress
+     * @param ll2pAddress Integer
+     */
+    public void setLl2pAddress(Integer ll2pAddress) {
+        this.ll2pAddress = ll2pAddress;
+    }
+
+    /**
+     * Return the ip Address
+     * @return InetAddress
+     */
+    public InetAddress getIpaddress() {
+        return ipaddress;
+    }
+
+    /**
+     * Set ipaddress
+     * @param ipaddress InetAddress
+     */
+    public void setIpaddress(InetAddress ipaddress) {
+        this.ipaddress = ipaddress;
+    }
 }
