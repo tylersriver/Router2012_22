@@ -21,7 +21,9 @@ public class Table extends Observable implements TableInterface {
 
     // -- Methods
     // --------------------------------------------------------------
-
+    public Table(){
+        table = new ArrayList<TableRecord>();
+    }
 
     // -- Interface Methods
     @Override
@@ -37,7 +39,6 @@ public class Table extends Observable implements TableInterface {
 
     @Override
     public TableRecord getItem(TableRecord record) throws LabException {
-        // TODO: 2/5/17 will this throw the exception if doesn't exist?
         return table.get(table.indexOf(record));
     }
 
@@ -47,14 +48,14 @@ public class Table extends Observable implements TableInterface {
             if(Objects.equals(record.getKey(), key)) {
                 return record;
             }
-        } return null; // TODO: 2/6/2017 Not sure correct implementation?
+        } return null;
     }
 
     @Override
     public TableRecord removeItem(Integer key) {
         // Search for matching record
         for (TableRecord record : table) {
-            if(Objects.equals(record.getKey(), key)){
+            if(key.equals(record.getKey())){
                 table.remove(table.indexOf(record));
                 return record;
             }

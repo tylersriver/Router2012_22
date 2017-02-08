@@ -66,6 +66,10 @@ public class LL2PFrame implements Datagram {
         this.crc = (CRC) Factory.getInstance().getDatagramHeaderField(Constants.LL2P_CRC_FIELD, crc);
     }
 
+    public Integer getDestinationAddressValue(){
+        return destinationAddress.getAddress();
+    }
+
     // -- Getters
     // --------------------------------------------------------------
 

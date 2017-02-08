@@ -3,6 +3,8 @@ package sriver.w.tyler.router2017_22.support;
 import android.provider.Contacts;
 
 import java.lang.reflect.Field;
+import java.net.InetAddress;
+import java.util.Map;
 
 import sriver.w.tyler.router2017_22.UI.UIManager;
 import sriver.w.tyler.router2017_22.networks.Constants;
@@ -13,6 +15,7 @@ import sriver.w.tyler.router2017_22.networks.datagram_fields.DatagramHeaderField
 import sriver.w.tyler.router2017_22.networks.datagram_fields.DatagramPayloadField;
 import sriver.w.tyler.router2017_22.networks.datagram_fields.LL2PAddressField;
 import sriver.w.tyler.router2017_22.networks.datagram_fields.LL2PTypeField;
+import sriver.w.tyler.router2017_22.networks.tablerecord.AdjacencyRecord;
 import sriver.w.tyler.router2017_22.networks.tablerecord.TableRecord;
 
 /**
@@ -105,8 +108,18 @@ public class Factory {
         UIManager.getInstance().raiseToast("This is the factory");
     }
 
-    public TableRecord getTableRecord(){
-        // TODO: 2/5/17 Fill this in
-        return null;
+
+    public TableRecord getTableRecord(int recordType, InetAddress address, Integer ll2paddress){
+        // TODO: 2/5/17 Fill this in right
+        switch (recordType){
+            case Constants.ADJACENCY_TABLE_RECORD:
+                return new AdjacencyRecord(address, ll2paddress);
+            case Constants.ARP_TABLE_RECORD:
+                return null;
+            case Constants.ROUTING_TABLE_RECORD:
+                return null;
+            default:
+                return null;
+        }
     }
 }

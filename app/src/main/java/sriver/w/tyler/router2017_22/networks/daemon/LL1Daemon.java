@@ -1,11 +1,12 @@
 package sriver.w.tyler.router2017_22.networks.daemon;
 
-import android.database.CursorIndexOutOfBoundsException;
 import android.os.AsyncTask;
 import android.util.Log;
 
 import java.io.IOException;
+import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.Observable;
 import java.util.Observer;
@@ -19,6 +20,7 @@ import sriver.w.tyler.router2017_22.support.BootLoader;
 import sriver.w.tyler.router2017_22.support.Factory;
 import sriver.w.tyler.router2017_22.support.FrameLogger;
 import sriver.w.tyler.router2017_22.support.GetIPAddress;
+import sriver.w.tyler.router2017_22.support.LabException;
 import sriver.w.tyler.router2017_22.support.PacketInformation;
 
 /**
@@ -65,7 +67,9 @@ public class LL1Daemon extends Observable implements Observer {
             addObserver(FrameLogger.getInstance());
             uiManager = UIManager.getInstance();
             ll2PDaemon = LL2PDaemon.getInstance();
+            adjacencyTable = new Table();
             // TODO: 2/7/2017 need spin off thread
+            new ReceiveUnicastFrame().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, receiveSocket);
         }
     }
 
@@ -81,9 +85,19 @@ public class LL1Daemon extends Observable implements Observer {
      * Get the Adjacency table
      * @return AdjacencyTable
      */
-    public AdjacencyTable getAdjacencyTable(){
+    public Table getAdjacencyTable(){
         return adjacencyTable;
-        // TODO: 2/7/2017 needing obvious class AdjacencyTable
+    }
+
+    /**
+     * add record to table
+     * @param LL2PAddress String
+     * @param ipaddress String
+     */
+    public void addAdjacency(String LL2PAddress, String ipaddress){
+        AdjacencyRecord record = new AdjacencyRecord(nameServer.getInetAddress(ipaddress), Integer.valueOf(LL2PAddress, 16));
+        adjacencyTable.addItem(record);
+        notifyObservers(record);
     }
 
     /**
@@ -110,8 +124,33 @@ public class LL1Daemon extends Observable implements Observer {
      * @param ll2p LL2PFrame
      */
     public void sendFrame(LL2PFrame ll2p){
-        // TODO: 2/7/2017 Spin off thread to Tx frame
+
+        AdjacencyRecord record = null;
+        try{
+            record = (AdjacencyRecord) adjacencyTable.getItem(ll2p.getDestinationAddressValue());
+        } catch (LabException e){
+            e.printStackTrace();
+        }
+
+        InetAddress ipaddress = record.getIpaddress();
+        DatagramPacket sendPacket = new DatagramPacket(ll2p.toString().getBytes(), ll2p.toString().length(), ipaddress, Constants.UDP_PORT);
+        new SendUDPPacket().execute(new PacketInformation(sendSocket, sendPacket));
         notifyObservers(ll2p);
+    }
+
+    /**
+     * Method to receive frame
+     * @return DatagramPacket
+     */
+    public DatagramPacket receiveFrame(){
+        byte[] receiveData = new byte[1024];   // byte array to store received bytes.
+        DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
+        try {
+            receiveSocket.receive(receivePacket); // check the socket for packet.
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return receivePacket;
     }
 
     // -- Classes
@@ -157,7 +196,7 @@ public class LL1Daemon extends Observable implements Observer {
     /** send UDP Packet
      * A private Async class to send packets out of the UI thread.
      */
-    private class sendUDPPacket extends AsyncTask<PacketInformation, Void, Void> {
+    private class SendUDPPacket extends AsyncTask<PacketInformation, Void, Void> {
         @Override
         protected Void doInBackground(PacketInformation... arg0) {
             PacketInformation pktInfo = arg0[0];
