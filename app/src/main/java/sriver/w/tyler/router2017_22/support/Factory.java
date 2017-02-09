@@ -83,22 +83,22 @@ public class Factory {
      */
     public Datagram createPayload(int FieldValue, String Contents){
         switch (FieldValue){
+            case Constants.LL2P_TYPE_IS_RESERVED:
+                //return null;
+            case Constants.LL2P_TYPE_IS_LRP:
+                //return null;
+            case Constants.LL2P_TYPE_IS_LL3P:
+                //return null;
+            case Constants.LL2P_TYPE_IS_ECHO_REQUEST:
+                //return null;
+            case Constants.LL2P_TYPE_IS_ECHO_REPLY:
+                //return null;
+            case Constants.LL2P_TYPE_IS_ARP_REQUEST:
+                //return null;
+            case Constants.LL2P_TYPE_IS_ARP_REPLY:
+                //return null;
             case Constants.LL2P_TYPE_IS_TEXT:
                 return new TextDatagram(Contents);
-            case Constants.LL2P_TYPE_IS_RESERVED:
-                return null;
-            case Constants.LL2P_TYPE_IS_LRP:
-                return null;
-            case Constants.LL2P_TYPE_IS_LL3P:
-                return null;
-            case Constants.LL2P_TYPE_IS_ECHO_REQUEST:
-                return null;
-            case Constants.LL2P_TYPE_IS_ECHO_REPLY:
-                return null;
-            case Constants.LL2P_TYPE_IS_ARP_REQUEST:
-                return null;
-            case Constants.LL2P_TYPE_IS_ARP_REPLY:
-                return null;
             default:
                 return null;
         }
@@ -109,11 +109,16 @@ public class Factory {
     }
 
 
-    public TableRecord getTableRecord(int recordType, InetAddress address, Integer ll2paddress){
-        // TODO: 2/5/17 Fill this in right
+    /**
+     * Generate different table records
+     * @param recordType int
+     * @param params Object[]
+     * @return TableRecord
+     */
+    public TableRecord getTableRecord(int recordType, Object[] params){
         switch (recordType){
             case Constants.ADJACENCY_TABLE_RECORD:
-                return new AdjacencyRecord(address, ll2paddress);
+                return new AdjacencyRecord(params);
             case Constants.ARP_TABLE_RECORD:
                 return null;
             case Constants.ROUTING_TABLE_RECORD:

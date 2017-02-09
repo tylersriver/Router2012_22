@@ -181,7 +181,17 @@ public class LL1Daemon extends Observable implements Observer {
 
         @Override
         protected byte[] doInBackground(DatagramSocket... params) {
-            return new byte[0];
+            byte[] buffer = new byte[1024];
+            DatagramPacket pkt = new DatagramPacket(buffer, 1024);
+            DatagramSocket skt = params[0];
+
+            try {
+                skt.receive(pkt);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return new String(pkt.getData()).substring(0, pkt.getLength()).getBytes();
         }
 
         /**

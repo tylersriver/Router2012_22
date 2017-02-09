@@ -3,6 +3,7 @@ package sriver.w.tyler.router2017_22.support;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.provider.Contacts;
+import android.util.Log;
 
 import java.util.Observable;
 
@@ -54,7 +55,7 @@ public class BootLoader extends Observable {
 
         // -- Test LL2PFrame (Lab 3)
         // -------------------------------------------------------------------
-        String frameString = "0011223141598008Hi1234";
+        String frameString = "0011223141598008SentFromRouter1234";
         LL2PFrame frame = new LL2PFrame(frameString.getBytes());
 
 //        UIManager.getInstance().raiseToast("Frame is: " + frame.toString());
@@ -70,21 +71,30 @@ public class BootLoader extends Observable {
         // -- Test table class
         AdjacencyRecord adjacencyRecord = new AdjacencyRecord(GetIPAddress.getInstance().getInetAddress("10.31.1.1"), 0x314159);
         AdjacencyRecord adjacencyRecord1 = new AdjacencyRecord(GetIPAddress.getInstance().getInetAddress("10.31.1.2"), 0x314158);
-        UIManager.getInstance().raiseToast("Adjacency records created: "+adjacencyRecord.toString());
+        Log.d(Constants.logTag, "Adjacency records created ");
 
         Table table = new Table();
-        UIManager.getInstance().raiseToast("Table created");
+        Log.d(Constants.logTag, "Table created ");
         table.addItem(adjacencyRecord);
         table.addItem(adjacencyRecord1);
-        UIManager.getInstance().raiseToast("Adjacency records added to table");
+        Log.d(Constants.logTag, "Adjacency records added to table");
         table.removeItem(0x31459);
-        UIManager.getInstance().raiseToast("Adjacency record removed from table");
+        Log.d(Constants.logTag,  "Adjacency record removed from table");
 
         // -- Test LL1Daemon
         ll1.addAdjacency("314159", "10.31.1.1");
         AdjacencyRecord adjacencyRecord2 = ll1.getAdjacencyRecord(0x314159);
-        UIManager.getInstance().raiseToast("Record in ll1 table is: " + adjacencyRecord2.toString());
+        Log.d(Constants.logTag, "Record in LL1 table is:  "+ adjacencyRecord2.toString());
         ll1.removeAdjacency(adjacencyRecord);
-        UIManager.getInstance().raiseToast("Record removed from ll1 table");
+        Log.d(Constants.logTag, "Record removed from LL1 table");
+
+        // -- Send Frame
+        ll1.addAdjacency("001122", "10.30.48.165");
+        ll1.sendFrame(frame);
+
+        // -- Test Factory
+        Object[] params = {GetIPAddress.getInstance().getInetAddress("10.31.1.1"), 0x314158};
+        AdjacencyRecord record = (AdjacencyRecord) Factory.getInstance().getTableRecord(Constants.ADJACENCY_TABLE_RECORD, params);
+        Log.d(Constants.logTag, "Factory generated record is: "+record.toString());
     }
 }

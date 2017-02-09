@@ -27,6 +27,16 @@ public class AdjacencyRecord extends TableRecordClass {
         this.ll2pAddress = ll2pAddress;
     }
 
+    /**
+     * Constructor that takes object array
+     * Note: params[0] = ipaddress, params[1] = ll2paddress
+     * @param params Object
+     */
+    public AdjacencyRecord(Object[] params){
+        this.ipaddress = (InetAddress) params[0];
+        this.ll2pAddress = (Integer) params[1];
+    }
+
     @Override
     public Integer getKey() {
         return ll2pAddress;
