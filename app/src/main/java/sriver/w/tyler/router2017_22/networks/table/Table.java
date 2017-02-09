@@ -1,6 +1,5 @@
 package sriver.w.tyler.router2017_22.networks.table;
 
-import android.app.ActionBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +11,8 @@ import sriver.w.tyler.router2017_22.support.LabException;
 
 /**
  * Created by tyler.w.sriver on 2/5/17.
+ *
+ * This table is used for keeping records of various types
  */
 public class Table extends Observable implements TableInterface {
 
