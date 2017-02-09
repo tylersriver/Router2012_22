@@ -68,7 +68,6 @@ public class LL1Daemon extends Observable implements Observer {
             uiManager = UIManager.getInstance();
             ll2PDaemon = LL2PDaemon.getInstance();
             adjacencyTable = new Table();
-            // TODO: 2/7/2017 need spin off thread
             new ReceiveUnicastFrame().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, receiveSocket);
         }
     }
@@ -98,6 +97,15 @@ public class LL1Daemon extends Observable implements Observer {
         AdjacencyRecord record = new AdjacencyRecord(nameServer.getInetAddress(ipaddress), Integer.valueOf(LL2PAddress, 16));
         adjacencyTable.addItem(record);
         notifyObservers(record);
+    }
+
+    public AdjacencyRecord getAdjacencyRecord(Integer key){
+        try {
+            return (AdjacencyRecord) adjacencyTable.getItem(key);
+        } catch (LabException e) {
+            e.printStackTrace();
+            Log.d(Constants.logTag, "getAdjacencyRecord: "+e.toString());
+        } return null;
     }
 
     /**
