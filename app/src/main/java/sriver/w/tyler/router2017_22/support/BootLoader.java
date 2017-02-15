@@ -96,5 +96,8 @@ public class BootLoader extends Observable {
         Object[] params = {GetIPAddress.getInstance().getInetAddress("10.31.1.1"), 0x314158};
         AdjacencyRecord record = (AdjacencyRecord) Factory.getInstance().getTableRecord(Constants.ADJACENCY_TABLE_RECORD, params);
         Log.d(Constants.logTag, "Factory generated record is: "+record.toString());
+
+        // -- Test Table and LL1Daemon (Lab 5)
+        // -------------------------------------------------------------------
     }
 }

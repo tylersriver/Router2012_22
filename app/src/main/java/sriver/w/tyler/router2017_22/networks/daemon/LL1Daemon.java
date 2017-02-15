@@ -99,6 +99,11 @@ public class LL1Daemon extends Observable implements Observer {
         notifyObservers(record);
     }
 
+    /**
+     * Get a record from the table based on key
+     * @param key Integer
+     * @return AdjacencyRecord
+     */
     public AdjacencyRecord getAdjacencyRecord(Integer key){
         try {
             return (AdjacencyRecord) adjacencyTable.getItem(key);
