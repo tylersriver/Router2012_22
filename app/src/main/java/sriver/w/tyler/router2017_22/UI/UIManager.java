@@ -33,7 +33,7 @@ public class UIManager implements Observer{
     private UIManager() {
     }
 
-    /**
+    /**show
      * Return the singleton instance
      * @return UIManager
      */

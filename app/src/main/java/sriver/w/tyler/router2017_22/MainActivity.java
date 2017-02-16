@@ -7,11 +7,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import sriver.w.tyler.router2017_22.UI.AddAdjacencyDialog;
 import sriver.w.tyler.router2017_22.UI.UIManager;
 import sriver.w.tyler.router2017_22.networks.Constants;
+import sriver.w.tyler.router2017_22.networks.daemon.LL1Daemon;
 import sriver.w.tyler.router2017_22.support.BootLoader;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AddAdjacencyDialog.AdjacencyPairListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.showIPAddress){
             UIManager.getInstance().raiseToast("Your IP address is "+ Constants.IP_ADDRESS);
+        } else if(item.getItemId() == R.id.addAdjacencyDialog) {
+            AddAdjacencyDialog dialog = new AddAdjacencyDialog();
+            dialog.show(getFragmentManager(), "add_adjacency_dialog");
         }
         return super.onOptionsItemSelected(item);
     }
@@ -33,5 +38,10 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public void onFinishedEditDialog(String ipAddress, String ll2pAddress) {
+        LL1Daemon.getInstance().addAdjacency(ll2pAddress, ipAddress);
     }
 }
