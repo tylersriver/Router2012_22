@@ -46,6 +46,7 @@ public class BootLoader extends Observable {
         addObserver(UIManager.getInstance());
         addObserver(FrameLogger.getInstance());
         addObserver(LL1Daemon.getInstance());
+        addObserver(UIManager.getInstance().getTableUI());
 
         setChanged();
         notifyObservers();
