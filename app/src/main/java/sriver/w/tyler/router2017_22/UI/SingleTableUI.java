@@ -35,6 +35,8 @@ public class SingleTableUI implements Observer {
 
     /**
      * Constructor to setup class
+     * @param parentActivity Activity
+     * @param viewID int
      * @param table Table
      */
     public SingleTableUI(Activity parentActivity, int viewID, Table table){
@@ -56,8 +58,8 @@ public class SingleTableUI implements Observer {
         parentActivity.runOnUiThread(new Runnable() {
             @Override // this is a mini-Runnable class’s run method!
             public void run() {
-                // notify the OS that the dataset has changed. It will update screen!
-                arrayAdapter.notifyDataSetChanged();
+            // notify the OS that the dataset has changed. It will update screen!
+            arrayAdapter.notifyDataSetChanged();
             }
         });
     }

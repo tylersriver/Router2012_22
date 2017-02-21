@@ -12,7 +12,7 @@ public class LL2PAddressField implements DatagramHeaderField {
 
     // -- Fields
     // --------------------------------------------------------------
-    private Integer address; // 0123456789 ABCDEF |
+    private Integer address;
     private boolean isSourceAddress;
     private String explanation;
 

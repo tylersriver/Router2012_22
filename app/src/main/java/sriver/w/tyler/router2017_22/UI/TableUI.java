@@ -6,6 +6,8 @@ import android.content.Context;
 import java.util.Observable;
 import java.util.Observer;
 
+import sriver.w.tyler.router2017_22.R;
+import sriver.w.tyler.router2017_22.networks.daemon.LL1Daemon;
 import sriver.w.tyler.router2017_22.support.BootLoader;
 import sriver.w.tyler.router2017_22.support.ParentActivity;
 
@@ -49,13 +51,12 @@ public class TableUI implements Runnable, Observer {
     public void update(Observable o, Object arg) {
         if(o.getClass().equals(BootLoader.class)) {
             Activity activity = ParentActivity.getActivity();
-            Context context = activity.getBaseContext(); // TODO: 2/19/2017 Probably needs changed?
 
             // -- Create Table UI's
-            adjacencyUI = new SingleTableUI(); // TODO: 2/19/2017 Arguments
-            arpTableUI = new SingleTableUI(); // TODO: 2/19/2017 Arguments
-            routingTableUI = new SingleTableUI(); // TODO: 2/19/2017 Arguments
-            forwardingUI = new SingleTableUI(); // TODO: 2/19/2017 Arguments
+            adjacencyUI = new AdjacencyTableUI(activity, R.id.adjacencyListView, LL1Daemon.getInstance().getAdjacencyTable(), LL1Daemon.getInstance());
+//            arpTableUI = new SingleTableUI(activity, R.id.arpListView, ); // TODO: 2/19/2017 Arguments
+//            routingTableUI = new SingleTableUI(activity, R.id.routingListView, ); // TODO: 2/19/2017 Arguments
+//            forwardingUI = new SingleTableUI(activity, R.id.forwardingListView, ); // TODO: 2/19/2017 Arguments
         }
     }
 }

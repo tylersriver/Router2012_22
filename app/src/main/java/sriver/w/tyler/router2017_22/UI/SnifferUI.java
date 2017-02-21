@@ -1,0 +1,90 @@
+package sriver.w.tyler.router2017_22.UI;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Observer;
+
+import sriver.w.tyler.router2017_22.R;
+import sriver.w.tyler.router2017_22.networks.datagram.LL2PFrame;
+
+/**
+ * Created by tyler on 2/20/2017.
+ */
+
+public class SnifferUI implements Observer {
+
+    // -- Classes
+    // --------------------------------------------------------------
+    /**
+     * This class is a holder. It holds widgets (views) that make
+     * up a single row in the sniffer top window.
+     */
+    private static class ViewHolder {
+        TextView packetNumber;
+        TextView packetSummaryString;
+    }
+
+    /**
+     * SnifferFrameListAdapter is a private adapter to display numbered rows from a List
+     * object which contains all frames transmitted or received.
+     *
+     * It is instantiated above and note that the constructor passes the context as well as
+     * the frameList.
+     */
+    private class SnifferFrameListAdapter extends ArrayAdapter<LL2PFrame> {
+        // this is the ArrayList that will be displayed in the rows on the ListView.
+        private ArrayList<LL2PFrame> frameList;
+
+        /**
+         *  The constructor is passed the context and the arrayList.
+         *  the arrayList is assigned to the local variable so its contents can be
+         *  adapted to the listView.
+         */
+        public SnifferFrameListAdapter(Context context, ArrayList<LL2PFrame> frames) {
+            super(context, 0, frames);
+            frameList = frames;
+        }
+
+        /**
+         * Here is where the work is performed to adapt a specific row in the arrayList to
+         * a row on the screen.
+         *
+         * @param position    - position in the array we're working with
+         * @param convertView - a row View that passed in – has a view to use or a null object
+         * @param parent      - the main view that contains the rows.  Note that is is the ListView object.
+         * @return
+         */
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            // First retrieve a frame object from the arrayList at the position we're working on
+            LL2PFrame ll2PFrame = getItem(position);
+            // declare a viewHolder - this simply is a single object to hold a two widgets
+            ViewHolder viewHolder;
+
+            /**
+             * If convertView is null then we didn't get a recycled View, we have to create from scratch.
+             * We do that here.
+             */
+            if (convertView == null) {
+                // inflate the view defined in the layout xml file using an inflater we create here.
+                LayoutInflater inflator = LayoutInflater.from(context);
+                convertView = inflator.inflate(R.layout.sniffer_layout, parent, false);
+                viewHolder = new ViewHolder();
+                viewHolder.packetNumber = (TextView) convertView.findViewById(R.id.snifferFrameNumberTextView);
+                viewHolder.packetSummaryString = (TextView) convertView.findViewById(R.id.snifferItemTextView);
+                convertView.setTag(viewHolder);
+            } else {
+                viewHolder = (ViewHolder) convertView.getTag();
+            }
+            viewHolder.packetNumber.setText(Integer.toString(position));
+            viewHolder.packetSummaryString.setText(frameList.get(position).toSummaryString());
+            return convertView;
+        }
+    }
+}
