@@ -1,23 +1,71 @@
 package sriver.w.tyler.router2017_22.UI;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Observable;
 import java.util.Observer;
 
 import sriver.w.tyler.router2017_22.R;
 import sriver.w.tyler.router2017_22.networks.datagram.LL2PFrame;
+import sriver.w.tyler.router2017_22.support.BootLoader;
+import sriver.w.tyler.router2017_22.support.FrameLogger;
+import sriver.w.tyler.router2017_22.support.ParentActivity;
 
 /**
  * Created by tyler on 2/20/2017.
+ *
+ * This class handles the UI for the packet sniffer
+ * on the left side of the UI
  */
-
 public class SnifferUI implements Observer {
+
+    // -- Fields
+    // --------------------------------------------------------------
+    private Activity parentActivity;
+    private Context context;
+    private FrameLogger frameLogger;
+    private ListView frameListView;
+    private TextView protocolBreakoutText;
+    private TextView frameBytesTextView;
+
+    // -- Methods
+    // --------------------------------------------------------------
+    public SnifferUI() {
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if(o.getClass().equals(BootLoader.class)) {
+            parentActivity = ParentActivity.getInstance(); // TODO: 2/21/2017 what? 
+            frameLogger = FrameLogger.getInstance();
+            context = parentActivity.getBaseContext();
+            frameLogger.addObserver(this);
+            connectWidgets();
+        } else if (o.getClass().equals(FrameLogger.class)){
+
+        }
+
+    }
+
+    private void connectWidgets(){
+
+    }
+
+    private AdapterView.OnItemClickListener showThisFrame = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        }
+    };
 
     // -- Classes
     // --------------------------------------------------------------
@@ -58,7 +106,7 @@ public class SnifferUI implements Observer {
          * @param position    - position in the array we're working with
          * @param convertView - a row View that passed in – has a view to use or a null object
          * @param parent      - the main view that contains the rows.  Note that is is the ListView object.
-         * @return
+         * @return View
          */
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
