@@ -11,9 +11,12 @@ import sriver.w.tyler.router2017_22.networks.daemon.LL1Daemon;
 import sriver.w.tyler.router2017_22.networks.datagram.LL2PFrame;
 import sriver.w.tyler.router2017_22.networks.table.Table;
 import sriver.w.tyler.router2017_22.networks.tablerecord.AdjacencyRecord;
+import sriver.w.tyler.router2017_22.support.Utilities;
 
 /**
  * Created by tyler on 2/19/2017.
+ *
+ * UI Class for the AdjacencyTable
  */
 public class AdjacencyTableUI extends SingleTableUI implements Observer {
 
@@ -49,7 +52,7 @@ public class AdjacencyTableUI extends SingleTableUI implements Observer {
 
             // -- Build String to make byte array for LL2P constructor
             StringBuilder ll2pFrameString = new StringBuilder();
-            ll2pFrameString.append(record.getLl2pAddress().toString()); // append destination address
+            ll2pFrameString.append(Utilities.padHexString(record.getLl2pAddress().toString(), 6)); // append destination address
             ll2pFrameString.append(Integer.toString(Constants.SOURCE_LL2P, 16)); // append source address
             ll2pFrameString.append("8004"); // append type
             ll2pFrameString.append("Echo Contents"); // append payload

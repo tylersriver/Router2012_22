@@ -8,10 +8,8 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import sriver.w.tyler.router2017_22.R;
 import sriver.w.tyler.router2017_22.networks.table.Table;
 import sriver.w.tyler.router2017_22.networks.tablerecord.TableRecord;
-import sriver.w.tyler.router2017_22.support.ParentActivity;
 
 /**
  * Created by tyler.w.sriver on 2/16/17.
@@ -43,11 +41,10 @@ public class SingleTableUI implements Observer {
         this.parentActivity = parentActivity;
         tableToDisplay = table;
         tableListViewWidget = (ListView) parentActivity.findViewById(viewID);
-        tableListViewWidget.setAdapter(arrayAdapter);
         table.addObserver(this);
         tableList = table.getTableAsArrayList();
-        arrayAdapter = new ArrayAdapter(parentActivity.getBaseContext(), android.R.layout.simple_list_item_1,
-                tableToDisplay.getTableAsArrayList());
+        arrayAdapter = new ArrayAdapter(parentActivity.getBaseContext(), android.R.layout.simple_list_item_1, tableToDisplay.getTableAsArrayList());
+        tableListViewWidget.setAdapter(arrayAdapter);
     }
 
     /**

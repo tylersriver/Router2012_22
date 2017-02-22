@@ -63,7 +63,6 @@ public class SnifferUI implements Observer {
         } else if (o.getClass().equals(FrameLogger.class)){
             frameListAdapter.notifyDataSetChanged();
         }
-
     }
 
     /**
@@ -85,14 +84,9 @@ public class SnifferUI implements Observer {
     private AdapterView.OnItemClickListener showThisFrame = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            // -- Get list from arguments
-            List records = (List<TableRecord>) parent;
-            // -- Get the selected record
-            AdjacencyRecord record = (AdjacencyRecord) records.get(position);
-            // -- Set the text
-            protocolBreakoutText.setText(record.toString());
-
-            // TODO: 2/22/2017 Finish this method
+            LL2PFrame frame = frameLogger.getFrameList().get(position);
+            protocolBreakoutText.setText(frame.toProtocolExplanationString());
+            frameBytesTextView.setText(frame.toHexString());
         }
     };
 
