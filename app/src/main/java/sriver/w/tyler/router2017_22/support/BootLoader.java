@@ -1,15 +1,10 @@
 package sriver.w.tyler.router2017_22.support;
 
-import android.app.ActionBar;
 import android.app.Activity;
-import android.provider.Contacts;
 import android.util.Log;
 
 import java.util.Observable;
 
-import sriver.w.tyler.router2017_22.UI.SingleTableUI;
-import sriver.w.tyler.router2017_22.UI.SnifferUI;
-import sriver.w.tyler.router2017_22.UI.TableUI;
 import sriver.w.tyler.router2017_22.UI.UIManager;
 import sriver.w.tyler.router2017_22.networks.Constants;
 import sriver.w.tyler.router2017_22.networks.daemon.LL1Daemon;
@@ -48,6 +43,7 @@ public class BootLoader extends Observable {
         addObserver(FrameLogger.getInstance());
         addObserver(LL1Daemon.getInstance());
         addObserver(UIManager.getInstance().getTableUI());
+        addObserver(UIManager.getInstance().getSnifferUI());
 
         setChanged();
         notifyObservers();

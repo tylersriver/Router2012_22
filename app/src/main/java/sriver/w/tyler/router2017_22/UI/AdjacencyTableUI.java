@@ -3,7 +3,6 @@ package sriver.w.tyler.router2017_22.UI;
 import android.app.Activity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
 
 import java.util.Observer;
 
@@ -11,9 +10,7 @@ import sriver.w.tyler.router2017_22.networks.Constants;
 import sriver.w.tyler.router2017_22.networks.daemon.LL1Daemon;
 import sriver.w.tyler.router2017_22.networks.datagram.LL2PFrame;
 import sriver.w.tyler.router2017_22.networks.table.Table;
-import sriver.w.tyler.router2017_22.networks.table.TableInterface;
 import sriver.w.tyler.router2017_22.networks.tablerecord.AdjacencyRecord;
-import sriver.w.tyler.router2017_22.support.Factory;
 
 /**
  * Created by tyler on 2/19/2017.
@@ -49,7 +46,6 @@ public class AdjacencyTableUI extends SingleTableUI implements Observer {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             AdjacencyRecord record = (AdjacencyRecord) tableList.get(position);
-            Factory factory = Factory.getInstance();
 
             // -- Build String to make byte array for LL2P constructor
             StringBuilder ll2pFrameString = new StringBuilder();

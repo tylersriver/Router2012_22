@@ -24,6 +24,7 @@ public class UIManager implements Observer{
     private Activity parentActivity = ParentActivity.getActivity();
     private Context context = parentActivity.getBaseContext();
     private TableUI tableUI;
+    private SnifferUI snifferUI;
 
     // -- Methods
     // --------------------------------------------------------------
@@ -33,6 +34,7 @@ public class UIManager implements Observer{
      */
     private UIManager() {
         tableUI = new TableUI();
+        snifferUI = new SnifferUI();
     }
 
     /**show
@@ -92,5 +94,13 @@ public class UIManager implements Observer{
      */
     public TableUI getTableUI() {
         return tableUI;
+    }
+
+    /**
+     * Return the Sniffer UI
+     * @return SnifferUI
+     */
+    public SnifferUI getSnifferUI() {
+        return snifferUI;
     }
 }

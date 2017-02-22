@@ -11,11 +11,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 import sriver.w.tyler.router2017_22.R;
 import sriver.w.tyler.router2017_22.networks.datagram.LL2PFrame;
+import sriver.w.tyler.router2017_22.networks.tablerecord.AdjacencyRecord;
+import sriver.w.tyler.router2017_22.networks.tablerecord.TableRecord;
 import sriver.w.tyler.router2017_22.support.BootLoader;
 import sriver.w.tyler.router2017_22.support.FrameLogger;
 import sriver.w.tyler.router2017_22.support.ParentActivity;
@@ -36,34 +39,60 @@ public class SnifferUI implements Observer {
     private ListView frameListView;
     private TextView protocolBreakoutText;
     private TextView frameBytesTextView;
+    private SnifferFrameListAdapter frameListAdapter;
 
     // -- Methods
     // --------------------------------------------------------------
     public SnifferUI() {
     }
 
+    /**
+     * Updates Sniffer when it is notified
+     * @param o Observable
+     * @param arg Object
+     */
     @Override
     public void update(Observable o, Object arg) {
         if(o.getClass().equals(BootLoader.class)) {
-            parentActivity = ParentActivity.getInstance(); // TODO: 2/21/2017 what? 
+            parentActivity = ParentActivity.getActivity();
             frameLogger = FrameLogger.getInstance();
             context = parentActivity.getBaseContext();
             frameLogger.addObserver(this);
+            frameListAdapter = new SnifferFrameListAdapter(context, frameLogger.getFrameList());
             connectWidgets();
         } else if (o.getClass().equals(FrameLogger.class)){
-
+            frameListAdapter.notifyDataSetChanged();
         }
 
     }
 
+    /**
+     * This function attaches the local variables to the UI objects
+     * Note: it is called when the Bootloader updates the class
+     */
     private void connectWidgets(){
-
+        frameListView = (ListView) parentActivity.findViewById(R.id.packetsCaptured);
+        frameListAdapter = new SnifferFrameListAdapter(context, frameLogger.getFrameList());
+        frameListView.setAdapter(frameListAdapter);
+        protocolBreakoutText = (TextView) parentActivity.findViewById(R.id.protocolExplanation);
+        frameBytesTextView = (TextView) parentActivity.findViewById(R.id.hexDump);
+        frameListView.setOnItemClickListener(showThisFrame);
     }
 
+    /**
+     * Click listener for the Sniffer UI to handle a click on a particular frame
+     */
     private AdapterView.OnItemClickListener showThisFrame = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            // -- Get list from arguments
+            List records = (List<TableRecord>) parent;
+            // -- Get the selected record
+            AdjacencyRecord record = (AdjacencyRecord) records.get(position);
+            // -- Set the text
+            protocolBreakoutText.setText(record.toString());
 
+            // TODO: 2/22/2017 Finish this method
         }
     };
 
