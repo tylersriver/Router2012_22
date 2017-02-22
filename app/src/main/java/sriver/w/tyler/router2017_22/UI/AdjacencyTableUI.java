@@ -52,7 +52,7 @@ public class AdjacencyTableUI extends SingleTableUI implements Observer {
 
             // -- Build String to make byte array for LL2P constructor
             StringBuilder ll2pFrameString = new StringBuilder();
-            ll2pFrameString.append(Utilities.padHexString(record.getLl2pAddress().toString(), 6)); // append destination address
+            ll2pFrameString.append(Utilities.padHexString(Utilities.intToAscii(record.getLl2pAddress()), 3)); // append destination address
             ll2pFrameString.append(Integer.toString(Constants.SOURCE_LL2P, 16)); // append source address
             ll2pFrameString.append("8004"); // append type
             ll2pFrameString.append("Echo Contents"); // append payload

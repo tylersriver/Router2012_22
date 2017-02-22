@@ -63,7 +63,8 @@ public class Utilities {
         int temp = value;
         StringBuilder builder = new StringBuilder();
         while (temp > 0) {
-            builder.append(Integer.toString(temp % 256));
+            builder.insert(0, Integer.toString(temp % 256, 16));
+            temp = temp / 256;
         }
         return builder.toString();
     }
