@@ -116,6 +116,6 @@ public class LL2PDaemon implements Observer{
         ll2pFrameString.append("1234"); // append CRC
         // -- Create and send frame
         LL2PFrame frameToSend = new LL2PFrame(ll2pFrameString.toString().getBytes());
-        LL1Daemon.getInstance().sendFrame(frameToSend);
+        ll1Daemon.sendFrame(frameToSend);
     }
 }
