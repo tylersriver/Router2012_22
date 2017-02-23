@@ -8,6 +8,7 @@ import java.util.Observable;
 import sriver.w.tyler.router2017_22.UI.UIManager;
 import sriver.w.tyler.router2017_22.networks.Constants;
 import sriver.w.tyler.router2017_22.networks.daemon.LL1Daemon;
+import sriver.w.tyler.router2017_22.networks.daemon.LL2PDaemon;
 import sriver.w.tyler.router2017_22.networks.datagram.LL2PFrame;
 import sriver.w.tyler.router2017_22.networks.table.Table;
 import sriver.w.tyler.router2017_22.networks.tablerecord.AdjacencyRecord;
@@ -44,6 +45,7 @@ public class BootLoader extends Observable {
         addObserver(UIManager.getInstance().getSnifferUI());
         addObserver(FrameLogger.getInstance());
         addObserver(LL1Daemon.getInstance());
+        addObserver(LL2PDaemon.getInstance());
 
         setChanged();
         notifyObservers();
@@ -55,7 +57,7 @@ public class BootLoader extends Observable {
 
         // -- Test LL2PFrame (Lab 3)
         // -------------------------------------------------------------------
-        String frameString = "0011223141598008SentFromRouter1234";
+        String frameString = "1122333141598008SentFromRouter1234";
         LL2PFrame frame = new LL2PFrame(frameString.getBytes());
 
 //        UIManager.getInstance().raiseToast("Frame is: " + frame.toString());
@@ -89,7 +91,7 @@ public class BootLoader extends Observable {
         Log.d(Constants.logTag, "Record removed from LL1 table");
 
         // -- Send Frame
-        ll1.addAdjacency("001122", "10.30.48.165");
+        ll1.addAdjacency("112233", "10.30.48.165");
         ll1.sendFrame(frame);
 
         // -- Test Factory

@@ -8,6 +8,7 @@ import java.util.Observer;
 
 import sriver.w.tyler.router2017_22.networks.Constants;
 import sriver.w.tyler.router2017_22.networks.daemon.LL1Daemon;
+import sriver.w.tyler.router2017_22.networks.daemon.LL2PDaemon;
 import sriver.w.tyler.router2017_22.networks.datagram.LL2PFrame;
 import sriver.w.tyler.router2017_22.networks.table.Table;
 import sriver.w.tyler.router2017_22.networks.tablerecord.AdjacencyRecord;
@@ -50,16 +51,7 @@ public class AdjacencyTableUI extends SingleTableUI implements Observer {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             AdjacencyRecord record = (AdjacencyRecord) tableList.get(position);
 
-            // -- Build String to make byte array for LL2P constructor
-            StringBuilder ll2pFrameString = new StringBuilder();
-            ll2pFrameString.append(Utilities.padHexString(Utilities.intToAscii(record.getLl2pAddress()), 3)); // append destination address
-            ll2pFrameString.append(Integer.toString(Constants.SOURCE_LL2P, 16)); // append source address
-            ll2pFrameString.append("8004"); // append type
-            ll2pFrameString.append("Echo Contents"); // append payload
-            ll2pFrameString.append("1234"); // append CRC
-            // -- Create and send frame
-            LL2PFrame frameToSend = new LL2PFrame(ll2pFrameString.toString().getBytes());
-            ll1Daemon.sendFrame(frameToSend);
+            LL2PDaemon.getInstance().sendEchoRequest(record.getLl2pAddress());
             UIManager.getInstance().raiseToast("Echo Request Sent");
         }
     };

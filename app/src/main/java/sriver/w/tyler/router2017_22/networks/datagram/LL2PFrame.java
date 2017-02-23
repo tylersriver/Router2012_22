@@ -113,6 +113,10 @@ public class LL2PFrame implements Datagram {
         return crc;
     }
 
+    public Integer getDestVal(){
+        return destinationAddress.getAddress();
+    }
+
     // -- Interface Methods
     // --------------------------------------------------------------
     @Override

@@ -141,15 +141,14 @@ public class LL1Daemon extends Observable implements Observer {
         AdjacencyRecord record = null;
         try{
             record = (AdjacencyRecord) adjacencyTable.getItem(ll2p.getDestinationAddressValue());
+            InetAddress ipaddress = record.getIpaddress();
+            DatagramPacket sendPacket = new DatagramPacket(ll2p.toString().getBytes(), ll2p.toString().length(), ipaddress, Constants.UDP_PORT);
+            new SendUDPPacket().execute(new PacketInformation(sendSocket, sendPacket));
+            setChanged();
+            notifyObservers(ll2p);
         } catch (LabException e){
             e.printStackTrace();
         }
-
-        InetAddress ipaddress = record.getIpaddress();
-        DatagramPacket sendPacket = new DatagramPacket(ll2p.toString().getBytes(), ll2p.toString().length(), ipaddress, Constants.UDP_PORT);
-        new SendUDPPacket().execute(new PacketInformation(sendSocket, sendPacket));
-        setChanged();
-        notifyObservers(ll2p);
     }
 
     /**
