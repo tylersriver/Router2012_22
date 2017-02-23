@@ -34,6 +34,8 @@ public class Table extends Observable implements TableInterface {
 
     @Override
     public TableRecord addItem(TableRecord record) {
+        setChanged();
+        notifyObservers();
         table.add(record);
         return record;
     }

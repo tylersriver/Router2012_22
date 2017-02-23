@@ -2,6 +2,7 @@ package sriver.w.tyler.router2017_22.UI;
 
 import android.app.Activity;
 import android.content.Context;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +59,6 @@ public class SnifferUI implements Observer {
             frameLogger = FrameLogger.getInstance();
             context = parentActivity.getBaseContext();
             frameLogger.addObserver(this);
-            frameListAdapter = new SnifferFrameListAdapter(context, frameLogger.getFrameList());
             connectWidgets();
         } else if (o.getClass().equals(FrameLogger.class)){
             frameListAdapter.notifyDataSetChanged();
@@ -74,6 +74,7 @@ public class SnifferUI implements Observer {
         frameListAdapter = new SnifferFrameListAdapter(context, frameLogger.getFrameList());
         frameListView.setAdapter(frameListAdapter);
         protocolBreakoutText = (TextView) parentActivity.findViewById(R.id.protocolExplanation);
+        protocolBreakoutText.setMovementMethod(new ScrollingMovementMethod());
         frameBytesTextView = (TextView) parentActivity.findViewById(R.id.hexDump);
         frameListView.setOnItemClickListener(showThisFrame);
     }
