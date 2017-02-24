@@ -2,6 +2,7 @@ package sriver.w.tyler.router2017_22.UI;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,7 @@ import sriver.w.tyler.router2017_22.networks.tablerecord.TableRecord;
 import sriver.w.tyler.router2017_22.support.BootLoader;
 import sriver.w.tyler.router2017_22.support.FrameLogger;
 import sriver.w.tyler.router2017_22.support.ParentActivity;
+import sriver.w.tyler.router2017_22.support.Utilities;
 
 /**
  * Created by tyler on 2/20/2017.
@@ -87,9 +89,58 @@ public class SnifferUI implements Observer {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             LL2PFrame frame = frameLogger.getFrameList().get(position);
             protocolBreakoutText.setText(frame.toProtocolExplanationString());
-            frameBytesTextView.setText(frame.toHexString());
+            frameBytesTextView.setText(HexDumpFormatter(frame));
         }
     };
+
+    /**
+     * Take the frame and format the contents for
+     * the hex dump
+     * @param frame LL2PFrame
+     * @return String
+     */
+    @NonNull
+    private String HexDumpFormatter(LL2PFrame frame){
+        String hexString = frame.toHexString();
+        String asciiString = frame.toString();
+
+        StringBuilder formattedString = new StringBuilder();
+
+        // -- Set index pointers
+        int byteStart = 0;
+        int byteEnd = byteStart+2;
+        int characterStart = 0;
+        int characterEnd = characterStart+1;
+
+        while (byteStart < hexString.length()){
+            formattedString.append(Utilities.padHexString(Integer.valueOf(characterStart).toString(), 2));
+            formattedString.append("\t\t");
+
+            // Build the Hex display portion
+            for(int i = 0; i < 8; i++){
+                if(byteStart < hexString.length()){
+                    formattedString.append(hexString.substring(byteStart, byteEnd));
+                    formattedString.append(" ");
+                    byteStart += 2;
+                    byteEnd += 2;
+                } else {
+                    formattedString.append("   ");
+                }
+            } // End For loop for bytes
+            formattedString.append("\t\t");
+
+            // Build the ASCII display portion
+            for(int i = 0; i < 8; i++){
+                if(characterEnd <= asciiString.length()){
+                    formattedString.append(asciiString.substring(characterStart, characterEnd));
+                    characterStart++;
+                    characterEnd++;
+                }
+            } // End loop for ASCII
+            formattedString.append("\n");
+        } // End While
+        return formattedString.toString();
+    }
 
     // -- Classes
     // --------------------------------------------------------------

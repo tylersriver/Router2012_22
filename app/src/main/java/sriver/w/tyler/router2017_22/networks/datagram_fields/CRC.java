@@ -21,7 +21,7 @@ public class CRC implements DatagramHeaderField {
 
     @Override
     public String toHexString() {
-        return Integer.toHexString(Integer.parseInt(crcValue));
+        return Integer.toHexString(Integer.valueOf(crcValue, 16));
     }
 
     @Override
