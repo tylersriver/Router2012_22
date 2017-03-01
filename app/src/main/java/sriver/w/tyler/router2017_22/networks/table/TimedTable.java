@@ -21,7 +21,7 @@ public class TimedTable extends Table {
     }
 
     /**
-     * Remvoe expired records and return list of removed records
+     * Remove expired records and return list of removed records
      * @param maxAgeAllowed Integer
      * @return ArrayList
      */
@@ -36,6 +36,11 @@ public class TimedTable extends Table {
         return removedRecords;
     }
 
+    /**
+     * Get the record and update time
+     * @param key Integer
+     * @throws LabException
+     */
     public void Touch(Integer key) throws LabException {
         TableRecordClass record = (TableRecordClass) this.getItem(key);
         record.updateTime();

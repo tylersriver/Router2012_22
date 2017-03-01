@@ -28,12 +28,14 @@ public class Constants implements Observer {
     final public static int UDP_PORT = 49999;
 
 
-    // -- LL2P Frame Constants
+    // -- Header Fields
     // --------------------------------------------------------------
-    final public static int LL2P_SOURCE_ADDRESS = 21;
-    final public static int LL2P_DEST_ADDRESS   = 22;
-    final public static int LL2P_TYPE_FIELD     = 23;
-    final public static int LL2P_CRC_FIELD      = 25;
+    final public static int LL2P_SOURCE_ADDRESS             = 21;
+    final public static int LL2P_DEST_ADDRESS               = 22;
+    final public static int LL2P_TYPE_FIELD                 = 23;
+    final public static int LL2P_CRC_FIELD                  = 25;
+    final public static int LL3P_SOURCE_ADDRESS             = 29;
+    final public static int LL3P_DEST_ADDRESS               = 30;
 
     // -- Field Offsets
     final public static int LL2P_DEST_ADDRESS_OFFSET        = 0;
@@ -41,19 +43,20 @@ public class Constants implements Observer {
     final public static int LL2P_TYPE_FIELD_OFFSET          = 12;
     final public static int LL2P_PAYLOAD_OFFSET             = 16;
 
-    final public static int LL2P_CRC_FIELD_LENGTH   = 2;
-    final public static int LL2P_ADDRESS_LENGTH     = 3;
-    final public static int LL2P_TYPE_FIELD_LENGTH  = 2;
+    final public static int LL2P_CRC_FIELD_LENGTH           = 2;
+    final public static int LL2P_ADDRESS_LENGTH             = 3;
+    final public static int LL2P_TYPE_FIELD_LENGTH          = 2;
+    final public static int LL3P_ADDRESS_FIELD_LENGTH       = 2;
 
     // -- LL2P Types
-    final public static int LL2P_TYPE_IS_LL3P          = 0x8001;
-    final public static int LL2P_TYPE_IS_RESERVED      = 0x8002;
-    final public static int LL2P_TYPE_IS_LRP           = 0x8003;
-    final public static int LL2P_TYPE_IS_ECHO_REQUEST  = 0x8004;
-    final public static int LL2P_TYPE_IS_ECHO_REPLY    = 0x8005;
-    final public static int LL2P_TYPE_IS_ARP_REQUEST   = 0x8006;
-    final public static int LL2P_TYPE_IS_ARP_REPLY     = 0x8007;
-    final public static int LL2P_TYPE_IS_TEXT          = 0x8008;
+    final public static int LL2P_TYPE_IS_LL3P               = 0x8001;
+    final public static int LL2P_TYPE_IS_RESERVED           = 0x8002;
+    final public static int LL2P_TYPE_IS_LRP                = 0x8003;
+    final public static int LL2P_TYPE_IS_ECHO_REQUEST       = 0x8004;
+    final public static int LL2P_TYPE_IS_ECHO_REPLY         = 0x8005;
+    final public static int LL2P_TYPE_IS_ARP_REQUEST        = 0x8006;
+    final public static int LL2P_TYPE_IS_ARP_REPLY          = 0x8007;
+    final public static int LL2P_TYPE_IS_TEXT               = 0x8008;
 
     // -- Record Constants
     // --------------------------------------------------------------
