@@ -31,7 +31,7 @@ public class LL3PAddressField implements DatagramHeaderField {
         this.address = Integer.valueOf(hexAddress, 16);
         this.networkNumber = Integer.valueOf(hexAddress.substring(0,2), 16);
         this.hostNumber = Integer.valueOf(hexAddress.substring(2,4), 16);
-        this.explanationString = String.valueOf(networkNumber) + "." + Integer.toHexString(hostNumber);
+        setExplanation();
     }
 
     /**
@@ -59,5 +59,20 @@ public class LL3PAddressField implements DatagramHeaderField {
     @Override
     public String toAsciiString() {
         return Utilities.intToAscii(address);
+    }
+
+    /**
+     * Build explanation string
+     */
+    private void setExplanation(){
+        StringBuilder builder = new StringBuilder();
+
+        // -- Check isSource
+        if(isSourceAddress) builder.append("Source");
+        else builder.append("Destination");
+
+        builder.append("LL3P Address: ");
+        builder.append(Integer.toHexString(address));
+        explanationString = builder.toString();
     }
 }

@@ -1,6 +1,7 @@
 package sriver.w.tyler.router2017_22.support;
 
 import android.provider.Contacts;
+import android.widget.Switch;
 
 import java.lang.reflect.Field;
 import java.net.InetAddress;
@@ -15,6 +16,7 @@ import sriver.w.tyler.router2017_22.networks.datagram_fields.DatagramHeaderField
 import sriver.w.tyler.router2017_22.networks.datagram_fields.DatagramPayloadField;
 import sriver.w.tyler.router2017_22.networks.datagram_fields.LL2PAddressField;
 import sriver.w.tyler.router2017_22.networks.datagram_fields.LL2PTypeField;
+import sriver.w.tyler.router2017_22.networks.datagram_fields.LL3PAddressField;
 import sriver.w.tyler.router2017_22.networks.tablerecord.AdjacencyRecord;
 import sriver.w.tyler.router2017_22.networks.tablerecord.TableRecord;
 
@@ -45,17 +47,13 @@ public class Factory {
      * @return requested field
      */
     public DatagramHeaderField getDatagramHeaderField(int FieldValue, String contents){
-        if(FieldValue == Constants.LL2P_SOURCE_ADDRESS){
-            return new LL2PAddressField(contents, true);
-        } else if(FieldValue == Constants.LL2P_DEST_ADDRESS){
-            return new LL2PAddressField(contents, false);
-        } else if (FieldValue == Constants.LL2P_TYPE_FIELD){
-            return new LL2PTypeField(contents);
-        } else if (checkIfPayload(FieldValue)){
-            return new DatagramPayloadField(FieldValue, contents);
-        } else if (FieldValue == Constants.LL2P_CRC_FIELD){
-            return new CRC(contents);
-        }
+        if (FieldValue == Constants.LL2P_SOURCE_ADDRESS)   return new LL2PAddressField(contents, true);
+        if (FieldValue == Constants.LL2P_DEST_ADDRESS)     return new LL2PAddressField(contents, false);
+        if (FieldValue == Constants.LL2P_TYPE_FIELD)       return new LL2PTypeField(contents);
+        if (checkIfPayload(FieldValue))                    return new DatagramPayloadField(FieldValue, contents);
+        if (FieldValue == Constants.LL2P_CRC_FIELD)        return new CRC(contents);
+        if (FieldValue == Constants.LL3P_SOURCE_ADDRESS)   return new LL3PAddressField(contents, true);
+        if (FieldValue == Constants.LL3P_DEST_ADDRESS)     return new LL3PAddressField(contents, false);
         return null;
     }
 

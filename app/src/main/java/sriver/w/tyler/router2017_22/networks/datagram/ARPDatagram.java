@@ -1,6 +1,8 @@
 package sriver.w.tyler.router2017_22.networks.datagram;
 
+import sriver.w.tyler.router2017_22.networks.Constants;
 import sriver.w.tyler.router2017_22.networks.datagram_fields.LL3PAddressField;
+import sriver.w.tyler.router2017_22.support.Factory;
 
 /**
  * Created by tyler on 2/28/2017.
@@ -21,8 +23,7 @@ public class ARPDatagram implements Datagram {
      * @param ll3paddress String
      */
     public ARPDatagram(String ll3paddress){
-        this.ll3paddress = new LL3PAddressField(ll3paddress, true);
-        // TODO: 3/1/2017 need factory builder
+        this.ll3paddress = (LL3PAddressField) Factory.getInstance().getDatagramHeaderField(Constants.LL3P_SOURCE_ADDRESS, ll3paddress);
     }
 
     /**
