@@ -40,7 +40,8 @@ public class LL3PAddressField implements DatagramHeaderField {
      */
     @Override
     public String toHexString() {
-        return Integer.toHexString(address);
+        return Utilities.padHexString(Integer.toHexString(networkNumber), 1) + "."
+          + Utilities.padHexString(Integer.toHexString(hostNumber), 1);
     }
 
     /**

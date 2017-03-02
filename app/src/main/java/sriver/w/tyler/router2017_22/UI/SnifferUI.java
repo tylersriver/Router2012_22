@@ -102,7 +102,7 @@ public class SnifferUI implements Observer {
     @NonNull
     private String HexDumpFormatter(LL2PFrame frame){
         String hexString = frame.toHexString();
-        String asciiString = frame.toString();
+        String asciiString = frame.toAsciiString();
 
         StringBuilder formattedString = new StringBuilder();
 

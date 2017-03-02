@@ -2,6 +2,8 @@ package sriver.w.tyler.router2017_22.networks.datagram_fields;
 
 import java.io.UnsupportedEncodingException;
 
+import sriver.w.tyler.router2017_22.support.Utilities;
+
 /**
  * Created by tyler.w.sriver on 1/26/17.
  *
@@ -21,7 +23,7 @@ public class CRC implements DatagramHeaderField {
 
     @Override
     public String toHexString() {
-        return Integer.toHexString(Integer.valueOf(crcValue, 16));
+        return Utilities.padHexString(Integer.toHexString(Integer.valueOf(crcValue, 16)), 2);
     }
 
     @Override

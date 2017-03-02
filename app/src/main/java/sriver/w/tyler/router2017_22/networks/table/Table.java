@@ -42,7 +42,12 @@ public class Table extends Observable implements TableInterface {
 
     @Override
     public TableRecord getItem(TableRecord record) throws LabException {
-        return table.get(table.indexOf(record));
+        for (TableRecord item: table) {
+            if(item.getKey().equals(record.getKey())) {
+                return item;
+            }
+        }
+        throw new LabException("Record not found");
     }
 
     @Override
@@ -51,7 +56,7 @@ public class Table extends Observable implements TableInterface {
             if(Objects.equals(record.getKey(), key)) {
                 return record;
             }
-        } return null;
+        } throw new LabException("Record not found");
     }
 
     @Override

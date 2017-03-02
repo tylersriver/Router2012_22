@@ -7,8 +7,10 @@ import java.util.Observable;
 
 import sriver.w.tyler.router2017_22.UI.UIManager;
 import sriver.w.tyler.router2017_22.networks.Constants;
+import sriver.w.tyler.router2017_22.networks.daemon.ARPDaemon;
 import sriver.w.tyler.router2017_22.networks.daemon.LL1Daemon;
 import sriver.w.tyler.router2017_22.networks.daemon.LL2PDaemon;
+import sriver.w.tyler.router2017_22.networks.datagram.ARPDatagram;
 import sriver.w.tyler.router2017_22.networks.datagram.LL2PFrame;
 import sriver.w.tyler.router2017_22.networks.table.Table;
 import sriver.w.tyler.router2017_22.networks.tablerecord.AdjacencyRecord;
@@ -46,6 +48,7 @@ public class BootLoader extends Observable {
         addObserver(FrameLogger.getInstance());
         addObserver(LL1Daemon.getInstance());
         addObserver(LL2PDaemon.getInstance());
+        addObserver(ARPDaemon.getInstance());
 
         setChanged();
         notifyObservers();
@@ -99,7 +102,10 @@ public class BootLoader extends Observable {
         AdjacencyRecord record = (AdjacencyRecord) Factory.getInstance().getTableRecord(Constants.ADJACENCY_TABLE_RECORD, params);
         Log.d(Constants.logTag, "Factory generated record is: "+record.toString());
 
-        // -- Test Table and LL1Daemon (Lab 5)
+        // -- Test ARPDaemon (Lab 7)
         // -------------------------------------------------------------------
+        ARPDaemon.getInstance().testARP();
+        LL2PDaemon.getInstance().sendArpRequest(new ARPDatagram("0A01"), 0x112233);
+
     }
 }

@@ -153,4 +153,12 @@ public class LL2PFrame implements Datagram {
                 " | " + sourceAddress.toString() +
                 " | " + payload.explainSelf();
     }
+
+    public String toAsciiString() {
+        return destinationAddress.toAsciiString() +
+                sourceAddress.toAsciiString() +
+                type.toAsciiString() +
+                payload.toAsciiString() +
+                crc.toAsciiString();
+    }
 }

@@ -18,7 +18,7 @@ public class TextDatagram implements Datagram {
     // --------------------------------------------------------------
     public TextDatagram(String contents){
         payload = new TextPayload(contents);
-//        payload = (TextPayload) Factory.getInstance().getDatagramHeaderField(Constants.LL2P_TYPE_IS_TEXT, contents);
+//        payload = (TextPayload) Factory.getInstance().createPayload(Constants.LL2P_TYPE_IS_TEXT, contents);
     }
 
     @Override

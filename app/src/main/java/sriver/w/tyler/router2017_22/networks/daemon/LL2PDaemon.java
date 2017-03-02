@@ -1,5 +1,6 @@
 package sriver.w.tyler.router2017_22.networks.daemon;
 
+import android.provider.ContactsContract;
 import android.util.Log;
 
 import java.sql.CallableStatement;
@@ -8,10 +9,15 @@ import java.util.Observer;
 
 import sriver.w.tyler.router2017_22.UI.UIManager;
 import sriver.w.tyler.router2017_22.networks.Constants;
+import sriver.w.tyler.router2017_22.networks.datagram.Datagram;
 import sriver.w.tyler.router2017_22.networks.datagram.LL2PFrame;
 import sriver.w.tyler.router2017_22.networks.datagram.TextDatagram;
+import sriver.w.tyler.router2017_22.networks.datagram_fields.CRC;
+import sriver.w.tyler.router2017_22.networks.datagram_fields.DatagramPayloadField;
+import sriver.w.tyler.router2017_22.networks.datagram_fields.LL2PAddressField;
 import sriver.w.tyler.router2017_22.networks.datagram_fields.LL2PTypeField;
 import sriver.w.tyler.router2017_22.support.BootLoader;
+import sriver.w.tyler.router2017_22.support.Factory;
 import sriver.w.tyler.router2017_22.support.Utilities;
 
 /**
@@ -117,5 +123,21 @@ public class LL2PDaemon implements Observer{
         // -- Create and send frame
         LL2PFrame frameToSend = new LL2PFrame(ll2pFrameString.toString().getBytes());
         ll1Daemon.sendFrame(frameToSend);
+    }
+
+    /**
+     * Wrap given datagram and send
+     * @param datagram Datagram
+     * @param ll2pAddress Integer
+     */
+    public void sendArpRequest(Datagram datagram, Integer ll2pAddress){
+        LL2PFrame frame = new LL2PFrame(
+                new LL2PAddressField(ll2pAddress, false),
+                new LL2PAddressField(Constants.SOURCE_LL2P, true),
+                new LL2PTypeField(Constants.LL2P_TYPE_IS_ARP_REQUEST),
+                new DatagramPayloadField(datagram),
+                new CRC("1234")
+        );
+        ll1Daemon.sendFrame(frame);
     }
 }

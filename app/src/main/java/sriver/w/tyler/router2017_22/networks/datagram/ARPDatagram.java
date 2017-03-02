@@ -41,7 +41,7 @@ public class ARPDatagram implements Datagram {
      */
     @Override
     public String toProtocolExplanationString() {
-        return ll3paddress.toAsciiString();
+        return "LL3P Frame: " + toHexString();
     }
 
     /**
