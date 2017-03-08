@@ -7,6 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import sriver.w.tyler.router2017_22.R;
+import sriver.w.tyler.router2017_22.networks.daemon.ARPDaemon;
 import sriver.w.tyler.router2017_22.networks.daemon.LL1Daemon;
 import sriver.w.tyler.router2017_22.support.BootLoader;
 import sriver.w.tyler.router2017_22.support.ParentActivity;
@@ -54,7 +55,7 @@ public class TableUI implements Runnable, Observer {
 
             // -- Create Table UI's
             adjacencyUI = new AdjacencyTableUI(activity, R.id.adjacencyListView, LL1Daemon.getInstance().getAdjacencyTable(), LL1Daemon.getInstance());
-//            arpTableUI = new SingleTableUI(activity, R.id.arpListView, ); // TODO: 2/19/2017 Arguments
+            arpTableUI = new SingleTableUI(activity, R.id.arpListView, ARPDaemon.getInstance().getArpTable()); // TODO: 2/19/2017 Arguments
 //            routingTableUI = new SingleTableUI(activity, R.id.routingListView, ); // TODO: 2/19/2017 Arguments
 //            forwardingUI = new SingleTableUI(activity, R.id.forwardingListView, ); // TODO: 2/19/2017 Arguments
         }

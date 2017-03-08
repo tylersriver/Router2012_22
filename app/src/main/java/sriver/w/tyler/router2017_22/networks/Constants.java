@@ -24,6 +24,7 @@ public class Constants implements Observer {
 
     public static String IP_ADDRESS;	// the IP address of this system Note: will be stored here in dotted decimal notation
     public static int SOURCE_LL2P = 0x712712;
+    public static int SOURCE_LL3P = 0x0A01;
     public static String IP_ADDRESS_PREFIX; // the prefix will be stored here
     final public static int UDP_PORT = 49999;
 

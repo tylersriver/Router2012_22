@@ -10,6 +10,8 @@ import sriver.w.tyler.router2017_22.support.LabException;
 
 /**
  * Created by tyler.w.sriver on 3/2/17.
+ *
+ * Daemon for handling ARP records
  */
 public class ARPDaemon extends Observable implements Observer, Runnable {
 
@@ -83,5 +85,13 @@ public class ARPDaemon extends Observable implements Observer, Runnable {
         arpTable.removeItem(0x712712);
 
         arpTable.expireRecords(200);
+    }
+
+    /**
+     * Get the ARP Table
+     * @return TimedTable
+     */
+    public TimedTable getArpTable() {
+        return arpTable;
     }
 }

@@ -126,7 +126,7 @@ public class LL2PDaemon implements Observer{
     }
 
     /**
-     * Wrap given datagram and send
+     * Wrap given datagram and send ARP Request
      * @param datagram Datagram
      * @param ll2pAddress Integer
      */
