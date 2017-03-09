@@ -27,6 +27,14 @@ public class ARPDatagram implements Datagram {
     }
 
     /**
+     * Return the transmission string
+     * @return String
+     */
+    public String toTransmissionString(){
+        return ll3paddress.toTransmissionString();
+    }
+
+    /**
      * Get the hex string for the address
      * @return String
      */

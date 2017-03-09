@@ -105,6 +105,5 @@ public class BootLoader extends Observable {
         // -- Test ARPDaemon (Lab 7)
         // -------------------------------------------------------------------
         ARPDaemon.getInstance().testARP();
-        LL2PDaemon.getInstance().sendArpRequest(new ARPDatagram( Utilities.padHexString( Integer.toHexString(Constants.SOURCE_LL3P), 2 ) ), 0x112233);
     }
 }

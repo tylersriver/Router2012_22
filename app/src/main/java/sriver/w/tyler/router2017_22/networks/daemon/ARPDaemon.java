@@ -3,10 +3,13 @@ package sriver.w.tyler.router2017_22.networks.daemon;
 import java.util.Observable;
 import java.util.Observer;
 
+import sriver.w.tyler.router2017_22.networks.Constants;
+import sriver.w.tyler.router2017_22.networks.datagram.ARPDatagram;
 import sriver.w.tyler.router2017_22.networks.table.TimedTable;
 import sriver.w.tyler.router2017_22.networks.tablerecord.ARPRecord;
 import sriver.w.tyler.router2017_22.support.BootLoader;
 import sriver.w.tyler.router2017_22.support.LabException;
+import sriver.w.tyler.router2017_22.support.Utilities;
 
 /**
  * Created by tyler.w.sriver on 3/2/17.
@@ -84,7 +87,10 @@ public class ARPDaemon extends Observable implements Observer, Runnable {
 
         arpTable.removeItem(0x712712);
 
-        arpTable.expireRecords(200);
+        arpTable.expireRecords(3);
+
+        ll2PDaemon.sendArpRequest(new ARPDatagram( Utilities.padHexString( Integer.toHexString(Constants.SOURCE_LL3P), 2 ) ), 0x112233);
+
     }
 
     /**

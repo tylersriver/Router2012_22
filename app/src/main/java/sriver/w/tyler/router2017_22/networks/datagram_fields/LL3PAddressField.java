@@ -45,6 +45,14 @@ public class LL3PAddressField implements DatagramHeaderField {
     }
 
     /**
+     * MEthod to build transmission hex string
+     * @return String
+     */
+    public String toTransmissionString() {
+        return Utilities.padHexString(Integer.toHexString(address), 1);
+    }
+
+    /**
      * Get the explanation string
      * @return String of format networkNum.hostNum
      */

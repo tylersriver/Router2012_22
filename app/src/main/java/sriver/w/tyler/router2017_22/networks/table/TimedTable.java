@@ -27,13 +27,27 @@ public class TimedTable extends Table {
      */
     public ArrayList<TableRecord> expireRecords(Integer maxAgeAllowed){
         ArrayList<TableRecord> removedRecords = new ArrayList<TableRecord>();
+        TableRecord record = null;
+        do {
+            record = removeOneRecord(maxAgeAllowed);
+            removedRecords.add(record);
+        } while (record != null);
+        return removedRecords;
+    }
+
+    /**
+     * Remove one record in loop
+     * @param maxAgeAllowed int
+     * @return TableRecord
+     */
+    private TableRecord removeOneRecord(Integer maxAgeAllowed){
         for(TableRecord record : table){
             if(record.getAgeInSec() > maxAgeAllowed){
-                removedRecords.add(record);
                 table.remove(record);
+                return record;
             }
         }
-        return removedRecords;
+        return null;
     }
 
     /**

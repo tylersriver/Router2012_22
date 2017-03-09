@@ -9,6 +9,7 @@ import java.util.Observer;
 
 import sriver.w.tyler.router2017_22.UI.UIManager;
 import sriver.w.tyler.router2017_22.networks.Constants;
+import sriver.w.tyler.router2017_22.networks.datagram.ARPDatagram;
 import sriver.w.tyler.router2017_22.networks.datagram.Datagram;
 import sriver.w.tyler.router2017_22.networks.datagram.LL2PFrame;
 import sriver.w.tyler.router2017_22.networks.datagram.TextDatagram;
@@ -131,13 +132,17 @@ public class LL2PDaemon implements Observer{
      * @param ll2pAddress Integer
      */
     public void sendArpRequest(Datagram datagram, Integer ll2pAddress){
-        LL2PFrame frame = new LL2PFrame(
-                new LL2PAddressField(ll2pAddress, false),
-                new LL2PAddressField(Constants.SOURCE_LL2P, true),
-                new LL2PTypeField(Constants.LL2P_TYPE_IS_ARP_REQUEST),
-                new DatagramPayloadField(datagram),
-                new CRC("1234")
-        );
-        ll1Daemon.sendFrame(frame);
+
+        ARPDatagram arpDatagram = (ARPDatagram) datagram;
+
+        StringBuilder ll2pFrameString = new StringBuilder();
+        ll2pFrameString.append(Utilities.padHexString(Utilities.intToAscii(ll2pAddress), 3)); // append destination address
+        ll2pFrameString.append(Integer.toString(Constants.SOURCE_LL2P, 16)); // append source address
+        ll2pFrameString.append(new LL2PTypeField(Constants.LL2P_TYPE_IS_ARP_REQUEST).toHexString()); // append type
+        ll2pFrameString.append( Utilities.padHexString(arpDatagram.toTransmissionString(),2)); // append payload
+        ll2pFrameString.append("1234"); // append CRC
+        // -- Create and send frame
+        LL2PFrame frameToSend = new LL2PFrame(ll2pFrameString.toString().getBytes());
+        ll1Daemon.sendFrame(frameToSend);
     }
 }

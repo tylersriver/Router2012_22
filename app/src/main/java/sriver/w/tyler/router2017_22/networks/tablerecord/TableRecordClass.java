@@ -46,6 +46,6 @@ public class TableRecordClass implements TableRecord {
 
     @Override
     public Integer getAgeInSec() {
-        return lastTimeTouched;
+        return Utilities.getTimeinSec() - lastTimeTouched;
     }
 }

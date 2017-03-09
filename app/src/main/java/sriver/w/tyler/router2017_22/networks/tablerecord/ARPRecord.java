@@ -107,7 +107,7 @@ public class ARPRecord extends TableRecordClass {
      * @return String
      */
     public String toString(){
-        return "LL2P: " + ll2pAddress + " | " + "LL3P: " + ll3pAddress;
+        return "LL2P: " + ll2pAddress + " | " + "LL3P: " + ll3pAddress + " | " + "Age: " + getAgeInSec().toString();
     }
 }
 
