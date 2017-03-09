@@ -61,10 +61,10 @@ public class LL2PDaemon implements Observer{
     private void processType(LL2PFrame frame){
         switch (Integer.valueOf(frame.getType().toString(), 16)){
             case Constants.LL2P_TYPE_IS_ARP_REPLY:
-                uiManager.raiseToast("Unsupported Frame Type");
+                ARPDaemon.getInstance().processArpReply(frame.getSourceAddress().getAddress(), (ARPDatagram) frame.getPayload().getPayload());
                 break;
             case Constants.LL2P_TYPE_IS_ARP_REQUEST:
-                uiManager.raiseToast("Unsupported Frame Type");
+                ARPDaemon.getInstance().processArpRequest(frame.getSourceAddress().getAddress(), (ARPDatagram) frame.getPayload().getPayload());
                 break;
             case Constants.LL2P_TYPE_IS_RESERVED:
                 uiManager.raiseToast("Unsupported Frame Type");
@@ -140,6 +140,26 @@ public class LL2PDaemon implements Observer{
         ll2pFrameString.append(Integer.toString(Constants.SOURCE_LL2P, 16)); // append source address
         ll2pFrameString.append(new LL2PTypeField(Constants.LL2P_TYPE_IS_ARP_REQUEST).toHexString()); // append type
         ll2pFrameString.append( Utilities.padHexString(arpDatagram.toTransmissionString(),2)); // append payload
+        ll2pFrameString.append("1234"); // append CRC
+        // -- Create and send frame
+        LL2PFrame frameToSend = new LL2PFrame(ll2pFrameString.toString().getBytes());
+        ll1Daemon.sendFrame(frameToSend);
+    }
+
+    /**
+     * Wrap datagram and send ARP Reply
+     * @param datagram Datagram
+     * @param ll2pAddress Integer
+     */
+    public void sendArpReply(Datagram datagram, Integer ll2pAddress){
+
+        ARPDatagram arpDatagram = (ARPDatagram) datagram;
+
+        StringBuilder ll2pFrameString = new StringBuilder();
+        ll2pFrameString.append(Utilities.padHexString(Utilities.intToAscii(ll2pAddress), 3)); // append destination address
+        ll2pFrameString.append(Integer.toString(Constants.SOURCE_LL2P, 16)); // append source address
+        ll2pFrameString.append(new LL2PTypeField(Constants.LL2P_TYPE_IS_ARP_REPLY).toHexString()); // append type
+        ll2pFrameString.append( Utilities.padHexString( Integer.toString(Constants.SOURCE_LL3P, 16) ,2)); // append payload
         ll2pFrameString.append("1234"); // append CRC
         // -- Create and send frame
         LL2PFrame frameToSend = new LL2PFrame(ll2pFrameString.toString().getBytes());

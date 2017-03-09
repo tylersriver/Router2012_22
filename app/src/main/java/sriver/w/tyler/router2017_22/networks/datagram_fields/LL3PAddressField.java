@@ -49,7 +49,7 @@ public class LL3PAddressField implements DatagramHeaderField {
      * @return String
      */
     public String toTransmissionString() {
-        return Utilities.padHexString(Integer.toHexString(address), 1);
+        return Utilities.padHexString(Integer.toHexString(address), 2);
     }
 
     /**

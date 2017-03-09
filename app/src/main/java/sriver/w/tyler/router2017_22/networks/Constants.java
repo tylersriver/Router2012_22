@@ -28,6 +28,11 @@ public class Constants implements Observer {
     public static String IP_ADDRESS_PREFIX; // the prefix will be stored here
     final public static int UDP_PORT = 49999;
 
+    final public static int THREAD_COUNT = 25;
+    final public static int UI_UPDATE_INTERVAL = 1;
+    final public static int ROUTER_BOOT_TIME = 10;
+    final public static int MAX_AGE_ALLOWED = 30;
+
 
     // -- Header Fields
     // --------------------------------------------------------------
