@@ -44,7 +44,7 @@ public class ARPDatagram implements Datagram {
     }
 
     /**
-     * Get the Ascii String
+     * Get the Ascii Stringa
      * @return String
      */
     @Override

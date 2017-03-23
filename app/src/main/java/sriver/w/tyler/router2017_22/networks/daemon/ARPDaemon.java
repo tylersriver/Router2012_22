@@ -81,6 +81,11 @@ public class ARPDaemon extends Observable implements Observer, Runnable {
         }
     }
 
+    /**
+     * Return the MAC address for given ll3paddress
+     * @param ll3pAddress Integer
+     * @return Integer
+     */
     public Integer getMACAddress(Integer ll3pAddress){
         try {
             ARPRecord record = (ARPRecord) arpTable.getItem(ll3pAddress);
@@ -141,5 +146,14 @@ public class ARPDaemon extends Observable implements Observer, Runnable {
     public void processArpRequest(Integer ll2pAddress, ARPDatagram datagram){
         AddARPEntry(ll2pAddress, Integer.valueOf(datagram.toTransmissionString(),16));
         ll2PDaemon.sendArpReply(datagram, ll2pAddress);
+    }
+
+    /**
+     * Send an ARP request
+     * @param ll2paddress Integer
+     */
+    public void sendARPRequest(Integer ll2paddress){
+        ARPDatagram datagram = new ARPDatagram( Integer.toHexString(Constants.SOURCE_LL3P));
+        ll2PDaemon.sendArpRequest(datagram, ll2paddress);
     }
 }

@@ -28,13 +28,27 @@ public class Scheduler implements Observer{
 
     // -- Methods
     // --------------------------------------------------------------
+
+    /**
+     * return the singleton instance
+     * @return Scheduler
+     */
     public static Scheduler getInstance() {
         return ourInstance;
     }
 
+    /**
+     * Empty constructor
+     */
     private Scheduler() {
     }
 
+    /**
+     * Observer update method to update when things
+     * happen
+     * @param o Observable
+     * @param arg Object
+     */
     @Override
     public void update(Observable o, Object arg) {
         if(o.getClass().equals(BootLoader.class)) {
@@ -47,11 +61,11 @@ public class Scheduler implements Observer{
             threadManager.scheduleAtFixedRate(tableUI,
                     Constants.ROUTER_BOOT_TIME,
                     Constants.UI_UPDATE_INTERVAL,
-                    TimeUnit.SECONDS);
+                    TimeUnit.SECONDS); // Thread for TAble UI
             threadManager.scheduleAtFixedRate(arpDaemon,
                     Constants.ROUTER_BOOT_TIME,
                     Constants.UI_UPDATE_INTERVAL,
-                    TimeUnit.SECONDS);
+                    TimeUnit.SECONDS); // Thread for ARPDaemon
 
         }
     }

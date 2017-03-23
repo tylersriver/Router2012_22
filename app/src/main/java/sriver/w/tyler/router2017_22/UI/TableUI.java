@@ -55,7 +55,7 @@ public class TableUI implements Runnable, Observer {
 
             // -- Create Table UI's
             adjacencyUI = new AdjacencyTableUI(activity, R.id.adjacencyListView, LL1Daemon.getInstance().getAdjacencyTable(), LL1Daemon.getInstance());
-            arpTableUI = new SingleTableUI(activity, R.id.arpListView, ARPDaemon.getInstance().getArpTable()); // TODO: 2/19/2017 Arguments
+            arpTableUI = new SingleTableUI(activity, R.id.arpListView, ARPDaemon.getInstance().getArpTable());
 //            routingTableUI = new SingleTableUI(activity, R.id.routingListView, ); // TODO: 2/19/2017 Arguments
 //            forwardingUI = new SingleTableUI(activity, R.id.forwardingListView, ); // TODO: 2/19/2017 Arguments
         }
