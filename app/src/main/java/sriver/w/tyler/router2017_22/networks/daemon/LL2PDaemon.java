@@ -61,10 +61,12 @@ public class LL2PDaemon implements Observer{
     private void processType(LL2PFrame frame){
         switch (Integer.valueOf(frame.getType().toString(), 16)){
             case Constants.LL2P_TYPE_IS_ARP_REPLY:
-                ARPDaemon.getInstance().processArpReply(frame.getSourceAddress().getAddress(), (ARPDatagram) frame.getPayload().getPayload());
+                ARPDatagram datagramToProcess = new ARPDatagram(frame.getPayload().toString());
+                ARPDaemon.getInstance().processArpReply(frame.getSourceAddress().getAddress(), datagramToProcess);
                 break;
             case Constants.LL2P_TYPE_IS_ARP_REQUEST:
-                ARPDaemon.getInstance().processArpRequest(frame.getSourceAddress().getAddress(), (ARPDatagram) frame.getPayload().getPayload());
+                ARPDatagram datagramToProcess2 = new ARPDatagram(frame.getPayload().toString());
+                ARPDaemon.getInstance().processArpRequest(frame.getSourceAddress().getAddress(), datagramToProcess2);
                 break;
             case Constants.LL2P_TYPE_IS_RESERVED:
                 uiManager.raiseToast("Unsupported Frame Type");

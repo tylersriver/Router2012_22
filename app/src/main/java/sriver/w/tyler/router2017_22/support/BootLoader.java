@@ -96,7 +96,7 @@ public class BootLoader extends Observable {
         Log.d(Constants.logTag, "Record removed from LL1 table");
 
         // -- Send Frame
-        ll1.addAdjacency("112233", "10.30.48.165");
+        ll1.addAdjacency("112233", "10.30.48.168");
         ll1.sendFrame(frame);
 
         // -- Test Factory
