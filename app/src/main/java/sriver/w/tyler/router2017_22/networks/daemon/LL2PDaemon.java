@@ -128,18 +128,14 @@ public class LL2PDaemon implements Observer{
 
     /**
      * Wrap given datagram and send ARP Request
-     * @param datagram Datagram
      * @param ll2pAddress Integer
      */
-    public void sendArpRequest(Datagram datagram, Integer ll2pAddress){
-
-        ARPDatagram arpDatagram = (ARPDatagram) datagram;
-
+    public void sendArpRequest(Integer ll2pAddress){
         StringBuilder ll2pFrameString = new StringBuilder();
         ll2pFrameString.append(Utilities.padHexString(Utilities.intToAscii(ll2pAddress), 3)); // append destination address
         ll2pFrameString.append(Integer.toString(Constants.SOURCE_LL2P, 16)); // append source address
         ll2pFrameString.append(new LL2PTypeField(Constants.LL2P_TYPE_IS_ARP_REQUEST).toHexString()); // append type
-        ll2pFrameString.append( Utilities.padHexString(arpDatagram.toTransmissionString(),2)); // append payload
+        ll2pFrameString.append( Utilities.padHexString( Utilities.padHexString(Integer.toHexString(Constants.SOURCE_LL3P),2) ,2)); // append payload
         ll2pFrameString.append("1234"); // append CRC
         // -- Create and send frame
         LL2PFrame frameToSend = new LL2PFrame(ll2pFrameString.toString().getBytes());
@@ -147,19 +143,15 @@ public class LL2PDaemon implements Observer{
     }
 
     /**
-     * Wrap datagram and send ARP Reply
-     * @param datagram Datagram
+     * send ARP Reply with source ll2paddress
      * @param ll2pAddress Integer
      */
-    public void sendArpReply(Datagram datagram, Integer ll2pAddress){
-
-        ARPDatagram arpDatagram = (ARPDatagram) datagram;
-
+    public void sendArpReply(Integer ll2pAddress){
         StringBuilder ll2pFrameString = new StringBuilder();
         ll2pFrameString.append(Utilities.padHexString(Utilities.intToAscii(ll2pAddress), 3)); // append destination address
         ll2pFrameString.append(Integer.toString(Constants.SOURCE_LL2P, 16)); // append source address
         ll2pFrameString.append(new LL2PTypeField(Constants.LL2P_TYPE_IS_ARP_REPLY).toHexString()); // append type
-        ll2pFrameString.append( Utilities.padHexString( Integer.toString(Constants.SOURCE_LL3P, 16) ,2)); // append payload
+        ll2pFrameString.append( Utilities.padHexString( Utilities.padHexString(Integer.toHexString(Constants.SOURCE_LL3P),2) ,2)); // append payload
         ll2pFrameString.append("1234"); // append CRC
         // -- Create and send frame
         LL2PFrame frameToSend = new LL2PFrame(ll2pFrameString.toString().getBytes());

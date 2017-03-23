@@ -105,7 +105,7 @@ public class ARPDaemon extends Observable implements Observer, Runnable {
         AddARPEntry(0x712714, 0x0A03);
         arpTable.removeItem(0x712712);
         arpTable.expireRecords(3);
-        ll2PDaemon.sendArpRequest(new ARPDatagram( Utilities.padHexString( Integer.toHexString(Constants.SOURCE_LL3P), 2 ) ), 0x112233);
+        ll2PDaemon.sendArpRequest(0x112233);
     }
 
     /**
@@ -145,7 +145,7 @@ public class ARPDaemon extends Observable implements Observer, Runnable {
      */
     public void processArpRequest(Integer ll2pAddress, ARPDatagram datagram){
         AddARPEntry(ll2pAddress, Integer.valueOf(datagram.toTransmissionString(),16));
-        ll2PDaemon.sendArpReply(datagram, ll2pAddress);
+        ll2PDaemon.sendArpReply(ll2pAddress);
     }
 
     /**
@@ -153,7 +153,6 @@ public class ARPDaemon extends Observable implements Observer, Runnable {
      * @param ll2paddress Integer
      */
     public void sendARPRequest(Integer ll2paddress){
-        ARPDatagram datagram = new ARPDatagram( Integer.toHexString(Constants.SOURCE_LL3P));
-        ll2PDaemon.sendArpRequest(datagram, ll2paddress);
+        ll2PDaemon.sendArpRequest(ll2paddress);
     }
 }

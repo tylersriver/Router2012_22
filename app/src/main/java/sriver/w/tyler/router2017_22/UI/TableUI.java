@@ -41,6 +41,7 @@ public class TableUI implements Runnable, Observer {
      */
     @Override
     public void run() {
+        arpTableUI.updateView();
     }
 
     /**
@@ -58,6 +59,8 @@ public class TableUI implements Runnable, Observer {
             arpTableUI = new SingleTableUI(activity, R.id.arpListView, ARPDaemon.getInstance().getArpTable());
 //            routingTableUI = new SingleTableUI(activity, R.id.routingListView, ); // TODO: 2/19/2017 Arguments
 //            forwardingUI = new SingleTableUI(activity, R.id.forwardingListView, ); // TODO: 2/19/2017 Arguments
+
+            ARPDaemon.getInstance().addObserver(arpTableUI);
         }
     }
 }

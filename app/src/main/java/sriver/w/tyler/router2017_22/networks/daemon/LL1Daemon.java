@@ -96,6 +96,7 @@ public class LL1Daemon extends Observable implements Observer {
     public void addAdjacency(String LL2PAddress, String ipaddress){
         AdjacencyRecord record = new AdjacencyRecord(nameServer.getInetAddress(ipaddress), Integer.valueOf(LL2PAddress, 16));
         adjacencyTable.addItem(record);
+        ll2PDaemon.sendArpRequest(Integer.valueOf(LL2PAddress, 16));
         notifyObservers(record);
     }
 
