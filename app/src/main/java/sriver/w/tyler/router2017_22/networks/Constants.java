@@ -43,16 +43,31 @@ public class Constants implements Observer {
     final public static int LL3P_SOURCE_ADDRESS             = 29;
     final public static int LL3P_DEST_ADDRESS               = 30;
 
-    // -- Field Offsets
+    // -- LL2P Field Offsets - indices not bytes
     final public static int LL2P_DEST_ADDRESS_OFFSET        = 0;
     final public static int LL2P_SOURCE_ADDRESS_OFFSET      = 6;
     final public static int LL2P_TYPE_FIELD_OFFSET          = 12;
     final public static int LL2P_PAYLOAD_OFFSET             = 16;
 
+    // -- LL2P lengths in bytes
     final public static int LL2P_CRC_FIELD_LENGTH           = 2;
     final public static int LL2P_ADDRESS_LENGTH             = 3;
     final public static int LL2P_TYPE_FIELD_LENGTH          = 2;
     final public static int LL3P_ADDRESS_FIELD_LENGTH       = 2;
+
+    // -- LRP Field Offsets - indices not bytes
+    final public static int LL3P_SOURCE_ADDRESS_OFFSET      = 0;
+    final public static int SEQUENCE_NUMBER_OFFSET          = 4;
+    final public static int COUNT_OFFSET                    = 5;
+    final public static int FIRST_NETWORK_OFFSET            = 8;
+    final public static int FIRST_DISTANCE_OFFSET           = 10;
+
+    // -- LRP Field lengths in bytes
+    final public static int LL3P_ADDRESS_LENGTH             = 2;
+    final public static double SEQUENCE_NUMBER_LENGTH       = .5;
+    final public static double COUNT_LENGTH                 = .5;
+    final public static int NETWORK_LENGTH                  = 1;
+    final public static int DISTANCE_LENGTH                 = 1;
 
     // -- LL2P Types
     final public static int LL2P_TYPE_IS_LL3P               = 0x8001;

@@ -26,7 +26,8 @@ import sriver.w.tyler.router2017_22.support.PacketInformation;
 /**
  * Created by tyler.w.sriver on 1/26/17.
  *
- * Daemon class
+ * LL1 Daemon class to handle sending frames passed from LL2
+ * and handle incoming frames
  */
 public class LL1Daemon extends Observable implements Observer {
     // -- Fields

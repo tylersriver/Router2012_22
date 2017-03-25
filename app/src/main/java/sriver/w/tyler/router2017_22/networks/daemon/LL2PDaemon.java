@@ -24,7 +24,8 @@ import sriver.w.tyler.router2017_22.support.Utilities;
 /**
  * Created by tyler on 2/7/2017.
  *
- * Daemon to process LL2P frames
+ * Daemon to process LL2P frames and handle
+ * our layer 2 processes
  */
 public class LL2PDaemon implements Observer{
 
@@ -44,6 +45,11 @@ public class LL2PDaemon implements Observer{
     private LL2PDaemon() {
     }
 
+    /**
+     * Get the incoming frame and process if
+     * destination matches source
+     * @param frame LL2PFrame
+     */
     public void processLL2PFrame(LL2PFrame frame){
         Log.d(Constants.logTag, "processLL2PFrame: "+ frame.toString());
         uiManager.raiseToast("Receive LL2PFrame: " + frame.toString());
@@ -59,6 +65,7 @@ public class LL2PDaemon implements Observer{
      * @param frame LL2PFrame
      */
     private void processType(LL2PFrame frame){
+        // -- Check type and process accordingly
         switch (Integer.valueOf(frame.getType().toString(), 16)){
             case Constants.LL2P_TYPE_IS_ARP_REPLY:
                 ARPDatagram datagramToProcess = new ARPDatagram(frame.getPayload().toString());
@@ -88,6 +95,11 @@ public class LL2PDaemon implements Observer{
         }
     }
 
+    /**
+     * Set variables on boot
+     * @param o Observable
+     * @param arg Object
+     */
     @Override
     public void update(Observable o, Object arg) {
         if(o.getClass().equals(BootLoader.class)) {

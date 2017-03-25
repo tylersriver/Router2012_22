@@ -103,6 +103,8 @@ public class ARPDaemon extends Observable implements Observer, Runnable {
         AddARPEntry(0x712712, 0x0A01);
         AddARPEntry(0x712713, 0x0A02);
         AddARPEntry(0x712714, 0x0A03);
+        AddARPEntry(0x712715, 0x0A04);
+        AddARPEntry(0x712716, 0x0A05);
         arpTable.removeItem(0x712712);
         arpTable.expireRecords(3);
         ll2PDaemon.sendArpRequest(0x112233);
