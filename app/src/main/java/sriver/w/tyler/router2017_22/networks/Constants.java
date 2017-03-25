@@ -42,6 +42,9 @@ public class Constants implements Observer {
     final public static int LL2P_CRC_FIELD                  = 25;
     final public static int LL3P_SOURCE_ADDRESS             = 29;
     final public static int LL3P_DEST_ADDRESS               = 30;
+    final public static int LRP_SEQUENCE_NUMBER             = 31;
+    final public static int LRP_ROUTE_COUNT                 = 32;
+    final public static int LRP_ROUTES                      = 33;
 
     // -- LL2P Field Offsets - indices not bytes
     final public static int LL2P_DEST_ADDRESS_OFFSET        = 0;
@@ -63,7 +66,6 @@ public class Constants implements Observer {
     final public static int FIRST_DISTANCE_OFFSET           = 10;
 
     // -- LRP Field lengths in bytes
-    final public static int LL3P_ADDRESS_LENGTH             = 2;
     final public static double SEQUENCE_NUMBER_LENGTH       = .5;
     final public static double COUNT_LENGTH                 = .5;
     final public static int NETWORK_LENGTH                  = 1;

@@ -17,6 +17,8 @@ import sriver.w.tyler.router2017_22.networks.datagram_fields.DatagramPayloadFiel
 import sriver.w.tyler.router2017_22.networks.datagram_fields.LL2PAddressField;
 import sriver.w.tyler.router2017_22.networks.datagram_fields.LL2PTypeField;
 import sriver.w.tyler.router2017_22.networks.datagram_fields.LL3PAddressField;
+import sriver.w.tyler.router2017_22.networks.datagram_fields.LRPRouteCount;
+import sriver.w.tyler.router2017_22.networks.datagram_fields.LRPSequenceNumber;
 import sriver.w.tyler.router2017_22.networks.tablerecord.AdjacencyRecord;
 import sriver.w.tyler.router2017_22.networks.tablerecord.TableRecord;
 
@@ -54,6 +56,8 @@ public class Factory {
         if (FieldValue == Constants.LL2P_CRC_FIELD)        return new CRC(contents);
         if (FieldValue == Constants.LL3P_SOURCE_ADDRESS)   return new LL3PAddressField(contents, true);
         if (FieldValue == Constants.LL3P_DEST_ADDRESS)     return new LL3PAddressField(contents, false);
+        if (FieldValue == Constants.LRP_SEQUENCE_NUMBER)   return new LRPSequenceNumber(contents);
+        if (FieldValue == Constants.LRP_ROUTE_COUNT)       return new LRPRouteCount(contents);
         return null;
     }
 
