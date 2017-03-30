@@ -12,7 +12,8 @@ import sriver.w.tyler.router2017_22.support.Factory;
 /**
  * Created by tyler.w.sriver on 3/25/17.
  *
- * TODO: Fill in
+ * This class defines the structure for a LRP packet
+ * interacting with it
  */
 public class LRPPacket implements Datagram {
 
@@ -75,7 +76,7 @@ public class LRPPacket implements Datagram {
      * @return byte[]
      */
     public byte[] getBytes(){
-        // TODO: How?
+        return toHexString().getBytes();
     }
 
     /**
@@ -90,20 +91,44 @@ public class LRPPacket implements Datagram {
     // --------------------------------------------------------------
     @Override
     public String toHexString() {
-        // TODO: 3/25/17 Needs implementation
-        return null;
+        // Build Hex String for the routes
+        StringBuilder routesHexString = new StringBuilder();
+        for (NetworkDistancePair route:
+             routes) {
+            routesHexString.append(route.toHexString());
+        }
+
+        // Return complete hex string
+        return sourceLL3P.toHexString() +
+                sequenceNumber.toHexString() +
+                count.toHexString() +
+                routesHexString.toString();
     }
 
     @Override
     public String toProtocolExplanationString() {
-        // TODO: 3/25/17 Needs implementation
-        return null;
+
+        // Build string of the routes
+        StringBuilder routesString = new StringBuilder();
+        for (NetworkDistancePair route:
+             routes) {
+            routesString.append(route.explainSelf());
+            routesString.append(" ");
+        }
+
+        // Return packet explanation
+        return "LRP Packet: \n" +
+                "LL3P Address: " + sourceLL3P.toString() + "\n" +
+                "Sequence Number: " + sequenceNumber.toString() + "\n" +
+                "Route Count: " + count.toString() + "\n" +
+                "Routes: " + routesString;
     }
 
     @Override
     public String toSummaryString() {
         // TODO: 3/25/17 needs implementation
-        return null;
+        return "LRP Packet: " + sourceLL3P.toString() +
+                " | " + count.toString() + " routes";
     }
 
     // -- Getters

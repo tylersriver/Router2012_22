@@ -5,7 +5,8 @@ import sriver.w.tyler.router2017_22.support.Utilities;
 /**
  * Created by tyler.w.sriver on 3/25/17.
  *
- * TODO: Fill this in
+ * This contains a unique Sequence number for this routing update.
+ * The field is only 4 bits long so sequence numbers wrap from 15 to 0
  */
 public class LRPSequenceNumber implements DatagramHeaderField {
 
