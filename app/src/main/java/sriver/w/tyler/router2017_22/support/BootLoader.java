@@ -3,6 +3,7 @@ package sriver.w.tyler.router2017_22.support;
 import android.app.Activity;
 import android.util.Log;
 
+import java.util.List;
 import java.util.Observable;
 
 import sriver.w.tyler.router2017_22.UI.UIManager;
@@ -13,8 +14,10 @@ import sriver.w.tyler.router2017_22.networks.daemon.LL2PDaemon;
 import sriver.w.tyler.router2017_22.networks.daemon.Scheduler;
 import sriver.w.tyler.router2017_22.networks.datagram.ARPDatagram;
 import sriver.w.tyler.router2017_22.networks.datagram.LL2PFrame;
+import sriver.w.tyler.router2017_22.networks.table.RoutingTable;
 import sriver.w.tyler.router2017_22.networks.table.Table;
 import sriver.w.tyler.router2017_22.networks.tablerecord.AdjacencyRecord;
+import sriver.w.tyler.router2017_22.networks.tablerecord.RoutingRecord;
 
 /**
  * Created by tyler.w.sriver on 1/11/2017.
@@ -75,6 +78,8 @@ public class BootLoader extends Observable {
         // -------------------------------------------------------------------
         LL1Daemon ll1 = LL1Daemon.getInstance();
 
+
+
         // -- Test table class
         AdjacencyRecord adjacencyRecord = new AdjacencyRecord(GetIPAddress.getInstance().getInetAddress("10.31.1.1"), 0x314159);
         AdjacencyRecord adjacencyRecord1 = new AdjacencyRecord(GetIPAddress.getInstance().getInetAddress("10.31.1.2"), 0x314158);
@@ -88,6 +93,8 @@ public class BootLoader extends Observable {
         table.removeItem(0x31459);
         Log.d(Constants.logTag,  "Adjacency record removed from table");
 
+
+
         // -- Test LL1Daemon
         ll1.addAdjacency("314159", "10.31.1.1");
         AdjacencyRecord adjacencyRecord2 = ll1.getAdjacencyRecord(0x314159);
@@ -95,17 +102,51 @@ public class BootLoader extends Observable {
         ll1.removeAdjacency(adjacencyRecord);
         Log.d(Constants.logTag, "Record removed from LL1 table");
 
+
+
         // -- Send Frame
         ll1.addAdjacency("112233", "10.30.48.168");
         ll1.sendFrame(frame);
+
+
 
         // -- Test Factory
         Object[] params = {GetIPAddress.getInstance().getInetAddress("10.31.1.1"), 0x314158};
         AdjacencyRecord record = (AdjacencyRecord) Factory.getInstance().getTableRecord(Constants.ADJACENCY_TABLE_RECORD, params);
         Log.d(Constants.logTag, "Factory generated record is: "+record.toString());
 
+
+
         // -- Test ARPDaemon (Lab 7)
         // -------------------------------------------------------------------
         ARPDaemon.getInstance().testARP();
+
+
+
+        // -- Test Routing and Forwarding Tables (Lab 9)
+        // -------------------------------------------------------------------
+        RoutingTable routingTable = new RoutingTable();
+        RoutingTable forwardingTable = new RoutingTable();
+
+        RoutingRecord record1 = new RoutingRecord(8,1,8);
+        RoutingRecord record2 = new RoutingRecord(1,0,1);
+        RoutingRecord record3 = new RoutingRecord(2,1,8);
+        RoutingRecord record4 = new RoutingRecord(4,2,7);
+        RoutingRecord record5 = new RoutingRecord(7,3,7);
+        RoutingRecord record6 = new RoutingRecord(8,2,7);
+        RoutingRecord record7 = new RoutingRecord(2,1,7);
+
+        routingTable.addNewRoute(record1);
+        routingTable.addNewRoute(record2);
+        routingTable.addNewRoute(record3);
+        routingTable.addNewRoute(record4);
+        routingTable.addNewRoute(record5);
+        routingTable.addNewRoute(record6);
+        routingTable.addNewRoute(record7);
+
+        List<RoutingRecord> bestRoutes = routingTable.getBestRoutes();
+        Log.d(Constants.logTag, "Best Routes: "+bestRoutes.toString());
+
+        routingTable.addItem(record1);
     }
 }

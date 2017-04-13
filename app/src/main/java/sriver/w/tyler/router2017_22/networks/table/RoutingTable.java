@@ -12,7 +12,7 @@ import sriver.w.tyler.router2017_22.support.LabException;
 /**
  * Created by tyler.w.sriver on 4/12/17.
  *
- * TODO: Fill description
+ * Table class to hold routes and supporting methods
  */
 public class RoutingTable extends TimedTable {
 
@@ -31,11 +31,26 @@ public class RoutingTable extends TimedTable {
      * @param newEntry TableRecord
      */
     public void addNewRoute(TableRecord newEntry){
-        try { // Attempt to retrieve record
-            TableRecord record = this.getItem(newEntry);
-            this.Touch(record.getKey());
-        } catch (LabException e) {
-            this.addItem(newEntry);
+        RoutingRecord newRoutingRecord = (RoutingRecord) newEntry;
+        boolean isUpdated = false;
+        for (int i = 0; i < table.size(); i++) {
+            if (table.get(i).getKey().compareTo(newRoutingRecord.getKey()) == 0) {
+                RoutingRecord temp = (RoutingRecord) table.get(i);
+                if (temp.getDistance() == newRoutingRecord.getDistance()) {
+                    ((RoutingRecord) table.get(i)).updateTime();
+                } else {
+                    removeItem(temp.getKey());
+                    table.add(newRoutingRecord);
+                    notifyObservers();
+                }
+                isUpdated = true;
+            }
+        }
+
+        //If not found in the table
+        if(!isUpdated) {
+            table.add(newRoutingRecord);
+            notifyObservers();
         }
     }
 
@@ -45,6 +60,7 @@ public class RoutingTable extends TimedTable {
      */
     public void removeItem(TableRecord recordToRemove) {
         super.removeItem(recordToRemove.getKey());
+        notifyObservers();
     }
 
     /**
@@ -152,7 +168,7 @@ public class RoutingTable extends TimedTable {
         } throw new LabException("No Route Found");
     }
 
-    
+
     public void addRoutes(List<RoutingRecord> routes){
 
     }
