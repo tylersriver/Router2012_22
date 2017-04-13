@@ -1,5 +1,6 @@
 package sriver.w.tyler.router2017_22.networks.datagram;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import sriver.w.tyler.router2017_22.networks.Constants;
@@ -48,6 +49,7 @@ public class LRPPacket implements Datagram {
         this.count = (LRPRouteCount) Factory.getInstance().getDatagramHeaderField(Constants.LRP_ROUTE_COUNT, count);
 
         // -- Store Routes in List
+        routes = new ArrayList<>();
         for (int i = 0; i < this.count.getRouteCount(); i++){
             String pair = netDistList.substring(i, i+4);
             NetworkDistancePair temp = new NetworkDistancePair(pair);
@@ -126,7 +128,6 @@ public class LRPPacket implements Datagram {
 
     @Override
     public String toSummaryString() {
-        // TODO: 3/25/17 needs implementation
         return "LRP Packet: " + sourceLL3P.toString() +
                 " | " + count.toString() + " routes";
     }

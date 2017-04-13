@@ -7,7 +7,9 @@ import sriver.w.tyler.router2017_22.support.Utilities;
 /**
  * Created by tyler.w.sriver on 3/25/17.
  *
- * TODO: fill in
+ * This class holds a pair of bytes that
+ * represent the "Network" name and it's distance from
+ * your router
  */
 public class NetworkDistancePair implements DatagramHeaderField {
 
@@ -27,6 +29,16 @@ public class NetworkDistancePair implements DatagramHeaderField {
     public NetworkDistancePair(String netDistPair){
         network = Integer.valueOf(netDistPair.substring(0,2), 16);
         distance = Integer.valueOf(netDistPair.substring(2,4), 16);
+    }
+
+    /**
+     * Overloaded constructor to take the fields as to Integers
+     * @param net Integer
+     * @param dist Integer
+     */
+    public NetworkDistancePair(Integer net, Integer dist){
+        this.network = net;
+        this.distance = dist;
     }
 
     // -- Interface Methods
@@ -57,5 +69,16 @@ public class NetworkDistancePair implements DatagramHeaderField {
     @Override
     public String toAsciiString() {
         return Utilities.intToAscii(network) + Utilities.intToAscii(distance);
+    }
+
+    // -- Getters
+    // --------------------------------------------------------------
+
+    public Integer getNetwork() {
+        return network;
+    }
+
+    public Integer getDistance() {
+        return distance;
     }
 }
