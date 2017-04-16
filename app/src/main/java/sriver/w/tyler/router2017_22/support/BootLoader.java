@@ -3,6 +3,7 @@ package sriver.w.tyler.router2017_22.support;
 import android.app.Activity;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
@@ -122,12 +123,15 @@ public class BootLoader extends Observable {
         ARPDaemon.getInstance().testARP();
 
 
-
+        // ===================================================================
+        //
         // -- Test Routing and Forwarding Tables (Lab 9)
-        // -------------------------------------------------------------------
+        //
+        // ===================================================================
         RoutingTable routingTable = new RoutingTable();
         RoutingTable forwardingTable = new RoutingTable();
 
+        // -- Create records
         RoutingRecord record1 = new RoutingRecord(8,1,8);
         RoutingRecord record2 = new RoutingRecord(1,0,1);
         RoutingRecord record3 = new RoutingRecord(2,1,8);
@@ -136,6 +140,7 @@ public class BootLoader extends Observable {
         RoutingRecord record6 = new RoutingRecord(8,2,7);
         RoutingRecord record7 = new RoutingRecord(2,1,7);
 
+        // -- Add routes
         routingTable.addNewRoute(record1);
         routingTable.addNewRoute(record2);
         routingTable.addNewRoute(record3);
@@ -144,9 +149,44 @@ public class BootLoader extends Observable {
         routingTable.addNewRoute(record6);
         routingTable.addNewRoute(record7);
 
-        List<RoutingRecord> bestRoutes = routingTable.getBestRoutes();
-        Log.d(Constants.logTag, "Best Routes: "+bestRoutes.toString());
+        // -- Test expire
+        routingTable.expireRecords(1);
+        Log.d(Constants.logTag, "Num Records: " +routingTable.getTableAsArrayList().size());
 
-        routingTable.addItem(record1);
+        // -- Test route update
+        record1 = new RoutingRecord(8,3,5);
+        record2 = new RoutingRecord(8,4,5);
+        routingTable.addNewRoute(record1);
+        routingTable.addNewRoute(record2);
+        Log.d(Constants.logTag, "Routes added");
+
+        // -- Test Best routes
+        record1 = new RoutingRecord(4,3,5);
+        record2 = new RoutingRecord(4,4,6);
+        record3 = new RoutingRecord(4,5,7);
+
+        record4 = new RoutingRecord(5,3,6);
+        record5 = new RoutingRecord(5,4,7);
+        record6 = new RoutingRecord(5,5,8);
+
+        routingTable.addNewRoute(record1);
+        routingTable.addNewRoute(record2);
+        routingTable.addNewRoute(record3);
+        routingTable.addNewRoute(record4);
+        routingTable.addNewRoute(record5);
+        routingTable.addNewRoute(record6);
+
+        List<RoutingRecord> bestRoutes = new ArrayList<>();
+        bestRoutes = routingTable.getBestRoutes();
+        Log.d(Constants.logTag, "Best Routes got");
+
+        routingTable.addNewRoute(record1);
+        routingTable.addNewRoute(record2);
+        routingTable.addNewRoute(record3);
+        routingTable.addNewRoute(record4);
+        routingTable.addNewRoute(record5);
+        routingTable.addNewRoute(record6);
+        Log.d(Constants.logTag, "Check LastTimeTouched");
+
     }
 }

@@ -42,6 +42,7 @@ public class TableUI implements Runnable, Observer {
     @Override
     public void run() {
         arpTableUI.updateView();
+        adjacencyUI.updateView();
     }
 
     /**

@@ -37,8 +37,10 @@ public class RoutingTable extends TimedTable {
             if (table.get(i).getKey().compareTo(newRoutingRecord.getKey()) == 0) {
                 RoutingRecord temp = (RoutingRecord) table.get(i);
                 if (temp.getDistance() == newRoutingRecord.getDistance()) {
+                    // Update time if same route
                     ((RoutingRecord) table.get(i)).updateTime();
                 } else {
+                    // Remove and replace if different
                     removeItem(temp.getKey());
                     table.add(newRoutingRecord);
                     notifyObservers();
@@ -47,7 +49,7 @@ public class RoutingTable extends TimedTable {
             }
         }
 
-        //If not found in the table
+        //If not found in the table add it
         if(!isUpdated) {
             table.add(newRoutingRecord);
             notifyObservers();
@@ -169,7 +171,13 @@ public class RoutingTable extends TimedTable {
     }
 
 
+    /**
+     * Add the new routes based on known update criteria
+     * @param routes List
+     */
     public void addRoutes(List<RoutingRecord> routes){
-
+        for (RoutingRecord record:routes) {
+            addNewRoute(record);
+        }
     }
 }
