@@ -1,6 +1,9 @@
 package sriver.w.tyler.router2017_22.networks.daemon;
 
+import android.util.Log;
+
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -131,18 +134,22 @@ public class LRPDaemon implements Observer, Runnable {
             // -- Create and Send update
             LRPRouteCount lrpCount = new LRPRouteCount(recordsToSend.size());
             LRPPacket packetToSend = new LRPPacket(Constants.SOURCE_LL3P, sequenceNumber, lrpCount.getRouteCount(), pairs);
-            sendUpdate(packetToSend);
+            sendUpdate(packetToSend, Constants.SOURCE_LL3P);
 
         } // -- end foreach
     }
 
-    private void sendUpdate(LRPDatagram packet, int ll3Paddress) {
+    /**
+     * Send the LRP Update
+     * @param packet LRPPacket
+     * @param ll3Paddress int
+     */
+    private void sendUpdate(LRPPacket packet, int ll3Paddress) {
         try {
             int ll2pAdd = arpDaemon.getMACAddress(ll3Paddress);
-            layer2Daemon.sendLL2PFrame(packet, ll2pAdd, Constants.LL2P_TYPE_IS_LRP);
-        }
-        catch (Exception e)
-        {
+            ll2PDaemon.sendLL2PFrame(packet, ll2pAdd, Constants.LL2P_TYPE_IS_LRP);
+        } catch (Exception e) {
+
             Log.e(getClass().toString(), e.getMessage());
         }
     }
