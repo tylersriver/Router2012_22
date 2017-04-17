@@ -32,6 +32,7 @@ public class Constants implements Observer {
     final public static int UI_UPDATE_INTERVAL = 1;
     final public static int ROUTER_BOOT_TIME = 5;
     final public static int MAX_AGE_ALLOWED = 30;
+    final public static int MAX_LRP_SEQUENCE_NUM = 15;
 
 
     // -- Header Fields

@@ -55,6 +55,7 @@ public class ARPDaemon extends Observable implements Observer, Runnable {
     public void update(Observable o, Object arg) {
         if(o.getClass().equals(BootLoader.class)) {
             ll2PDaemon = LL2PDaemon.getInstance();
+            addObserver(LRPDaemon.getInstance());
         }
     }
 

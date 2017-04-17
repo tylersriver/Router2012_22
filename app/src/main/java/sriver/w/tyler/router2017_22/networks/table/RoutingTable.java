@@ -175,9 +175,10 @@ public class RoutingTable extends TimedTable {
      * Add the new routes based on known update criteria
      * @param routes List
      */
-    public void addRoutes(List<RoutingRecord> routes){
+    public boolean addRoutes(List<RoutingRecord> routes){
         for (RoutingRecord record:routes) {
             addNewRoute(record);
         }
+        return false;
     }
 }

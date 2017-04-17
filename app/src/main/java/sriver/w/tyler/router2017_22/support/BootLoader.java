@@ -12,6 +12,7 @@ import sriver.w.tyler.router2017_22.networks.Constants;
 import sriver.w.tyler.router2017_22.networks.daemon.ARPDaemon;
 import sriver.w.tyler.router2017_22.networks.daemon.LL1Daemon;
 import sriver.w.tyler.router2017_22.networks.daemon.LL2PDaemon;
+import sriver.w.tyler.router2017_22.networks.daemon.LRPDaemon;
 import sriver.w.tyler.router2017_22.networks.daemon.Scheduler;
 import sriver.w.tyler.router2017_22.networks.datagram.ARPDatagram;
 import sriver.w.tyler.router2017_22.networks.datagram.LL2PFrame;
@@ -55,6 +56,7 @@ public class BootLoader extends Observable {
         addObserver(LL2PDaemon.getInstance());
         addObserver(ARPDaemon.getInstance());
         addObserver(Scheduler.getInstance());
+        addObserver(LRPDaemon.getInstance());
 
         setChanged();
         notifyObservers();

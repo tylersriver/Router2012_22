@@ -84,4 +84,12 @@ public class LL3PAddressField implements DatagramHeaderField {
         builder.append(Integer.toHexString(address));
         explanationString = builder.toString();
     }
+
+    /**
+     * Return the address
+     * @return Integer
+     */
+    public Integer getAddress() {
+        return address;
+    }
 }

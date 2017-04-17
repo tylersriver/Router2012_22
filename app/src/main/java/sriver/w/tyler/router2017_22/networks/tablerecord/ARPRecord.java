@@ -51,7 +51,7 @@ public class ARPRecord extends TableRecordClass {
      */
     @Override
     public Integer getKey() {
-        return ll2pAddress;
+        return ll3pAddress;
     }
 
     /**
