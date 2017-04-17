@@ -92,4 +92,12 @@ public class LL3PAddressField implements DatagramHeaderField {
     public Integer getAddress() {
         return address;
     }
+
+    /**
+     * Return network number
+     * @return Integer
+     */
+    public Integer getNetworkNumber() {
+        return networkNumber;
+    }
 }

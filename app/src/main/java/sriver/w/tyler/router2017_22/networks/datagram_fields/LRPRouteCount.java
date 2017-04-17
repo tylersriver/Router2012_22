@@ -25,6 +25,14 @@ public class LRPRouteCount implements DatagramHeaderField {
     }
 
     /**
+     * Overload to take integer
+     * @param routeCount Integer
+     */
+    public LRPRouteCount(Integer routeCount){
+        this.routeCount = routeCount;
+    }
+
+    /**
      * Return hex string of route count
      * @return String
      */

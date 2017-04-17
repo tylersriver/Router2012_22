@@ -5,7 +5,10 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import sriver.w.tyler.router2017_22.networks.Constants;
 import sriver.w.tyler.router2017_22.networks.datagram.LRPPacket;
+import sriver.w.tyler.router2017_22.networks.datagram_fields.LL3PAddressField;
+import sriver.w.tyler.router2017_22.networks.datagram_fields.LRPRouteCount;
 import sriver.w.tyler.router2017_22.networks.datagram_fields.NetworkDistancePair;
 import sriver.w.tyler.router2017_22.networks.table.RoutingTable;
 import sriver.w.tyler.router2017_22.networks.table.Table;
@@ -76,9 +79,72 @@ public class LRPDaemon implements Observer, Runnable {
         }
     }
 
+    /**
+     * It forces its work onto the UI thread
+     * and calls the method updateRoutes
+     */
     @Override
     public void run() {
+        updateRoutes();
+    }
 
+    private void updateRoutes(){
+
+        // -- Expired Routes
+        routingTable.expireRecords(Constants.MAX_AGE_LRP);
+        forwardingTable.expireRecords(Constants.MAX_AGE_LRP);
+
+        // -- add ourselves
+        RoutingRecord ourself = new RoutingRecord(Constants.SOURCE_NETWORK, 0, Constants.SOURCE_NETWORK);
+
+        // -- Add Adjacent nodes to routing
+        for (TableRecord record : arpDaemon.getArpTable().getTableAsArrayList()) {
+
+            // -- Transpose information
+            // --------------------------------------------------------------
+            ARPRecord arpRecord = (ARPRecord) record;
+            Integer Ll3pInt = arpRecord.getLl3pAddress();       // The current records LL3P Address
+            String Ll3pString = Integer.toHexString(Ll3pInt);   // The same LL3P address as a string
+            Integer networkNum = new LL3PAddressField(Ll3pString, true).getNetworkNumber(); //
+
+            // -- Create Record
+            RoutingRecord adjecentRoute = new RoutingRecord(networkNum, 1, Ll3pInt);
+
+            // -- Add record
+            routingTable.addNewRoute(adjecentRoute);
+
+            // -- Hand forwarding table best routes
+            forwardingTable.clear();
+            forwardingTable.addRoutes(routingTable.getBestRoutes());
+
+            // -- Send LRP Updates
+            // --------------------------------------------------------------
+            List<RoutingRecord> recordsToSend = routingTable.getRoutesExcluding(Ll3pInt);
+            
+            // -- Transpose List into network distance pairs
+            List<NetworkDistancePair> pairs = new ArrayList<>();
+            for (RoutingRecord route:recordsToSend) {
+                NetworkDistancePair temp = new NetworkDistancePair(route.getNetworkNumber(), route.getDistance());
+                pairs.add(temp);
+            }
+
+            // -- Create and Send update
+            LRPRouteCount lrpCount = new LRPRouteCount(recordsToSend.size());
+            LRPPacket packetToSend = new LRPPacket(Constants.SOURCE_LL3P, sequenceNumber, lrpCount.getRouteCount(), pairs);
+            sendUpdate(packetToSend);
+
+        } // -- end foreach
+    }
+
+    private void sendUpdate(LRPDatagram packet, int ll3Paddress) {
+        try {
+            int ll2pAdd = arpDaemon.getMACAddress(ll3Paddress);
+            layer2Daemon.sendLL2PFrame(packet, ll2pAdd, Constants.LL2P_TYPE_IS_LRP);
+        }
+        catch (Exception e)
+        {
+            Log.e(getClass().toString(), e.getMessage());
+        }
     }
 
     /**
@@ -127,7 +193,8 @@ public class LRPDaemon implements Observer, Runnable {
     }
 
     /**
-     * TODO: Describe
+     * Update the routing table, and if changes were made
+     * to the routing table, you should also update the forwarding table
      * @param lrp LRPPacket
      */
     public void processLRPPacket(LRPPacket lrp) {

@@ -159,7 +159,6 @@ public class RoutingTable extends TimedTable {
      * This returns the best route for the specified remote network
      * @param network Integer
      * @return RoutingRecord
-     * @throws LabException
      */
     public RoutingRecord getBestRoute(Integer network) throws LabException {
         List<RoutingRecord> bestRecords = getBestRoutes();

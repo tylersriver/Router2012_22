@@ -25,14 +25,17 @@ public class Constants implements Observer {
     public static String IP_ADDRESS;	// the IP address of this system Note: will be stored here in dotted decimal notation
     public static int SOURCE_LL2P = 0x712712;
     public static int SOURCE_LL3P = 0x0A01;
+    final public static int SOURCE_NETWORK = 0x0A;
     public static String IP_ADDRESS_PREFIX; // the prefix will be stored here
     final public static int UDP_PORT = 49999;
 
-    final public static int THREAD_COUNT = 25;
-    final public static int UI_UPDATE_INTERVAL = 1;
-    final public static int ROUTER_BOOT_TIME = 5;
-    final public static int MAX_AGE_ALLOWED = 30;
-    final public static int MAX_LRP_SEQUENCE_NUM = 15;
+    final public static int THREAD_COUNT            = 25;
+    final public static int UI_UPDATE_INTERVAL      = 1;
+    final public static int ROUTER_BOOT_TIME        = 5;
+    final public static int MAX_AGE_ALLOWED         = 30;
+    final public static int MAX_AGE_LRP             = 30;
+    final public static int MAX_AGE_ARP             = 120;
+    final public static int MAX_LRP_SEQUENCE_NUM    = 15;
 
 
     // -- Header Fields
