@@ -134,7 +134,7 @@ public class LRPDaemon implements Observer, Runnable {
             // -- Create and Send update
             LRPRouteCount lrpCount = new LRPRouteCount(recordsToSend.size());
             LRPPacket packetToSend = new LRPPacket(Constants.SOURCE_LL3P, sequenceNumber, lrpCount.getRouteCount(), pairs);
-            sendUpdate(packetToSend, Constants.SOURCE_LL3P);
+            sendUpdate(packetToSend, Ll3pInt);
 
         } // -- end foreach
     }
@@ -147,9 +147,8 @@ public class LRPDaemon implements Observer, Runnable {
     private void sendUpdate(LRPPacket packet, int ll3Paddress) {
         try {
             int ll2pAdd = arpDaemon.getMACAddress(ll3Paddress);
-            ll2PDaemon.sendLL2PFrame(packet, ll2pAdd, Constants.LL2P_TYPE_IS_LRP);
+            ll2PDaemon.sendLRPUpdate(packet, ll2pAdd);
         } catch (Exception e) {
-
             Log.e(getClass().toString(), e.getMessage());
         }
     }

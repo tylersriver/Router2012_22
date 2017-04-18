@@ -30,12 +30,17 @@ public class Constants implements Observer {
     final public static int UDP_PORT = 49999;
 
     final public static int THREAD_COUNT            = 25;
+
     final public static int UI_UPDATE_INTERVAL      = 1;
     final public static int ROUTER_BOOT_TIME        = 5;
+    final public static int LRP_UPDATE_INTERVAL     = 10;
+    final public static int ARP_DAEMON_UPDATE_INTERVAL = 5;
+
     final public static int MAX_AGE_ALLOWED         = 30;
     final public static int MAX_AGE_LRP             = 30;
     final public static int MAX_AGE_ARP             = 120;
     final public static int MAX_LRP_SEQUENCE_NUM    = 15;
+
 
 
     // -- Header Fields

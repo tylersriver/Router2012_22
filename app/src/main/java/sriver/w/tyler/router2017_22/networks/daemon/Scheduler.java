@@ -64,8 +64,12 @@ public class Scheduler implements Observer{
                     TimeUnit.SECONDS); // Thread for TAble UI
             threadManager.scheduleAtFixedRate(arpDaemon,
                     Constants.ROUTER_BOOT_TIME,
-                    Constants.UI_UPDATE_INTERVAL,
+                    Constants.ARP_DAEMON_UPDATE_INTERVAL,
                     TimeUnit.SECONDS); // Thread for ARPDaemon
+            threadManager.scheduleAtFixedRate(lrpDaemon,
+                    Constants.ROUTER_BOOT_TIME,
+                    Constants.LRP_UPDATE_INTERVAL,
+                    TimeUnit.SECONDS);
 
         }
     }

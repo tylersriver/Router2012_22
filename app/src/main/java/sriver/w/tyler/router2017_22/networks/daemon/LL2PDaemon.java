@@ -12,6 +12,7 @@ import sriver.w.tyler.router2017_22.networks.Constants;
 import sriver.w.tyler.router2017_22.networks.datagram.ARPDatagram;
 import sriver.w.tyler.router2017_22.networks.datagram.Datagram;
 import sriver.w.tyler.router2017_22.networks.datagram.LL2PFrame;
+import sriver.w.tyler.router2017_22.networks.datagram.LRPPacket;
 import sriver.w.tyler.router2017_22.networks.datagram.TextDatagram;
 import sriver.w.tyler.router2017_22.networks.datagram_fields.CRC;
 import sriver.w.tyler.router2017_22.networks.datagram_fields.DatagramPayloadField;
@@ -79,13 +80,14 @@ public class LL2PDaemon implements Observer{
                 uiManager.raiseToast("Unsupported Frame Type");
                 break;
             case Constants.LL2P_TYPE_IS_LRP:
-                uiManager.raiseToast("Unsupported Frame Type");
+                LRPDaemon.getInstance().receiveNewLRP(frame.getPayload().toHexString().getBytes(), frame.getSourceAddress().getAddress());
                 break;
             case Constants.LL2P_TYPE_IS_LL3P:
                 uiManager.raiseToast("Unsupported Frame Type");
                 break;
             case Constants.LL2P_TYPE_IS_ECHO_REQUEST:
                 answerEchoRequest(frame);
+                break;
             case Constants.LL2P_TYPE_IS_ECHO_REPLY:
                 uiManager.raiseToast("Received Echo Reply: "+frame.toSummaryString());
                 break;
@@ -170,5 +172,20 @@ public class LL2PDaemon implements Observer{
         // -- Create and send frame
         LL2PFrame frameToSend = new LL2PFrame(ll2pFrameString.toString().getBytes());
         ll1Daemon.sendFrame(frameToSend);
+    }
+
+    /**
+     * Send an LRP update to the given ll2p address
+     * @param packet LRPPacket
+     * @param ll2pAddress int
+     */
+    public void sendLRPUpdate(LRPPacket packet, int ll2pAddress) {
+        LL2PFrame frame = new LL2PFrame(new LL2PAddressField(ll2pAddress, false),
+                                        new LL2PAddressField(Constants.SOURCE_LL2P, true),
+                                        new LL2PTypeField(Constants.LL2P_TYPE_IS_LRP),
+                                        new DatagramPayloadField(packet),
+                                        new CRC("1234"));
+        ll1Daemon.sendFrame(frame);
+
     }
 }
