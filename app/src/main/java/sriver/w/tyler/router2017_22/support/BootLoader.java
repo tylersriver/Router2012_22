@@ -108,7 +108,7 @@ public class BootLoader extends Observable {
 
 
         // -- Send Frame
-        ll1.addAdjacency("112233", "10.30.48.168");
+        ll1.addAdjacency("112233", "171.17.1.13");
         ll1.sendFrame(frame);
 
 
@@ -189,6 +189,10 @@ public class BootLoader extends Observable {
         routingTable.addNewRoute(record5);
         routingTable.addNewRoute(record6);
         Log.d(Constants.logTag, "Check LastTimeTouched");
+        // ===================================================================
+
+        // -- Lab 10
+        LRPDaemon.getInstance().getRoutingTable().addNewRoute(record1);
 
     }
 }

@@ -1,6 +1,7 @@
 package sriver.w.tyler.router2017_22.networks.tablerecord;
 
 import sriver.w.tyler.router2017_22.networks.datagram_fields.NetworkDistancePair;
+import sriver.w.tyler.router2017_22.support.Utilities;
 
 /**
  * Created by tyler.w.sriver on 4/12/17.
@@ -62,5 +63,11 @@ public class RoutingRecord extends TableRecordClass {
     @Override
     public Integer getKey() {
         return key;
+    }
+
+    @Override
+    public String toString() {
+        return "RR. " + networkDistancePair.explainSelf() +
+                " Next hop: " + Utilities.padHexString(Integer.toHexString(nextHop), 2) + " age: " + getAgeInSec();
     }
 }

@@ -3,7 +3,6 @@ package sriver.w.tyler.router2017_22.networks.daemon;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -21,6 +20,7 @@ import sriver.w.tyler.router2017_22.networks.tablerecord.TableRecord;
 import sriver.w.tyler.router2017_22.networks.tablerecord.TableRecordClass;
 import sriver.w.tyler.router2017_22.support.BootLoader;
 import sriver.w.tyler.router2017_22.support.LabException;
+import sriver.w.tyler.router2017_22.support.Utilities;
 
 /**
  * Created by tyler.w.sriver on 3/9/17.
@@ -91,6 +91,10 @@ public class LRPDaemon implements Observer, Runnable {
         updateRoutes();
     }
 
+    /**
+     * This method updates
+     * all routing and forwarding information
+     */
     private void updateRoutes(){
 
         // -- Expired Routes
@@ -98,7 +102,8 @@ public class LRPDaemon implements Observer, Runnable {
         forwardingTable.expireRecords(Constants.MAX_AGE_LRP);
 
         // -- add ourselves
-        RoutingRecord ourself = new RoutingRecord(Constants.SOURCE_NETWORK, 0, Constants.SOURCE_NETWORK);
+        RoutingRecord ourSelf = new RoutingRecord(Constants.SOURCE_NETWORK, 0, Constants.SOURCE_NETWORK);
+        routingTable.addNewRoute(ourSelf);
 
         // -- Add Adjacent nodes to routing
         for (TableRecord record : arpDaemon.getArpTable().getTableAsArrayList()) {
@@ -107,7 +112,7 @@ public class LRPDaemon implements Observer, Runnable {
             // --------------------------------------------------------------
             ARPRecord arpRecord = (ARPRecord) record;
             Integer Ll3pInt = arpRecord.getLl3pAddress();       // The current records LL3P Address
-            String Ll3pString = Integer.toHexString(Ll3pInt);   // The same LL3P address as a string
+            String Ll3pString = Utilities.padHexString( Integer.toHexString(Ll3pInt), 2 );   // The same LL3P address as a string
             Integer networkNum = new LL3PAddressField(Ll3pString, true).getNetworkNumber(); //
 
             // -- Create Record

@@ -80,7 +80,7 @@ public class LL2PDaemon implements Observer{
                 uiManager.raiseToast("Unsupported Frame Type");
                 break;
             case Constants.LL2P_TYPE_IS_LRP:
-                LRPDaemon.getInstance().receiveNewLRP(frame.getPayload().toHexString().getBytes(), frame.getSourceAddress().getAddress());
+                LRPDaemon.getInstance().receiveNewLRP(frame.getPayload().toAsciiString().getBytes(), frame.getSourceAddress().getAddress());
                 break;
             case Constants.LL2P_TYPE_IS_LL3P:
                 uiManager.raiseToast("Unsupported Frame Type");
