@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.concurrent.RunnableFuture;
 
 import sriver.w.tyler.router2017_22.networks.Constants;
 import sriver.w.tyler.router2017_22.networks.datagram.LRPPacket;
@@ -20,6 +21,7 @@ import sriver.w.tyler.router2017_22.networks.tablerecord.TableRecord;
 import sriver.w.tyler.router2017_22.networks.tablerecord.TableRecordClass;
 import sriver.w.tyler.router2017_22.support.BootLoader;
 import sriver.w.tyler.router2017_22.support.LabException;
+import sriver.w.tyler.router2017_22.support.ParentActivity;
 import sriver.w.tyler.router2017_22.support.Utilities;
 
 /**
@@ -88,7 +90,12 @@ public class LRPDaemon implements Observer, Runnable {
      */
     @Override
     public void run() {
-        updateRoutes();
+        ParentActivity.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                updateRoutes();
+            }
+        });
     }
 
     /**
