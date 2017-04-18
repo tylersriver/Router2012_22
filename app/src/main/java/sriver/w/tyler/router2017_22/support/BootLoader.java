@@ -55,8 +55,8 @@ public class BootLoader extends Observable {
         addObserver(LL1Daemon.getInstance());
         addObserver(LL2PDaemon.getInstance());
         addObserver(ARPDaemon.getInstance());
-        addObserver(Scheduler.getInstance());
         addObserver(LRPDaemon.getInstance());
+        addObserver(Scheduler.getInstance());
 
         setChanged();
         notifyObservers();
@@ -122,7 +122,7 @@ public class BootLoader extends Observable {
 
         // -- Test ARPDaemon (Lab 7)
         // -------------------------------------------------------------------
-        ARPDaemon.getInstance().testARP();
+        //ARPDaemon.getInstance().testARP();
 
 
         // ===================================================================

@@ -29,7 +29,7 @@ public class Constants implements Observer {
     public static String IP_ADDRESS_PREFIX; // the prefix will be stored here
     final public static int UDP_PORT = 49999;
 
-    final public static int THREAD_COUNT            = 5;
+    final public static int THREAD_COUNT            = 6;
 
     final public static int UI_UPDATE_INTERVAL      = 1;
     final public static int ROUTER_BOOT_TIME        = 5;

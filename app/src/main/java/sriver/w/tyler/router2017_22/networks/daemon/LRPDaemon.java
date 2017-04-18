@@ -97,7 +97,7 @@ public class LRPDaemon implements Observer, Runnable {
      */
     private void updateRoutes(){
 
-        // -- Expired Routes
+        // -- Expire Routes
         routingTable.expireRecords(Constants.MAX_AGE_LRP);
         forwardingTable.expireRecords(Constants.MAX_AGE_LRP);
 
@@ -121,10 +121,6 @@ public class LRPDaemon implements Observer, Runnable {
             // -- Add record
             routingTable.addNewRoute(adjecentRoute);
 
-            // -- Hand forwarding table best routes
-            forwardingTable.clear();
-            forwardingTable.addRoutes(routingTable.getBestRoutes());
-
             // -- Send LRP Updates
             // --------------------------------------------------------------
             List<RoutingRecord> recordsToSend = routingTable.getRoutesExcluding(Ll3pInt);
@@ -142,6 +138,10 @@ public class LRPDaemon implements Observer, Runnable {
             sendUpdate(packetToSend, Ll3pInt);
 
         } // -- end foreach
+
+        // -- Hand forwarding table best routes
+        forwardingTable.clear();
+        forwardingTable.addRoutes(routingTable.getBestRoutes());
     }
 
     /**

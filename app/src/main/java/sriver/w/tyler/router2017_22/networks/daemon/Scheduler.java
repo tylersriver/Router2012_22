@@ -73,7 +73,7 @@ public class Scheduler implements Observer{
             threadManager.scheduleAtFixedRate(lrpDaemon,
                     Constants.ROUTER_BOOT_TIME,
                     Constants.LRP_UPDATE_INTERVAL,
-                    TimeUnit.SECONDS);
+                    TimeUnit.SECONDS); // Thread for LRP Daemon
 
         }
     }
