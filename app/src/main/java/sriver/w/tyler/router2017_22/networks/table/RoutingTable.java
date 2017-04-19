@@ -89,8 +89,9 @@ public class RoutingTable extends TimedTable {
         List<RoutingRecord> returnList = new ArrayList<>();
         for (TableRecord record: table) {
             RoutingRecord routingRecord = (RoutingRecord) record;
-            if(routingRecord.getNextHop() != ll3pAddress)
+            if(routingRecord.getNextHop() != ll3pAddress) {
                 returnList.add(routingRecord);
+            }
         }
         return returnList;
     }
@@ -159,7 +160,6 @@ public class RoutingTable extends TimedTable {
      * This returns the best route for the specified remote network
      * @param network Integer
      * @return RoutingRecord
-     * @throws LabException
      */
     public RoutingRecord getBestRoute(Integer network) throws LabException {
         List<RoutingRecord> bestRecords = getBestRoutes();
@@ -175,9 +175,10 @@ public class RoutingTable extends TimedTable {
      * Add the new routes based on known update criteria
      * @param routes List
      */
-    public void addRoutes(List<RoutingRecord> routes){
+    public boolean addRoutes(List<RoutingRecord> routes){
         for (RoutingRecord record:routes) {
             addNewRoute(record);
         }
+        return false;
     }
 }

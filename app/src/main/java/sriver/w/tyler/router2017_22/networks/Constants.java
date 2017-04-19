@@ -25,13 +25,22 @@ public class Constants implements Observer {
     public static String IP_ADDRESS;	// the IP address of this system Note: will be stored here in dotted decimal notation
     public static int SOURCE_LL2P = 0x712712;
     public static int SOURCE_LL3P = 0x0A01;
+    final public static int SOURCE_NETWORK = 0x0A;
     public static String IP_ADDRESS_PREFIX; // the prefix will be stored here
     final public static int UDP_PORT = 49999;
 
-    final public static int THREAD_COUNT = 25;
-    final public static int UI_UPDATE_INTERVAL = 1;
-    final public static int ROUTER_BOOT_TIME = 5;
-    final public static int MAX_AGE_ALLOWED = 30;
+    final public static int THREAD_COUNT            = 6;
+
+    final public static int UI_UPDATE_INTERVAL      = 1;
+    final public static int ROUTER_BOOT_TIME        = 5;
+    final public static int LRP_UPDATE_INTERVAL     = 10;
+    final public static int ARP_DAEMON_UPDATE_INTERVAL = 5;
+
+    final public static int MAX_AGE_ALLOWED         = 3000;
+    final public static int MAX_AGE_LRP             = 30;
+    final public static int MAX_AGE_ARP             = 120;
+    final public static int MAX_LRP_SEQUENCE_NUM    = 15;
+
 
 
     // -- Header Fields
@@ -62,14 +71,23 @@ public class Constants implements Observer {
     final public static int LL3P_SOURCE_ADDRESS_OFFSET      = 0;
     final public static int SEQUENCE_NUMBER_OFFSET          = 4;
     final public static int COUNT_OFFSET                    = 5;
-    final public static int FIRST_NETWORK_OFFSET            = 8;
-    final public static int FIRST_DISTANCE_OFFSET           = 10;
+    final public static int FIRST_NETWORK_OFFSET            = 6;
 
-    // -- LRP Field lengths in bytes
-    final public static double SEQUENCE_NUMBER_LENGTH       = .5;
-    final public static double COUNT_LENGTH                 = .5;
-    final public static int NETWORK_LENGTH                  = 1;
-    final public static int DISTANCE_LENGTH                 = 1;
+    // -- LL3P Field Offsets -- indices not bytes
+    final public static int SOURCE_LL3P_OFFSET              = 0;
+    final public static int DEST_LL3P_OFFSET                = 4;
+    final public static int LL3P_TYPE_OFFSET                = 8;
+    final public static int LL3P_IDENTIFIER_OFFSET          = 12;
+    final public static int LL3P_TTL_OFFSET                 = 16;
+    final public static int LL3P_PAYLOAD_OFFSET             = 18;
+
+    // -- LL3P Datagram Field Lengths -- in bytes
+    final public static int LL3P_ADDRESS_LENGTH             = 2;
+    final public static int LL3P_TYPE_LENGTH                = 2;
+    final public static int LL3P_IDENTIFIER_LENGTH          = 2;
+    final public static int LL3P_TTL_LENGTH                 = 1;
+    final public static int LL3P_CRC_LENGTH                 = 2;
+
 
     // -- LL2P Types
     final public static int LL2P_TYPE_IS_LL3P               = 0x8001;

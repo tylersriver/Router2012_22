@@ -55,6 +55,7 @@ public class ARPDaemon extends Observable implements Observer, Runnable {
     public void update(Observable o, Object arg) {
         if(o.getClass().equals(BootLoader.class)) {
             ll2PDaemon = LL2PDaemon.getInstance();
+            addObserver(LRPDaemon.getInstance());
         }
     }
 
@@ -86,14 +87,30 @@ public class ARPDaemon extends Observable implements Observer, Runnable {
      * @param ll3pAddress Integer
      * @return Integer
      */
-    public Integer getMACAddress(Integer ll3pAddress){
+    public Integer getMACAddress(Integer ll3pAddress) throws LabException{
         try {
             ARPRecord record = (ARPRecord) arpTable.getItem(ll3pAddress);
             return record.getLl2pAddress();
         } catch (LabException ex) {
             ex.printStackTrace();
         }
-        return null;
+        throw new LabException("Record Not Found");
+    }
+
+    /**
+     * Get ll3paddress for record with Given ll2pAddress
+     * @param ll2pAddress int
+     * @return int
+     */
+    public int	getKey(int ll2pAddress){
+        for (TableRecord record : arpTable.getTableAsArrayList()) {
+            if (record instanceof ARPRecord) {
+                if (((ARPRecord) record).getLl2pAddress() == ll2pAddress) {
+                    return ((ARPRecord) record).getKey();
+                }
+            }
+        }
+        return -1;
     }
 
     /**
@@ -141,6 +158,7 @@ public class ARPDaemon extends Observable implements Observer, Runnable {
     }
 
     /**
+     * Handle getting an arp request
      * Add/Touch record then send reply
      * @param ll2pAddress Integer
      * @param datagram ARPDatagram
