@@ -72,13 +72,6 @@ public class Constants implements Observer {
     final public static int SEQUENCE_NUMBER_OFFSET          = 4;
     final public static int COUNT_OFFSET                    = 5;
     final public static int FIRST_NETWORK_OFFSET            = 8;
-    final public static int FIRST_DISTANCE_OFFSET           = 10;
-
-    // -- LRP Field lengths in bytes
-    final public static double SEQUENCE_NUMBER_LENGTH       = .5;
-    final public static double COUNT_LENGTH                 = .5;
-    final public static int NETWORK_LENGTH                  = 1;
-    final public static int DISTANCE_LENGTH                 = 1;
 
     // -- LL2P Types
     final public static int LL2P_TYPE_IS_LL3P               = 0x8001;

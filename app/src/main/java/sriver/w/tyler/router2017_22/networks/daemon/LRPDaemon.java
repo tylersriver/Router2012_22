@@ -140,7 +140,7 @@ public class LRPDaemon implements Observer, Runnable {
 
             // -- Create and Send update
             LRPRouteCount lrpCount = new LRPRouteCount(recordsToSend.size());
-            LRPPacket packetToSend = new LRPPacket(Constants.SOURCE_LL3P, sequenceNumber, lrpCount.getRouteCount(), pairs);
+            LRPPacket packetToSend = new LRPPacket(Constants.SOURCE_LL3P, getCurrentSequenceNumber(), lrpCount.getRouteCount(), pairs);
             sendUpdate(packetToSend, Ll3pInt);
 
         } // -- end foreach
@@ -187,17 +187,16 @@ public class LRPDaemon implements Observer, Runnable {
      * @param ll2pSource Integer
      * @return ARPRecord
      */
-    private ARPRecord getRecordMatchingLL2P(Integer ll2pSource){
-        ARPRecord recordToTouch = null;
+    private ARPRecord getRecordMatchingLL2P(Integer ll2pSource) throws LabException{
 
         // Find ARPRecord with matching ll2paddress
         for (TableRecord record: arpDaemon.getArpTable().getTableAsArrayList()) {
             ARPRecord recordCast = (ARPRecord) record;
             if(recordCast.getLl2pAddress() == ll2pSource){
-                recordToTouch = recordCast;
+                return recordCast;
             }
         }
-        return recordToTouch;
+        throw  new LabException("Record Not Found");
     }
 
     /**
@@ -282,6 +281,19 @@ public class LRPDaemon implements Observer, Runnable {
      */
     public Table getForwardingTable(){
         return forwardingTable;
+    }
+
+    /**
+     * Return the sequence number
+     * and increment
+     * @return int
+     */
+    private int getCurrentSequenceNumber(){
+        sequenceNumber++;
+        if(sequenceNumber == 16){
+            sequenceNumber = 0;
+        }
+        return sequenceNumber;
     }
 
 }

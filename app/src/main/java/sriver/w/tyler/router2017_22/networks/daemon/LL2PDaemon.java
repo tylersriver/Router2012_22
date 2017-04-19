@@ -180,12 +180,16 @@ public class LL2PDaemon implements Observer{
      * @param ll2pAddress int
      */
     public void sendLRPUpdate(LRPPacket packet, int ll2pAddress) {
-        LL2PFrame frame = new LL2PFrame(new LL2PAddressField(ll2pAddress, false),
-                                        new LL2PAddressField(Constants.SOURCE_LL2P, true),
-                                        new LL2PTypeField(Constants.LL2P_TYPE_IS_LRP),
-                                        new DatagramPayloadField(packet),
-                                        new CRC("1234"));
-        ll1Daemon.sendFrame(frame);
+
+        StringBuilder ll2pFrameString = new StringBuilder();
+        ll2pFrameString.append(Utilities.padHexString(Utilities.intToAscii(ll2pAddress), 3)); // append destination address
+        ll2pFrameString.append(Integer.toString(Constants.SOURCE_LL2P, 16)); // append source address
+        ll2pFrameString.append(new LL2PTypeField(Constants.LL2P_TYPE_IS_LRP).toHexString()); // append type
+        ll2pFrameString.append( packet.toHexString() ); // append payload
+        ll2pFrameString.append("1234"); // append CRC
+        LL2PFrame frameToSend = new LL2PFrame(ll2pFrameString.toString().getBytes());
+
+        ll1Daemon.sendFrame(frameToSend);
 
     }
 }

@@ -40,8 +40,8 @@ public class LRPPacket implements Datagram {
 
         // -- Get substrings for fields
         String sourceLL3P = bytes.substring(Constants.LL3P_SOURCE_ADDRESS_OFFSET, Constants.LL3P_ADDRESS_FIELD_LENGTH*2);
-        String sequenceNumber = bytes.substring(Constants.SEQUENCE_NUMBER_OFFSET, (int) Constants.SEQUENCE_NUMBER_LENGTH*2);
-        String count = bytes.substring(Constants.COUNT_OFFSET, (int) Constants.COUNT_LENGTH*2);
+        String sequenceNumber = bytes.substring(Constants.SEQUENCE_NUMBER_OFFSET, Constants.SEQUENCE_NUMBER_OFFSET+1);
+        String count = bytes.substring(Constants.COUNT_OFFSET, Constants.COUNT_OFFSET+1);
         String netDistList = bytes.substring(Constants.FIRST_NETWORK_OFFSET, bytes.length());
 
         // -- Store fields
@@ -51,7 +51,7 @@ public class LRPPacket implements Datagram {
 
         // -- Store Routes in List
         routes = new ArrayList<>();
-        for (int i = 0; i < this.count.getRouteCount(); i++){
+        for (int i = 0; i < netDistList.length(); i+=4){
             String pair = netDistList.substring(i, i+4);
             NetworkDistancePair temp = new NetworkDistancePair(pair);
             routes.add(temp);
@@ -96,13 +96,12 @@ public class LRPPacket implements Datagram {
     public String toHexString() {
         // Build Hex String for the routes
         StringBuilder routesHexString = new StringBuilder();
-        for (NetworkDistancePair route:
-             routes) {
+        for (NetworkDistancePair route: routes) {
             routesHexString.append(route.toHexString());
         }
 
         // Return complete hex string
-        return sourceLL3P.toHexString() +
+        return sourceLL3P.toTransmissionString() +
                 sequenceNumber.toHexString() +
                 count.toHexString() +
                 routesHexString.toString();
