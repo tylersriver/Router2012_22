@@ -108,7 +108,8 @@ public class BootLoader extends Observable {
 
 
         // -- Send Frame
-        ll1.addAdjacency("112233", "171.17.1.13");
+        ll1.addAdjacency("112233", "192.168.1.126");
+        ll1.addAdjacency("dabbed", "192.168.1.195");
         ll1.sendFrame(frame);
 
 
@@ -122,7 +123,7 @@ public class BootLoader extends Observable {
 
         // -- Test ARPDaemon (Lab 7)
         // -------------------------------------------------------------------
-        //ARPDaemon.getInstance().testARP();
+        ARPDaemon.getInstance().testARP();
 
 
         // ===================================================================

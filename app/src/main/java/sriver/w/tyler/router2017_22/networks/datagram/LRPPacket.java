@@ -9,6 +9,7 @@ import sriver.w.tyler.router2017_22.networks.datagram_fields.LRPRouteCount;
 import sriver.w.tyler.router2017_22.networks.datagram_fields.LRPSequenceNumber;
 import sriver.w.tyler.router2017_22.networks.datagram_fields.NetworkDistancePair;
 import sriver.w.tyler.router2017_22.support.Factory;
+import sriver.w.tyler.router2017_22.support.Utilities;
 
 /**
  * Created by tyler.w.sriver on 3/25/17.
@@ -67,7 +68,7 @@ public class LRPPacket implements Datagram {
     public LRPPacket(Integer ll3p, Integer sequenceNumber,
                      Integer count, List<NetworkDistancePair> networkDistancePairList){
         // -- Set fields
-        this.sourceLL3P = new LL3PAddressField(Integer.toHexString(ll3p), true);
+        this.sourceLL3P = new LL3PAddressField(Utilities.padHexString(Integer.toHexString(ll3p),2), true);
         this.sequenceNumber = new LRPSequenceNumber(Integer.toHexString(sequenceNumber));
         this.count = new LRPRouteCount(Integer.toHexString(count));
         this.routes = networkDistancePairList;
