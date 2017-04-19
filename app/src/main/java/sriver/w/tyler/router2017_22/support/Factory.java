@@ -86,19 +86,12 @@ public class Factory {
     public Datagram createPayload(int FieldValue, String Contents){
         switch (FieldValue){
             case Constants.LL2P_TYPE_IS_RESERVED:
-                //return null;
             case Constants.LL2P_TYPE_IS_LRP:
-                //return null;
             case Constants.LL2P_TYPE_IS_LL3P:
-                //return null;
             case Constants.LL2P_TYPE_IS_ECHO_REQUEST:
-                //return null;
             case Constants.LL2P_TYPE_IS_ECHO_REPLY:
-                //return null;
             case Constants.LL2P_TYPE_IS_ARP_REQUEST:
-                //return null;
             case Constants.LL2P_TYPE_IS_ARP_REPLY:
-                //return null;
             case Constants.LL2P_TYPE_IS_TEXT:
                 return new TextDatagram(Contents);
             default:

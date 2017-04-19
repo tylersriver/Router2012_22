@@ -52,20 +52,28 @@ public class Scheduler implements Observer{
     @Override
     public void update(Observable o, Object arg) {
         if(o.getClass().equals(BootLoader.class)) {
+
             // -- Get Singleton References
             arpDaemon = ARPDaemon.getInstance();
             lrpDaemon = LRPDaemon.getInstance();
             tableUI = UIManager.getInstance().getTableUI();
 
             threadManager = new ScheduledThreadPoolExecutor(Constants.THREAD_COUNT);
+
             threadManager.scheduleAtFixedRate(tableUI,
                     Constants.ROUTER_BOOT_TIME,
                     Constants.UI_UPDATE_INTERVAL,
                     TimeUnit.SECONDS); // Thread for TAble UI
+
             threadManager.scheduleAtFixedRate(arpDaemon,
                     Constants.ROUTER_BOOT_TIME,
-                    Constants.UI_UPDATE_INTERVAL,
+                    Constants.ARP_DAEMON_UPDATE_INTERVAL,
                     TimeUnit.SECONDS); // Thread for ARPDaemon
+
+            threadManager.scheduleAtFixedRate(lrpDaemon,
+                    Constants.ROUTER_BOOT_TIME,
+                    Constants.LRP_UPDATE_INTERVAL,
+                    TimeUnit.SECONDS); // Thread for LRP Daemon
 
         }
     }

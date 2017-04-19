@@ -33,13 +33,7 @@ public class DatagramPayloadField implements DatagramHeaderField {
 
     @Override
     public String toAsciiString() {
-        String hexString = toHexString();
-        StringBuilder output = new StringBuilder();
-        for(int i=0; i < hexString.length(); i+=2) {
-            String temp = hexString.substring(i, i+2);
-            output.append((char)Integer.parseInt(temp, 16));
-        }
-        return output.toString();
+        return packet.toString();
     }
 
     @Override

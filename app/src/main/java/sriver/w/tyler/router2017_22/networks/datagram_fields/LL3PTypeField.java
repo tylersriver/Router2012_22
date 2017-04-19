@@ -3,11 +3,11 @@ package sriver.w.tyler.router2017_22.networks.datagram_fields;
 import sriver.w.tyler.router2017_22.support.Utilities;
 
 /**
- * Created by tyler.w.sriver on 1/25/17.
+ * Created by tyler.w.sriver on 4/18/17.
  *
- * This class represents the structure of the LL@P Type Field
+ * This field contains the type. The only valid type is 0x8001
  */
-public class LL2PTypeField implements DatagramHeaderField {
+public class LL3PTypeField implements DatagramHeaderField {
 
     // -- Fields
     // --------------------------------------------------------------
@@ -24,7 +24,7 @@ public class LL2PTypeField implements DatagramHeaderField {
 
     @Override
     public String toHexString() {
-        return Utilities.padHexString(Integer.toHexString(this.type), 2);
+        return Integer.toHexString(this.type);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class LL2PTypeField implements DatagramHeaderField {
      * Constructor with type as an int
      * @param typeValue int
      */
-    public LL2PTypeField(Integer typeValue){
+    public LL3PTypeField(Integer typeValue){
         this.type = typeValue;
         setExplanation();
     }
@@ -53,7 +53,7 @@ public class LL2PTypeField implements DatagramHeaderField {
      * Constructor with type as a string
      * @param typeValueString string
      */
-    public LL2PTypeField(String typeValueString){
+    public LL3PTypeField(String typeValueString){
         this.type = Integer.parseInt(typeValueString, 16);
         setExplanation();
     }

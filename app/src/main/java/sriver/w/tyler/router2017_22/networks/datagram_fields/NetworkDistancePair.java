@@ -49,7 +49,7 @@ public class NetworkDistancePair implements DatagramHeaderField {
      */
     @Override
     public String toHexString() {
-        return Integer.toHexString(network) + Integer.toHexString(distance);
+        return Utilities.padHexString(Integer.toHexString(network), 1) + Utilities.padHexString(Integer.toHexString(distance), 1);
     }
 
     /**
