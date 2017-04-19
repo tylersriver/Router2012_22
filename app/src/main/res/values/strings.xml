@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Router2017_22</string>
     <string name="IPMenuItem">Show IP Address</string>
+    <string name="name_prompt">Send to?</string>
 </resources>

@@ -129,7 +129,7 @@ public class LRPDaemon implements Observer, Runnable {
 
             // -- Send LRP Updates
             // --------------------------------------------------------------
-            List<RoutingRecord> recordsToSend = routingTable.getRoutesExcluding(Ll3pInt);
+            List<RoutingRecord> recordsToSend = forwardingTable.getRoutesExcluding(Ll3pInt);
             
             // -- Transpose List into network distance pairs
             List<NetworkDistancePair> pairs = new ArrayList<>();

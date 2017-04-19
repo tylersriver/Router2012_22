@@ -25,6 +25,7 @@ public class UIManager implements Observer{
     private Context context = parentActivity.getBaseContext();
     private TableUI tableUI;
     private SnifferUI snifferUI;
+    private Messenger messenger;
 
     // -- Methods
     // --------------------------------------------------------------
@@ -35,6 +36,7 @@ public class UIManager implements Observer{
     private UIManager() {
         tableUI = new TableUI();
         snifferUI = new SnifferUI();
+        messenger = new Messenger();
     }
 
     /**show
@@ -86,6 +88,7 @@ public class UIManager implements Observer{
         if (o.getClass().equals(BootLoader.class)){
             setupWidgets();
         }
+        messenger.finishCreatingMessenger();
     }
 
     /**
@@ -102,5 +105,13 @@ public class UIManager implements Observer{
      */
     public SnifferUI getSnifferUI() {
         return snifferUI;
+    }
+
+    /**
+     * Return Messenger
+     * @return Messenger
+     */
+    public Messenger getMessenger() {
+        return messenger;
     }
 }

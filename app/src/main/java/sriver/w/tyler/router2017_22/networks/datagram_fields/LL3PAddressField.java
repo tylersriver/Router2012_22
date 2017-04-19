@@ -27,10 +27,11 @@ public class LL3PAddressField implements DatagramHeaderField {
      * @param isSourceAddress Boolean
      */
     public LL3PAddressField(String hexAddress, Boolean isSourceAddress){
+        String padded = Utilities.padHexString(hexAddress, 2);
         this.isSourceAddress = isSourceAddress;
-        this.address = Integer.valueOf(hexAddress, 16);
-        this.networkNumber = Integer.valueOf(hexAddress.substring(0,2), 16);
-        this.hostNumber = Integer.valueOf(hexAddress.substring(2,4), 16);
+        this.address = Integer.valueOf(padded, 16);
+        this.networkNumber = Integer.valueOf(padded.substring(0,2), 16);
+        this.hostNumber = Integer.valueOf(padded.substring(2,4), 16);
         setExplanation();
     }
 
@@ -40,7 +41,7 @@ public class LL3PAddressField implements DatagramHeaderField {
      */
     @Override
     public String toHexString() {
-        return Utilities.padHexString(Integer.toHexString(networkNumber), 1) + "."
+        return Utilities.padHexString(Integer.toHexString(networkNumber), 1)
           + Utilities.padHexString(Integer.toHexString(hostNumber), 1);
     }
 

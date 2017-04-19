@@ -36,7 +36,7 @@ public class Constants implements Observer {
     final public static int LRP_UPDATE_INTERVAL     = 10;
     final public static int ARP_DAEMON_UPDATE_INTERVAL = 5;
 
-    final public static int MAX_AGE_ALLOWED         = 30;
+    final public static int MAX_AGE_ALLOWED         = 3000;
     final public static int MAX_AGE_LRP             = 30;
     final public static int MAX_AGE_ARP             = 120;
     final public static int MAX_LRP_SEQUENCE_NUM    = 15;
@@ -71,7 +71,7 @@ public class Constants implements Observer {
     final public static int LL3P_SOURCE_ADDRESS_OFFSET      = 0;
     final public static int SEQUENCE_NUMBER_OFFSET          = 4;
     final public static int COUNT_OFFSET                    = 5;
-    final public static int FIRST_NETWORK_OFFSET            = 8;
+    final public static int FIRST_NETWORK_OFFSET            = 6;
 
     // -- LL3P Field Offsets -- indices not bytes
     final public static int SOURCE_LL3P_OFFSET              = 0;
@@ -79,7 +79,7 @@ public class Constants implements Observer {
     final public static int LL3P_TYPE_OFFSET                = 8;
     final public static int LL3P_IDENTIFIER_OFFSET          = 12;
     final public static int LL3P_TTL_OFFSET                 = 16;
-    final public static int LL3P_PAYLOAD_OFFSET             = 17;
+    final public static int LL3P_PAYLOAD_OFFSET             = 18;
 
     // -- LL3P Datagram Field Lengths -- in bytes
     final public static int LL3P_ADDRESS_LENGTH             = 2;

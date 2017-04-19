@@ -86,40 +86,40 @@ public class BootLoader extends Observable {
 
 
         // -- Test table class
-        AdjacencyRecord adjacencyRecord = new AdjacencyRecord(GetIPAddress.getInstance().getInetAddress("10.31.1.1"), 0x314159);
-        AdjacencyRecord adjacencyRecord1 = new AdjacencyRecord(GetIPAddress.getInstance().getInetAddress("10.31.1.2"), 0x314158);
-        Log.d(Constants.logTag, "Adjacency records created ");
-
-        Table table = new Table();
-        Log.d(Constants.logTag, "Table created ");
-        table.addItem(adjacencyRecord);
-        table.addItem(adjacencyRecord1);
-        Log.d(Constants.logTag, "Adjacency records added to table");
-        table.removeItem(0x31459);
-        Log.d(Constants.logTag,  "Adjacency record removed from table");
+//        AdjacencyRecord adjacencyRecord = new AdjacencyRecord(GetIPAddress.getInstance().getInetAddress("10.31.1.1"), 0x314159);
+//        AdjacencyRecord adjacencyRecord1 = new AdjacencyRecord(GetIPAddress.getInstance().getInetAddress("10.31.1.2"), 0x314158);
+//        Log.d(Constants.logTag, "Adjacency records created ");
+//
+//        Table table = new Table();
+//        Log.d(Constants.logTag, "Table created ");
+//        table.addItem(adjacencyRecord);
+//        table.addItem(adjacencyRecord1);
+//        Log.d(Constants.logTag, "Adjacency records added to table");
+//        table.removeItem(0x31459);
+//        Log.d(Constants.logTag,  "Adjacency record removed from table");
 
 
 
         // -- Test LL1Daemon
-        ll1.addAdjacency("314159", "10.31.1.1");
-        AdjacencyRecord adjacencyRecord2 = ll1.getAdjacencyRecord(0x314159);
-        Log.d(Constants.logTag, "Record in LL1 table is:  "+ adjacencyRecord2.toString());
-        ll1.removeAdjacency(adjacencyRecord);
-        Log.d(Constants.logTag, "Record removed from LL1 table");
+//        ll1.addAdjacency("314159", "10.31.1.1");
+//        AdjacencyRecord adjacencyRecord2 = ll1.getAdjacencyRecord(0x314159);
+//        Log.d(Constants.logTag, "Record in LL1 table is:  "+ adjacencyRecord2.toString());
+//        ll1.removeAdjacency(adjacencyRecord);
+//        Log.d(Constants.logTag, "Record removed from LL1 table");
 
 
 
         // -- Send Frame
-        ll1.addAdjacency("112233", "172.17.1.13");
-        ll1.addAdjacency("dabbed", "172.17.1.14");
-        ll1.sendFrame(frame);
+        ll1.addAdjacency("112233", "10.30.48.168");
+        ll1.addAdjacency("dabbed", "10.30.57.202");
+//        ll1.sendFrame(frame);
 
 
 
         // -- Test Factory
-        Object[] params = {GetIPAddress.getInstance().getInetAddress("10.31.1.1"), 0x314158};
-        AdjacencyRecord record = (AdjacencyRecord) Factory.getInstance().getTableRecord(Constants.ADJACENCY_TABLE_RECORD, params);
-        Log.d(Constants.logTag, "Factory generated record is: "+record.toString());
+//        Object[] params = {GetIPAddress.getInstance().getInetAddress("10.31.1.1"), 0x314158};
+//        AdjacencyRecord record = (AdjacencyRecord) Factory.getInstance().getTableRecord(Constants.ADJACENCY_TABLE_RECORD, params);
+//        Log.d(Constants.logTag, "Factory generated record is: "+record.toString());
 
 
 

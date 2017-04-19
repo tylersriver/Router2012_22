@@ -87,14 +87,14 @@ public class ARPDaemon extends Observable implements Observer, Runnable {
      * @param ll3pAddress Integer
      * @return Integer
      */
-    public Integer getMACAddress(Integer ll3pAddress) {
+    public Integer getMACAddress(Integer ll3pAddress) throws LabException{
         try {
             ARPRecord record = (ARPRecord) arpTable.getItem(ll3pAddress);
             return record.getLl2pAddress();
         } catch (LabException ex) {
             ex.printStackTrace();
         }
-        return null;
+        throw new LabException("Record Not Found");
     }
 
     /**
@@ -158,6 +158,7 @@ public class ARPDaemon extends Observable implements Observer, Runnable {
     }
 
     /**
+     * Handle getting an arp request
      * Add/Touch record then send reply
      * @param ll2pAddress Integer
      * @param datagram ARPDatagram

@@ -24,7 +24,7 @@ public class LL2PTypeField implements DatagramHeaderField {
 
     @Override
     public String toHexString() {
-        return Integer.toHexString(this.type);
+        return Utilities.padHexString(Integer.toHexString(this.type), 2);
     }
 
     @Override

@@ -89,7 +89,8 @@ public class SnifferUI implements Observer {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             LL2PFrame frame = frameLogger.getFrameList().get(position);
             protocolBreakoutText.setText(frame.toProtocolExplanationString());
-            frameBytesTextView.setText(HexDumpFormatter(frame));
+//            frameBytesTextView.setText(HexDumpFormatter(frame));
+            frameBytesTextView.setText(frame.toAsciiString());
         }
     };
 
@@ -102,7 +103,16 @@ public class SnifferUI implements Observer {
     @NonNull
     private String HexDumpFormatter(LL2PFrame frame){
         String hexString = frame.toHexString();
-        String asciiString = frame.toAsciiString();
+
+//        if((hexString.length() % 2) != 0){
+//            hexString = Utilities.padHexString(hexString, (hexString.length()+1) / 2);
+//        }
+
+        String asciiString = Utilities.intToAscii(Integer.valueOf(hexString, 16));
+
+//        if((asciiString.length() % 2) != 0){
+//            asciiString = Utilities.padHexString(asciiString, (asciiString.length()+1) / 2);
+//        }
 
         StringBuilder formattedString = new StringBuilder();
 

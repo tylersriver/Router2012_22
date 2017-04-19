@@ -129,7 +129,7 @@ public class LL3Daemon implements Observer {
         // -- Handle accordingly based on if ours or not
         if(destAdd == Constants.SOURCE_LL3P) {
             int sourceAddress = packet.getSourceAddress().getAddress();
-//            UIManager.getInstance().getMessenger().receiveMessage(sourceAddress, packet.getPayload().toString());
+            UIManager.getInstance().getMessenger().receiveMessage(sourceAddress, packet.getPayload().toString());
             UIManager.getInstance().raiseToast("LL3P: " + packet.getPayload().toString());
         } else {
             // -- Decremeent ttl and check

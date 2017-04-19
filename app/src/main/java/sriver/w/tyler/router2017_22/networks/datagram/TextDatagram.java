@@ -23,12 +23,7 @@ public class TextDatagram implements Datagram {
 
     @Override
     public String toHexString() {
-        StringBuilder hex = new StringBuilder();
-        for(int i = 0; i < payload.toAsciiString().length(); i++){
-            int ascii = (int)payload.toAsciiString().charAt(i);
-            hex.append(Integer.toHexString(ascii));
-        }
-        return hex.toString();
+        return payload.toHexString();
     }
 
     @Override

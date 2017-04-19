@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements AddAdjacencyDialo
         } else if(item.getItemId() == R.id.addAdjacencyDialog) {
             AddAdjacencyDialog dialog = new AddAdjacencyDialog();
             dialog.show(getFragmentManager(), "add_adjacency_dialog");
+        } else if (item.getItemId() == R.id.showMessenger) {
+            UIManager.getInstance().getMessenger().openMessengerWindow();
         }
         return super.onOptionsItemSelected(item);
     }
