@@ -12,6 +12,7 @@ import sriver.w.tyler.router2017_22.networks.Constants;
 import sriver.w.tyler.router2017_22.networks.datagram.ARPDatagram;
 import sriver.w.tyler.router2017_22.networks.datagram.Datagram;
 import sriver.w.tyler.router2017_22.networks.datagram.LL2PFrame;
+import sriver.w.tyler.router2017_22.networks.datagram.LL3PDatagram;
 import sriver.w.tyler.router2017_22.networks.datagram.LRPPacket;
 import sriver.w.tyler.router2017_22.networks.datagram.TextDatagram;
 import sriver.w.tyler.router2017_22.networks.datagram_fields.CRC;
@@ -83,7 +84,7 @@ public class LL2PDaemon implements Observer{
                 LRPDaemon.getInstance().receiveNewLRP(frame.getPayload().toAsciiString().getBytes(), frame.getSourceAddress().getAddress());
                 break;
             case Constants.LL2P_TYPE_IS_LL3P:
-                uiManager.raiseToast("Unsupported Frame Type");
+                LL3Daemon.getInstance().processLL3Packet(new LL3PDatagram(frame.getPayload().getPayload().toHexString().getBytes()), frame.getSourceAddress().getAddress());
                 break;
             case Constants.LL2P_TYPE_IS_ECHO_REQUEST:
                 answerEchoRequest(frame);
@@ -191,5 +192,23 @@ public class LL2PDaemon implements Observer{
 
         ll1Daemon.sendFrame(frameToSend);
 
+    }
+
+
+    /**
+     * Forward the LL3P packet to next hop
+     * @param datagram LL3PDatagram
+     * @param ll2pAddress ll2pAddress
+     */
+    public void forwardLL3P(LL3PDatagram datagram, int ll2pAddress) {
+        StringBuilder ll2pFrameString = new StringBuilder();
+        ll2pFrameString.append(Utilities.padHexString(Utilities.intToAscii(ll2pAddress), 3)); // append destination address
+        ll2pFrameString.append(Integer.toString(Constants.SOURCE_LL2P, 16)); // append source address
+        ll2pFrameString.append(new LL2PTypeField(Constants.LL2P_TYPE_IS_LL3P).toHexString()); // append type
+        ll2pFrameString.append( datagram.toHexString() ); // append payload
+        ll2pFrameString.append("1234"); // append CRC
+        LL2PFrame frameToSend = new LL2PFrame(ll2pFrameString.toString().getBytes());
+
+        ll1Daemon.sendFrame(frameToSend);
     }
 }

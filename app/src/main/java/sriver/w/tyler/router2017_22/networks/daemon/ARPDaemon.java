@@ -87,7 +87,7 @@ public class ARPDaemon extends Observable implements Observer, Runnable {
      * @param ll3pAddress Integer
      * @return Integer
      */
-    public Integer getMACAddress(Integer ll3pAddress){
+    public Integer getMACAddress(Integer ll3pAddress) {
         try {
             ARPRecord record = (ARPRecord) arpTable.getItem(ll3pAddress);
             return record.getLl2pAddress();
@@ -95,6 +95,22 @@ public class ARPDaemon extends Observable implements Observer, Runnable {
             ex.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * Get ll3paddress for record with Given ll2pAddress
+     * @param ll2pAddress int
+     * @return int
+     */
+    public int	getKey(int ll2pAddress){
+        for (TableRecord record : arpTable.getTableAsArrayList()) {
+            if (record instanceof ARPRecord) {
+                if (((ARPRecord) record).getLl2pAddress() == ll2pAddress) {
+                    return ((ARPRecord) record).getKey();
+                }
+            }
+        }
+        return -1;
     }
 
     /**

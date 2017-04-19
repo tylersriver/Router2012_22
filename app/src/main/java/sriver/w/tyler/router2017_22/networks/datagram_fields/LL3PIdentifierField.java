@@ -5,7 +5,7 @@ import sriver.w.tyler.router2017_22.support.Utilities;
 /**
  * Created by tyler.w.sriver on 4/18/17.
  *
- * This is a 2 byte field that contains a value which cycles from 0 to 65 (0535)
+ * This is a 2 byte field that contains a value which cycles from 0 to 65,535
  */
 public class LL3PIdentifierField implements DatagramHeaderField {
 

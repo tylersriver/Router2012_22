@@ -109,7 +109,7 @@ public class ARPRecord extends TableRecordClass {
      * @return String
      */
     public String toString(){
-        return "LL2P: " + ll2pAddress + " | " + "LL3P: " + Utilities.padHexString(Integer.toHexString(ll3pAddress),2) + " | " + "Age: " + getAgeInSec().toString();
+        return "LL2P: " + Utilities.padHexString( Integer.toHexString(ll2pAddress), 3) + " | " + "LL3P: " + Utilities.padHexString(Integer.toHexString(ll3pAddress),2) + " | " + "Age: " + getAgeInSec().toString();
     }
 }
 

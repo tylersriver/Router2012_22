@@ -104,6 +104,7 @@ public class LRPPacket implements Datagram {
         return sourceLL3P.toTransmissionString() +
                 sequenceNumber.toHexString() +
                 count.toHexString() +
+                "00" +
                 routesHexString.toString();
     }
 

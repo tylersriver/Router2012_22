@@ -1,6 +1,5 @@
 package sriver.w.tyler.router2017_22.networks.datagram;
 
-import java.util.Objects;
 
 import sriver.w.tyler.router2017_22.networks.Constants;
 import sriver.w.tyler.router2017_22.networks.datagram_fields.DatagramPayloadField;
@@ -41,7 +40,7 @@ public class LL3PDatagram implements Datagram {
      */
     public LL3PDatagram (LL3PAddressField sourceAddress, LL3PAddressField destinationAddress,
                          LL3PTTLField ttl, LL3PIdentifierField identifier,
-                         LL3PTypeField type, LL3PChecksum crc)
+                         LL3PTypeField type, LL3PChecksum crc, DatagramPayloadField payload)
     {
         this.sourceAddress = sourceAddress;
         this.destinationAddress = destinationAddress;
@@ -49,6 +48,7 @@ public class LL3PDatagram implements Datagram {
         this.identifier = identifier;
         this.type = type;
         this.crc = crc;
+        this.payload = payload;
     }
 
     /**
@@ -130,6 +130,13 @@ public class LL3PDatagram implements Datagram {
         return crc;
     }
 
+    /**
+     * Get the payload
+     * @return DatagramPayloadField
+     */
+    public DatagramPayloadField getPayload() {
+        return payload;
+    }
 
     // -- Interface Methods
     // --------------------------------------------------------------
@@ -140,9 +147,11 @@ public class LL3PDatagram implements Datagram {
      */
     @Override
     public String toHexString() {
-        return destinationAddress.toHexString() +
-                sourceAddress.toHexString() +
+        return sourceAddress.toHexString() +
+                destinationAddress.toHexString() +
                 type.toHexString() +
+                identifier.toHexString() +
+                ttl.toHexString() +
                 payload.toHexString() +
                 crc.toHexString();
     }
@@ -198,5 +207,13 @@ public class LL3PDatagram implements Datagram {
                 type.toAsciiString() +
                 payload.toAsciiString() +
                 crc.toAsciiString();
+    }
+
+    /**
+     * Decrement the ttl field
+     */
+    public void decrementTTL(){
+        int temp = ttl.getTtl();
+        ttl.setTtl(temp-1);
     }
 }
