@@ -73,6 +73,22 @@ public class Constants implements Observer {
     final public static int COUNT_OFFSET                    = 5;
     final public static int FIRST_NETWORK_OFFSET            = 8;
 
+    // -- LL3P Field Offsets -- indices not bytes
+    final public static int SOURCE_LL3P_OFFSET              = 0;
+    final public static int DEST_LL3P_OFFSET                = 4;
+    final public static int LL3P_TYPE_OFFSET                = 8;
+    final public static int LL3P_IDENTIFIER_OFFSET          = 12;
+    final public static int LL3P_TTL_OFFSET                 = 16;
+    final public static int LL3P_PAYLOAD_OFFSET             = 17;
+
+    // -- LL3P Datagram Field Lengths -- in bytes
+    final public static int LL3P_ADDRESS_LENGTH             = 2;
+    final public static int LL3P_TYPE_LENGTH                = 2;
+    final public static int LL3P_IDENTIFIER_LENGTH          = 2;
+    final public static int LL3P_TTL_LENGTH                 = 1;
+    final public static int LL3P_CRC_LENGTH                 = 2;
+
+
     // -- LL2P Types
     final public static int LL2P_TYPE_IS_LL3P               = 0x8001;
     final public static int LL2P_TYPE_IS_RESERVED           = 0x8002;

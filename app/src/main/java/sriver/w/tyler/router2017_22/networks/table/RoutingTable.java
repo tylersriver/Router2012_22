@@ -89,8 +89,9 @@ public class RoutingTable extends TimedTable {
         List<RoutingRecord> returnList = new ArrayList<>();
         for (TableRecord record: table) {
             RoutingRecord routingRecord = (RoutingRecord) record;
-            if(routingRecord.getNextHop() != ll3pAddress)
+            if(routingRecord.getNextHop() != ll3pAddress) {
                 returnList.add(routingRecord);
+            }
         }
         return returnList;
     }

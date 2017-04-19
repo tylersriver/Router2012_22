@@ -108,7 +108,7 @@ public class LRPDaemon implements Observer, Runnable {
         forwardingTable.expireRecords(Constants.MAX_AGE_LRP);
 
         // -- add ourselves
-        RoutingRecord ourSelf = new RoutingRecord(Constants.SOURCE_NETWORK, 0, Constants.SOURCE_NETWORK);
+        RoutingRecord ourSelf = new RoutingRecord(Constants.SOURCE_NETWORK, 0, Constants.SOURCE_LL3P);
         routingTable.addNewRoute(ourSelf);
 
         // -- Add Adjacent nodes to routing
@@ -289,11 +289,12 @@ public class LRPDaemon implements Observer, Runnable {
      * @return int
      */
     private int getCurrentSequenceNumber(){
+        int current = sequenceNumber;
         sequenceNumber++;
         if(sequenceNumber == 16){
             sequenceNumber = 0;
         }
-        return sequenceNumber;
+        return current;
     }
 
 }
